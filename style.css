@@ -2,44 +2,59 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   background: #f1f5f9;
+
   color: #1e293b;
 }
 
 
-/* =========================
+/* =================================================
    PAGE
-========================= */
+================================================= */
 
 .page {
   min-height: 100vh;
 }
+
 
 .hidden {
   display: none !important;
 }
 
 
-/* =========================
+/* =================================================
    LOGIN
-========================= */
+================================================= */
 
 #loginPage {
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   padding: 20px;
 }
 
 
 .login-card {
+
   width: 100%;
+
   max-width: 420px;
+
   background: white;
+
   padding: 35px;
+
   border-radius: 18px;
 
   box-shadow:
@@ -48,126 +63,55 @@ body {
 
 
 .login-card h1 {
+
   margin: 0;
+
   text-align: center;
 }
 
 
 .login-card h2 {
+
   text-align: center;
+
   margin-top: 30px;
 }
 
 
 .school-name {
+
   text-align: center;
+
   color: #64748b;
 }
 
 
-/* =========================
-   FORM
-========================= */
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-
-.form-group label {
-  display: block;
-  margin-bottom: 7px;
-  font-weight: bold;
-}
-
-
-.form-group input {
-  width: 100%;
-  padding: 13px;
-
-  border:
-    1px solid #cbd5e1;
-
-  border-radius: 10px;
-
-  font-size: 16px;
-}
-
-
-.form-group input:focus {
-  outline: none;
-
-  border-color: #2563eb;
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-button {
-  border: none;
-  cursor: pointer;
-}
-
-
-.btn-primary {
-  width: 100%;
-
-  padding: 13px;
-
-  border-radius: 10px;
-
-  background: #2563eb;
-  color: white;
-
-  font-size: 16px;
-  font-weight: bold;
-}
-
-
-.btn-primary:hover {
-  background: #1d4ed8;
-}
-
-
-.btn-danger {
-  padding: 10px 16px;
-
-  border-radius: 8px;
-
-  background: #dc2626;
-  color: white;
-
-  font-weight: bold;
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-.message {
-  margin-top: 15px;
-  text-align: center;
-  min-height: 20px;
-}
-
-
-/* =========================
+/* =================================================
    DASHBOARD
-========================= */
+================================================= */
 
 .dashboard {
+
+  width: 100%;
+
   max-width: 1100px;
+
   margin: auto;
+
   padding: 20px;
 }
 
 
+/* =================================================
+   TOPBAR
+================================================= */
+
 .topbar {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   background: white;
@@ -184,17 +128,25 @@ button {
 
 
 .topbar h1 {
+
   margin: 0 0 5px;
 }
 
 
 .topbar p {
+
   margin: 0;
+
   color: #64748b;
 }
 
 
-.welcome-card {
+/* =================================================
+   FORM CARD
+================================================= */
+
+.form-card {
+
   background: white;
 
   padding: 25px;
@@ -206,27 +158,367 @@ button {
 }
 
 
-/* =========================
+.form-card h2 {
+
+  margin-top: 0;
+
+  margin-bottom: 25px;
+}
+
+
+/* =================================================
+   FORM
+================================================= */
+
+.form-group {
+
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-weight: bold;
+}
+
+
+.form-group input,
+.form-group select {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  background: white;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+
+  outline: none;
+
+  border-color: #2563eb;
+}
+
+
+.form-group select:disabled {
+
+  background: #f1f5f9;
+
+  cursor: not-allowed;
+}
+
+
+/* =================================================
+   BUTTON
+================================================= */
+
+button {
+
+  border: none;
+
+  cursor: pointer;
+}
+
+
+.btn-primary {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+}
+
+
+.btn-primary:hover {
+
+  background: #1d4ed8;
+}
+
+
+.btn-primary:disabled {
+
+  background: #94a3b8;
+
+  cursor: not-allowed;
+}
+
+
+.btn-danger {
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  background: #dc2626;
+
+  color: white;
+
+  font-weight: bold;
+}
+
+
+.btn-secondary {
+
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  background: #64748b;
+
+  color: white;
+
+  font-weight: bold;
+}
+
+
+/* =================================================
+   SEARCH RESULTS
+================================================= */
+
+.search-results {
+
+  margin-top: -8px;
+
+  margin-bottom: 18px;
+}
+
+
+.student-result {
+
+  padding: 13px;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius: 10px;
+
+  margin-bottom: 8px;
+
+  background: #f8fafc;
+
+  cursor: pointer;
+}
+
+
+.student-result:hover {
+
+  background: #eff6ff;
+
+  border-color: #93c5fd;
+}
+
+
+.student-result strong {
+
+  display: block;
+
+  margin-bottom: 4px;
+}
+
+
+.student-result small {
+
+  color: #64748b;
+}
+
+
+.no-result {
+
+  padding: 12px;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  border-radius: 10px;
+}
+
+
+/* =================================================
+   SELECTED STUDENT
+================================================= */
+
+.selected-student {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 15px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background: #eff6ff;
+
+  border:
+    1px solid #bfdbfe;
+}
+
+
+.selected-student strong {
+
+  display: block;
+
+  margin-bottom: 5px;
+}
+
+
+.selected-student small {
+
+  color: #475569;
+}
+
+
+/* =================================================
+   BOBOT
+================================================= */
+
+.bobot-box {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 16px;
+
+  margin-bottom: 18px;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  border:
+    1px solid #e2e8f0;
+}
+
+
+.bobot-box span {
+
+  font-weight: bold;
+}
+
+
+.bobot-box strong {
+
+  font-size: 26px;
+}
+
+
+/* =================================================
+   MESSAGE
+================================================= */
+
+.message {
+
+  margin-top: 15px;
+
+  text-align: center;
+
+  min-height: 20px;
+}
+
+
+.message.success {
+
+  color: #15803d;
+
+  font-weight: bold;
+}
+
+
+.message.error {
+
+  color: #dc2626;
+
+  font-weight: bold;
+}
+
+
+/* =================================================
+   WELCOME
+================================================= */
+
+.welcome-card {
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =================================================
    MOBILE
-========================= */
+================================================= */
 
 @media (max-width: 600px) {
 
-  .login-card {
-    padding: 25px;
-  }
-
   .dashboard {
+
     padding: 12px;
   }
 
+
   .topbar {
+
     flex-direction: column;
+
     align-items: flex-start;
+
     gap: 15px;
   }
 
+
   .btn-danger {
+
+    width: 100%;
+  }
+
+
+  .selected-student {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .btn-secondary {
+
     width: 100%;
   }
 
