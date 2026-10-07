@@ -17,10 +17,6 @@ body {
 }
 
 
-/* =================================================
-   PAGE
-================================================= */
-
 .page {
   min-height: 100vh;
 }
@@ -94,17 +90,13 @@ body {
 
   width: 100%;
 
-  max-width: 1100px;
+  max-width: 1200px;
 
   margin: auto;
 
   padding: 20px;
 }
 
-
-/* =================================================
-   TOPBAR
-================================================= */
 
 .topbar {
 
@@ -142,7 +134,7 @@ body {
 
 
 /* =================================================
-   FORM CARD
+   CARD
 ================================================= */
 
 .form-card {
@@ -153,6 +145,8 @@ body {
 
   border-radius: 15px;
 
+  margin-bottom: 20px;
+
   box-shadow:
     0 5px 20px rgba(0, 0, 0, 0.06);
 }
@@ -161,8 +155,6 @@ body {
 .form-card h2 {
 
   margin-top: 0;
-
-  margin-bottom: 25px;
 }
 
 
@@ -293,8 +285,14 @@ button {
 }
 
 
+.btn-secondary:hover {
+
+  background: #475569;
+}
+
+
 /* =================================================
-   SEARCH RESULTS
+   SEARCH SISWA GDS
 ================================================= */
 
 .search-results {
@@ -357,7 +355,7 @@ button {
 
 
 /* =================================================
-   SELECTED STUDENT
+   SISWA TERPILIH
 ================================================= */
 
 .selected-student {
@@ -465,6 +463,271 @@ button {
 
 
 /* =================================================
+   STATISTIK GURU
+================================================= */
+
+.stats-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+
+.stat-card {
+
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+.stat-card span {
+
+  display: block;
+
+  color: #64748b;
+
+  margin-bottom: 8px;
+}
+
+
+.stat-card strong {
+
+  font-size: 30px;
+}
+
+
+/* =================================================
+   FILTER
+================================================= */
+
+.filter-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr auto;
+
+  gap: 15px;
+
+  align-items: end;
+}
+
+
+.filter-button-area {
+
+  padding-bottom: 18px;
+}
+
+
+/* =================================================
+   SECTION HEADER
+================================================= */
+
+.section-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+
+.section-header h2 {
+
+  margin: 0;
+}
+
+
+.section-header p {
+
+  margin-bottom: 0;
+
+  color: #64748b;
+}
+
+
+/* =================================================
+   TABLE
+================================================= */
+
+.table-wrapper {
+
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+
+.ranking-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 750px;
+}
+
+
+.ranking-table th,
+.ranking-table td {
+
+  padding: 13px 10px;
+
+  border-bottom:
+    1px solid #e2e8f0;
+
+  text-align: center;
+}
+
+
+.ranking-table th {
+
+  background: #f8fafc;
+
+  font-size: 14px;
+}
+
+
+.ranking-table td.nama-cell {
+
+  text-align: left;
+
+  font-weight: bold;
+}
+
+
+.ranking-table tbody tr {
+
+  cursor: pointer;
+}
+
+
+.ranking-table tbody tr:hover {
+
+  background: #eff6ff;
+}
+
+
+.rank-number {
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+
+.total-bobot {
+
+  font-size: 20px;
+
+  font-weight: bold;
+}
+
+
+.empty-state {
+
+  text-align: center;
+
+  padding: 35px;
+
+  color: #64748b;
+}
+
+
+/* =================================================
+   DETAIL
+================================================= */
+
+.detail-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 700px;
+}
+
+
+.detail-table th,
+.detail-table td {
+
+  padding: 12px;
+
+  border-bottom:
+    1px solid #e2e8f0;
+
+  text-align: left;
+}
+
+
+.detail-table th {
+
+  background: #f8fafc;
+}
+
+
+.detail-table .bobot {
+
+  font-weight: bold;
+
+  text-align: center;
+}
+
+
+.delete-button {
+
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  background: #dc2626;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: bold;
+}
+
+
+.delete-button:hover {
+
+  background: #b91c1c;
+}
+
+
+/* =================================================
+   LOADING
+================================================= */
+
+.loading {
+
+  text-align: center;
+
+  padding: 25px;
+
+  color: #64748b;
+}
+
+
+/* =================================================
    WELCOME
 ================================================= */
 
@@ -485,7 +748,7 @@ button {
    MOBILE
 ================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
   .dashboard {
 
@@ -503,7 +766,45 @@ button {
   }
 
 
-  .btn-danger {
+  .topbar .btn-danger {
+
+    width: 100%;
+  }
+
+
+  .stats-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .filter-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .filter-button-area {
+
+    padding-bottom: 0;
+  }
+
+
+  .filter-button-area button {
+
+    width: 100%;
+  }
+
+
+  .section-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .section-header button {
 
     width: 100%;
   }
@@ -517,7 +818,7 @@ button {
   }
 
 
-  .btn-secondary {
+  .selected-student .btn-secondary {
 
     width: 100%;
   }
