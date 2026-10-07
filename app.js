@@ -14,19 +14,12 @@ import {
 // =====================================================
 
 const firebaseConfig = {
-
-  apiKey: "MASUKKAN_API_KEY_ANDA",
-
-  authDomain: "MASUKKAN_AUTH_DOMAIN_ANDA",
-
-  projectId: "MASUKKAN_PROJECT_ID_ANDA",
-
-  storageBucket: "MASUKKAN_STORAGE_BUCKET_ANDA",
-
-  messagingSenderId: "MASUKKAN_MESSAGING_SENDER_ID_ANDA",
-
-  appId: "MASUKKAN_APP_ID_ANDA"
-
+  apiKey: "AIzaSyAwsBj_5jJS1J4nQTXlp_88dnJaAh1FI58",
+  authDomain: "pelanggaran-siswa-sman2.firebaseapp.com",
+  projectId: "pelanggaran-siswa-sman2",
+  storageBucket: "pelanggaran-siswa-sman2.firebasestorage.app",
+  messagingSenderId: "62940952618",
+  appId: "1:62940952618:web:10a06124346f778ed82b53"
 };
 
 
