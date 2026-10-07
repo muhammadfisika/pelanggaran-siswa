@@ -21,9 +21,10 @@
 
 <body>
 
-  <!-- ========================= -->
-  <!-- LOGIN PAGE -->
-  <!-- ========================= -->
+
+  <!-- =================================================
+       LOGIN PAGE
+  ================================================== -->
 
   <section
     id="loginPage"
@@ -43,6 +44,7 @@
       <h2>
         Login
       </h2>
+
 
       <form id="loginForm">
 
@@ -98,9 +100,10 @@
   </section>
 
 
-  <!-- ========================= -->
-  <!-- GDS PAGE -->
-  <!-- ========================= -->
+
+  <!-- =================================================
+       GDS PAGE
+  ================================================== -->
 
   <section
     id="gdsPage"
@@ -108,6 +111,9 @@
   >
 
     <div class="dashboard">
+
+
+      <!-- TOPBAR -->
 
       <div class="topbar">
 
@@ -121,6 +127,7 @@
 
         </div>
 
+
         <button
           id="logoutGds"
           class="btn-danger"
@@ -131,16 +138,214 @@
       </div>
 
 
-      <div class="welcome-card">
+
+      <!-- FORM PELANGGARAN -->
+
+      <div class="form-card">
 
         <h2>
-          Dashboard Petugas GDS
+          Catat Pelanggaran Siswa
         </h2>
 
-        <p>
-          Modul pencatatan pelanggaran siswa
-          akan tersedia pada Tahap 3.
-        </p>
+
+        <!-- CARI SISWA -->
+
+        <div class="form-group">
+
+          <label for="searchSiswa">
+            Cari Nama Siswa
+          </label>
+
+          <input
+            type="text"
+            id="searchSiswa"
+            placeholder="Ketik nama siswa..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <!-- HASIL PENCARIAN -->
+
+        <div
+          id="hasilSiswa"
+          class="search-results"
+        ></div>
+
+
+        <!-- SISWA TERPILIH -->
+
+        <div
+          id="siswaTerpilih"
+          class="selected-student hidden"
+        >
+
+          <div>
+
+            <strong>
+              Siswa Terpilih
+            </strong>
+
+            <div id="namaSiswaTerpilih"></div>
+
+            <small id="infoSiswaTerpilih"></small>
+
+          </div>
+
+
+          <button
+            type="button"
+            id="ubahSiswa"
+            class="btn-secondary"
+          >
+            Ganti
+          </button>
+
+        </div>
+
+
+
+        <!-- FORM DATA -->
+
+        <form
+          id="pelanggaranForm"
+          class="hidden"
+        >
+
+
+          <!-- TANGGAL -->
+
+          <div class="form-group">
+
+            <label for="tanggal">
+              Tanggal
+            </label>
+
+            <input
+              type="date"
+              id="tanggal"
+              required
+            >
+
+          </div>
+
+
+
+          <!-- JENIS -->
+
+          <div class="form-group">
+
+            <label for="jenisPelanggaran">
+              Jenis Pelanggaran
+            </label>
+
+            <select
+              id="jenisPelanggaran"
+              required
+            >
+
+              <option value="">
+                Pilih jenis pelanggaran
+              </option>
+
+              <option value="ringan">
+                Ringan — Bobot 1
+              </option>
+
+              <option value="sedang">
+                Sedang — Bobot 5
+              </option>
+
+              <option value="berat">
+                Berat — Bobot 10
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- RINCIAN -->
+
+          <div class="form-group">
+
+            <label for="rincianPelanggaran">
+              Rincian Pelanggaran
+            </label>
+
+            <select
+              id="rincianPelanggaran"
+              required
+              disabled
+            >
+
+              <option value="">
+                Pilih jenis terlebih dahulu
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- BOBOT -->
+
+          <div class="bobot-box">
+
+            <span>
+              Bobot Pelanggaran
+            </span>
+
+            <strong id="nilaiBobot">
+              -
+            </strong>
+
+          </div>
+
+
+
+          <!-- WAKTU -->
+
+          <div class="form-group">
+
+            <label for="waktu">
+              Waktu
+            </label>
+
+            <input
+              type="time"
+              id="waktu"
+              required
+            >
+
+          </div>
+
+
+
+          <!-- SIMPAN -->
+
+          <button
+            type="submit"
+            class="btn-primary"
+            id="btnSimpan"
+          >
+            SIMPAN PELANGGARAN
+          </button>
+
+
+        </form>
+
+
+        <!-- PESAN -->
+
+        <div
+          id="formMessage"
+          class="message"
+        ></div>
+
 
       </div>
 
@@ -149,9 +354,10 @@
   </section>
 
 
-  <!-- ========================= -->
-  <!-- GURU PAGE -->
-  <!-- ========================= -->
+
+  <!-- =================================================
+       GURU PAGE
+  ================================================== -->
 
   <section
     id="guruPage"
@@ -171,6 +377,7 @@
           <p id="guruUserName"></p>
 
         </div>
+
 
         <button
           id="logoutGuru"
@@ -200,12 +407,14 @@
   </section>
 
 
-  <!-- Firebase -->
+
+  <!-- FIREBASE -->
 
   <script
     type="module"
     src="app.js"
   ></script>
+
 
 </body>
 
