@@ -23,7 +23,7 @@
 
 
   <!-- =================================================
-       LOGIN PAGE
+       LOGIN
   ================================================== -->
 
   <section
@@ -33,18 +33,13 @@
 
     <div class="login-card">
 
-      <h1>
-        Pelanggaran Siswa
-      </h1>
+      <h1>Pelanggaran Siswa</h1>
 
       <p class="school-name">
         SMAN 2 Rangkasbitung
       </p>
 
-      <h2>
-        Login
-      </h2>
-
+      <h2>Login</h2>
 
       <form id="loginForm">
 
@@ -102,7 +97,7 @@
 
 
   <!-- =================================================
-       GDS PAGE
+       PETUGAS GDS
   ================================================== -->
 
   <section
@@ -112,21 +107,15 @@
 
     <div class="dashboard">
 
-
-      <!-- TOPBAR -->
-
       <div class="topbar">
 
         <div>
 
-          <h1>
-            Petugas GDS
-          </h1>
+          <h1>Petugas GDS</h1>
 
           <p id="gdsUserName"></p>
 
         </div>
-
 
         <button
           id="logoutGds"
@@ -138,17 +127,12 @@
       </div>
 
 
-
-      <!-- FORM PELANGGARAN -->
-
       <div class="form-card">
 
         <h2>
           Catat Pelanggaran Siswa
         </h2>
 
-
-        <!-- CARI SISWA -->
 
         <div class="form-group">
 
@@ -166,15 +150,11 @@
         </div>
 
 
-        <!-- HASIL PENCARIAN -->
-
         <div
           id="hasilSiswa"
           class="search-results"
         ></div>
 
-
-        <!-- SISWA TERPILIH -->
 
         <div
           id="siswaTerpilih"
@@ -183,16 +163,13 @@
 
           <div>
 
-            <strong>
-              Siswa Terpilih
-            </strong>
+            <strong>Siswa Terpilih</strong>
 
             <div id="namaSiswaTerpilih"></div>
 
             <small id="infoSiswaTerpilih"></small>
 
           </div>
-
 
           <button
             type="button"
@@ -205,16 +182,10 @@
         </div>
 
 
-
-        <!-- FORM DATA -->
-
         <form
           id="pelanggaranForm"
           class="hidden"
         >
-
-
-          <!-- TANGGAL -->
 
           <div class="form-group">
 
@@ -230,9 +201,6 @@
 
           </div>
 
-
-
-          <!-- JENIS -->
 
           <div class="form-group">
 
@@ -266,9 +234,6 @@
           </div>
 
 
-
-          <!-- RINCIAN -->
-
           <div class="form-group">
 
             <label for="rincianPelanggaran">
@@ -290,9 +255,6 @@
           </div>
 
 
-
-          <!-- BOBOT -->
-
           <div class="bobot-box">
 
             <span>
@@ -305,9 +267,6 @@
 
           </div>
 
-
-
-          <!-- WAKTU -->
 
           <div class="form-group">
 
@@ -324,9 +283,6 @@
           </div>
 
 
-
-          <!-- SIMPAN -->
-
           <button
             type="submit"
             class="btn-primary"
@@ -335,17 +291,13 @@
             SIMPAN PELANGGARAN
           </button>
 
-
         </form>
 
-
-        <!-- PESAN -->
 
         <div
           id="formMessage"
           class="message"
         ></div>
-
 
       </div>
 
@@ -356,7 +308,7 @@
 
 
   <!-- =================================================
-       GURU PAGE
+       GURU
   ================================================== -->
 
   <section
@@ -366,12 +318,13 @@
 
     <div class="dashboard">
 
+
       <div class="topbar">
 
         <div>
 
           <h1>
-            Guru
+            Dashboard Guru
           </h1>
 
           <p id="guruUserName"></p>
@@ -389,32 +342,194 @@
       </div>
 
 
-      <div class="welcome-card">
+      <!-- STATISTIK -->
 
-        <h2>
-          Dashboard Guru
-        </h2>
+      <div class="stats-grid">
 
-        <p>
-          Rekap dan ranking pelanggaran
-          akan tersedia pada Tahap 4.
-        </p>
+        <div class="stat-card">
+
+          <span>
+            Siswa Melanggar
+          </span>
+
+          <strong id="totalSiswa">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            Total Pelanggaran
+          </span>
+
+          <strong id="totalPelanggaran">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>
+            Total Bobot
+          </span>
+
+          <strong id="totalBobot">
+            0
+          </strong>
+
+        </div>
 
       </div>
+
+
+      <!-- FILTER -->
+
+      <div class="form-card">
+
+        <h2>
+          Rekap Pelanggaran
+        </h2>
+
+
+        <div class="filter-grid">
+
+          <div class="form-group">
+
+            <label for="filterKelas">
+              Kelas
+            </label>
+
+            <select id="filterKelas">
+
+              <option value="">
+                Semua Kelas
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="filterTanggal">
+              Tanggal
+            </label>
+
+            <input
+              type="date"
+              id="filterTanggal"
+            >
+
+          </div>
+
+
+          <div class="filter-button-area">
+
+            <button
+              id="btnResetFilter"
+              class="btn-secondary"
+              type="button"
+            >
+              Reset Filter
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- RANKING -->
+
+      <div class="form-card">
+
+        <div class="section-header">
+
+          <h2>
+            Ranking Pelanggaran Siswa
+          </h2>
+
+          <button
+            id="btnRefreshGuru"
+            class="btn-secondary"
+            type="button"
+          >
+            Refresh
+          </button>
+
+        </div>
+
+
+        <div
+          id="loadingGuru"
+          class="loading"
+        >
+          Memuat data...
+        </div>
+
+
+        <div
+          id="rankingContainer"
+          class="table-wrapper"
+        ></div>
+
+      </div>
+
+
+      <!-- DETAIL -->
+
+      <div
+        id="detailSiswaCard"
+        class="form-card hidden"
+      >
+
+        <div class="section-header">
+
+          <div>
+
+            <h2 id="detailNamaSiswa">
+              Detail Siswa
+            </h2>
+
+            <p id="detailInfoSiswa"></p>
+
+          </div>
+
+
+          <button
+            id="btnTutupDetail"
+            class="btn-secondary"
+            type="button"
+          >
+            Tutup
+          </button>
+
+        </div>
+
+
+        <div
+          id="detailPelanggaranContainer"
+        ></div>
+
+      </div>
+
 
     </div>
 
   </section>
 
 
-
-  <!-- FIREBASE -->
-
   <script
     type="module"
     src="app.js"
   ></script>
-
 
 </body>
 
