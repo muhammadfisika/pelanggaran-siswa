@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,30 +12,201 @@
 
   <title>Pelanggaran Siswa</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
 
 <body>
 
-  <main class="container">
+  <!-- ========================= -->
+  <!-- LOGIN PAGE -->
+  <!-- ========================= -->
 
-    <div class="card">
+  <section
+    id="loginPage"
+    class="page"
+  >
 
-      <h1>Pelanggaran Siswa</h1>
+    <div class="login-card">
 
-      <p>
+      <h1>
+        Pelanggaran Siswa
+      </h1>
+
+      <p class="school-name">
         SMAN 2 Rangkasbitung
       </p>
 
-      <div id="status">
-        Menghubungkan ke Firebase...
+      <h2>
+        Login
+      </h2>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Masukkan email"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Masukkan password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn-primary"
+        >
+          LOGIN
+        </button>
+
+      </form>
+
+
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================= -->
+  <!-- GDS PAGE -->
+  <!-- ========================= -->
+
+  <section
+    id="gdsPage"
+    class="page hidden"
+  >
+
+    <div class="dashboard">
+
+      <div class="topbar">
+
+        <div>
+
+          <h1>
+            Petugas GDS
+          </h1>
+
+          <p id="gdsUserName"></p>
+
+        </div>
+
+        <button
+          id="logoutGds"
+          class="btn-danger"
+        >
+          Logout
+        </button>
+
+      </div>
+
+
+      <div class="welcome-card">
+
+        <h2>
+          Dashboard Petugas GDS
+        </h2>
+
+        <p>
+          Modul pencatatan pelanggaran siswa
+          akan tersedia pada Tahap 3.
+        </p>
+
       </div>
 
     </div>
 
-  </main>
+  </section>
 
-  <script type="module" src="app.js"></script>
+
+  <!-- ========================= -->
+  <!-- GURU PAGE -->
+  <!-- ========================= -->
+
+  <section
+    id="guruPage"
+    class="page hidden"
+  >
+
+    <div class="dashboard">
+
+      <div class="topbar">
+
+        <div>
+
+          <h1>
+            Guru
+          </h1>
+
+          <p id="guruUserName"></p>
+
+        </div>
+
+        <button
+          id="logoutGuru"
+          class="btn-danger"
+        >
+          Logout
+        </button>
+
+      </div>
+
+
+      <div class="welcome-card">
+
+        <h2>
+          Dashboard Guru
+        </h2>
+
+        <p>
+          Rekap dan ranking pelanggaran
+          akan tersedia pada Tahap 4.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Firebase -->
+
+  <script
+    type="module"
+    src="app.js"
+  ></script>
 
 </body>
+
 </html>
