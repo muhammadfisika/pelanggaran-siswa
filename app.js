@@ -2,13 +2,11 @@
 // FIREBASE APP
 // APLIKASI PELANGGARAN SISWA
 // SMAN 2 RANGKASBITUNG
-// TAHAP 3
+// TAHAP 4
 // =====================================================
-
 
 import { initializeApp } from
   "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-
 
 import {
   getAuth,
@@ -18,7 +16,6 @@ import {
 } from
   "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-
 import {
   getFirestore,
   collection,
@@ -26,9 +23,8 @@ import {
   doc,
   getDoc,
   addDoc,
-  serverTimestamp,
-  query,
-  orderBy
+  deleteDoc,
+  serverTimestamp
 } from
   "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
@@ -54,10 +50,8 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getFirestore(app);
@@ -90,7 +84,7 @@ const guruUserName =
 
 
 // =====================================================
-// DATA GLOBAL
+// DATA GDS
 // =====================================================
 
 let userAktif = null;
@@ -101,7 +95,16 @@ let dataJenisPelanggaran = [];
 
 let siswaTerpilih = null;
 
-let jenisTerpilih = null;
+
+// =====================================================
+// DATA GURU
+// =====================================================
+
+let semuaPelanggaran = [];
+
+let rankingSiswa = [];
+
+let siswaDetailAktif = null;
 
 
 // =====================================================
@@ -115,7 +118,6 @@ function showLogin() {
   gdsPage.classList.add("hidden");
 
   guruPage.classList.add("hidden");
-
 }
 
 
@@ -129,7 +131,6 @@ function showGds(nama) {
 
   gdsUserName.textContent =
     "Login sebagai: " + nama;
-
 }
 
 
@@ -143,7 +144,6 @@ function showGuru(nama) {
 
   guruUserName.textContent =
     "Login sebagai: " + nama;
-
 }
 
 
@@ -157,23 +157,19 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
-
     const email =
       document
         .getElementById("email")
         .value
         .trim();
 
-
     const password =
       document
         .getElementById("password")
         .value;
 
-
     loginMessage.textContent =
       "Sedang login...";
-
 
     loginMessage.className =
       "message";
@@ -187,9 +183,7 @@ loginForm.addEventListener(
         password
       );
 
-
-      loginMessage.textContent =
-        "";
+      loginMessage.textContent = "";
 
     }
 
@@ -199,7 +193,6 @@ loginForm.addEventListener(
         "Login Error:",
         error
       );
-
 
       let message =
         "Login gagal.";
@@ -266,7 +259,7 @@ loginForm.addEventListener(
 
 
 // =====================================================
-// CEK USER LOGIN
+// AUTH STATE
 // =====================================================
 
 onAuthStateChanged(
@@ -280,7 +273,6 @@ onAuthStateChanged(
       showLogin();
 
       return;
-
     }
 
 
@@ -292,7 +284,6 @@ onAuthStateChanged(
           "users",
           user.uid
         );
-
 
       const userSnap =
         await getDoc(userRef);
@@ -311,7 +302,6 @@ onAuthStateChanged(
           "message error";
 
         return;
-
       }
 
 
@@ -319,31 +309,32 @@ onAuthStateChanged(
         userSnap.data();
 
 
-      const role =
-        userData.role;
-
-
-      const nama =
-        userData.nama ||
-        user.email;
-
-
       userAktif = {
 
-        uid: user.uid,
+        uid:
+          user.uid,
 
-        email: user.email,
+        email:
+          user.email,
 
-        nama: nama,
+        nama:
+          userData.nama ||
+          user.email,
 
-        role: role
+        role:
+          userData.role
 
       };
 
 
-      if (role === "gds") {
+      if (
+        userAktif.role ===
+        "gds"
+      ) {
 
-        showGds(nama);
+        showGds(
+          userAktif.nama
+        );
 
         await loadMasterFirebase();
 
@@ -351,9 +342,16 @@ onAuthStateChanged(
 
       }
 
-      else if (role === "guru") {
+      else if (
+        userAktif.role ===
+        "guru"
+      ) {
 
-        showGuru(nama);
+        showGuru(
+          userAktif.nama
+        );
+
+        await loadDashboardGuru();
 
       }
 
@@ -368,7 +366,6 @@ onAuthStateChanged(
 
         loginMessage.className =
           "message error";
-
       }
 
     }
@@ -376,10 +373,9 @@ onAuthStateChanged(
     catch (error) {
 
       console.error(
-        "Gagal mengambil data user:",
+        "Auth state error:",
         error
       );
-
 
       await signOut(auth);
 
@@ -390,7 +386,6 @@ onAuthStateChanged(
 
       loginMessage.className =
         "message error";
-
     }
 
   }
@@ -398,7 +393,7 @@ onAuthStateChanged(
 
 
 // =====================================================
-// LOGOUT GDS
+// LOGOUT
 // =====================================================
 
 document
@@ -412,10 +407,6 @@ document
     }
   );
 
-
-// =====================================================
-// LOGOUT GURU
-// =====================================================
 
 document
   .getElementById("logoutGuru")
@@ -437,7 +428,10 @@ async function ambilDataSiswaFirebase() {
 
   const snapshot =
     await getDocs(
-      collection(db, "siswa")
+      collection(
+        db,
+        "siswa"
+      )
     );
 
 
@@ -453,13 +447,17 @@ async function ambilDataSiswaFirebase() {
 
       dataSiswa.push({
 
-        id: docSnapshot.id,
+        id:
+          docSnapshot.id,
 
-        nama: data.nama || "",
+        nama:
+          data.nama || "",
 
-        nisn: data.nisn || "",
+        nisn:
+          data.nisn || "",
 
-        kelas: data.kelas || ""
+        kelas:
+          data.kelas || ""
 
       });
 
@@ -470,21 +468,13 @@ async function ambilDataSiswaFirebase() {
   dataSiswa.sort(
     function(a, b) {
 
-      return a.nama
-        .localeCompare(
-          b.nama,
-          "id"
-        );
+      return a.nama.localeCompare(
+        b.nama,
+        "id"
+      );
 
     }
   );
-
-
-  console.log(
-    "Data siswa:",
-    dataSiswa
-  );
-
 }
 
 
@@ -492,7 +482,8 @@ async function ambilDataSiswaFirebase() {
 // LOAD MASTER PELANGGARAN
 // =====================================================
 
-async function ambilJenisPelanggaranFirebase() {
+async function
+ambilJenisPelanggaranFirebase() {
 
   const snapshot =
     await getDocs(
@@ -515,7 +506,8 @@ async function ambilJenisPelanggaranFirebase() {
 
       dataJenisPelanggaran.push({
 
-        id: docSnapshot.id,
+        id:
+          docSnapshot.id,
 
         nama:
           data.nama || "",
@@ -534,13 +526,6 @@ async function ambilJenisPelanggaranFirebase() {
 
     }
   );
-
-
-  console.log(
-    "Jenis pelanggaran:",
-    dataJenisPelanggaran
-  );
-
 }
 
 
@@ -556,17 +541,12 @@ async function loadMasterFirebase() {
 
     await ambilJenisPelanggaranFirebase();
 
-
-    console.log(
-      "Master Firebase berhasil dimuat."
-    );
-
   }
 
   catch (error) {
 
     console.error(
-      "Gagal memuat master Firebase:",
+      "Gagal load master:",
       error
     );
 
@@ -575,15 +555,12 @@ async function loadMasterFirebase() {
         "formMessage"
       );
 
-
     formMessage.textContent =
-      "Gagal mengambil data master Firebase.";
+      "Gagal mengambil data Firebase.";
 
     formMessage.className =
       "message error";
-
   }
-
 }
 
 
@@ -620,20 +597,6 @@ searchSiswa.addEventListener(
     if (!keyword) {
 
       return;
-
-    }
-
-
-    if (dataSiswa.length === 0) {
-
-      hasilSiswa.innerHTML = `
-        <div class="no-result">
-          Data siswa belum tersedia.
-        </div>
-      `;
-
-      return;
-
     }
 
 
@@ -666,7 +629,6 @@ searchSiswa.addEventListener(
       `;
 
       return;
-
     }
 
 
@@ -686,13 +648,21 @@ searchSiswa.addEventListener(
         item.innerHTML = `
 
           <strong>
-            ${escapeHtml(siswa.nama)}
+            ${escapeHtml(
+              siswa.nama
+            )}
           </strong>
 
           <small>
-            NISN: ${escapeHtml(siswa.nisn)}
-            &nbsp; | &nbsp;
-            Kelas: ${escapeHtml(siswa.kelas)}
+            NISN:
+            ${escapeHtml(
+              siswa.nisn
+            )}
+            |
+            Kelas:
+            ${escapeHtml(
+              siswa.kelas
+            )}
           </small>
 
         `;
@@ -764,24 +734,11 @@ function pilihSiswa(siswa) {
     .remove("hidden");
 
 
-  searchSiswa.value =
-    "";
+  searchSiswa.value = "";
 
+  hasilSiswa.innerHTML = "";
 
-  hasilSiswa.innerHTML =
-    "";
-
-
-  searchSiswa.disabled =
-    true;
-
-
-  document
-    .getElementById(
-      "tanggal"
-    )
-    .focus();
-
+  searchSiswa.disabled = true;
 }
 
 
@@ -797,9 +754,7 @@ document
     "click",
     function() {
 
-      siswaTerpilih =
-        null;
-
+      siswaTerpilih = null;
 
       document
         .getElementById(
@@ -808,7 +763,6 @@ document
         .classList
         .add("hidden");
 
-
       document
         .getElementById(
           "pelanggaranForm"
@@ -816,10 +770,8 @@ document
         .classList
         .add("hidden");
 
-
       searchSiswa.disabled =
         false;
-
 
       searchSiswa.focus();
 
@@ -857,10 +809,6 @@ jenisPelanggaran.addEventListener(
       jenisPelanggaran.value;
 
 
-    jenisTerpilih =
-      null;
-
-
     rincianPelanggaran.innerHTML =
       "";
 
@@ -874,7 +822,6 @@ jenisPelanggaran.addEventListener(
       rincianPelanggaran.disabled =
         true;
 
-
       rincianPelanggaran.innerHTML = `
         <option value="">
           Pilih jenis terlebih dahulu
@@ -882,20 +829,18 @@ jenisPelanggaran.addEventListener(
       `;
 
       return;
-
     }
 
 
     const daftar =
-      dataJenisPelanggaran
-        .filter(
-          function(item) {
+      dataJenisPelanggaran.filter(
+        function(item) {
 
-            return item.jenis ===
-              jenis;
+          return item.jenis ===
+            jenis;
 
-          }
-        );
+        }
+      );
 
 
     const bobot =
@@ -914,23 +859,11 @@ jenisPelanggaran.addEventListener(
       false;
 
 
-    const defaultOption =
-      document.createElement(
-        "option"
-      );
-
-
-    defaultOption.value =
-      "";
-
-
-    defaultOption.textContent =
-      "Pilih rincian pelanggaran";
-
-
-    rincianPelanggaran.appendChild(
-      defaultOption
-    );
+    rincianPelanggaran.innerHTML = `
+      <option value="">
+        Pilih rincian pelanggaran
+      </option>
+    `;
 
 
     daftar.forEach(
@@ -954,10 +887,6 @@ jenisPelanggaran.addEventListener(
           item.nama;
 
 
-        option.dataset.bobot =
-          item.bobot;
-
-
         rincianPelanggaran
           .appendChild(
             option
@@ -969,25 +898,11 @@ jenisPelanggaran.addEventListener(
 
     if (daftar.length === 0) {
 
-      const option =
-        document.createElement(
-          "option"
-        );
-
-
-      option.value =
-        "";
-
-
-      option.textContent =
-        "Belum ada rincian untuk jenis ini";
-
-
-      rincianPelanggaran
-        .appendChild(
-          option
-        );
-
+      rincianPelanggaran.innerHTML += `
+        <option value="">
+          Belum ada rincian untuk jenis ini
+        </option>
+      `;
     }
 
   }
@@ -1019,27 +934,26 @@ pelanggaranForm.addEventListener(
 
     if (!siswaTerpilih) {
 
-      formMessage.textContent =
-        "Silakan pilih siswa terlebih dahulu.";
-
-      formMessage.className =
-        "message error";
+      tampilkanPesanForm(
+        "Silakan pilih siswa terlebih dahulu.",
+        "error"
+      );
 
       return;
-
     }
 
 
-    if (!userAktif) {
+    if (
+      !userAktif ||
+      userAktif.role !== "gds"
+    ) {
 
-      formMessage.textContent =
-        "Sesi pengguna tidak ditemukan.";
-
-      formMessage.className =
-        "message error";
+      tampilkanPesanForm(
+        "Anda tidak memiliki akses sebagai Petugas GDS.",
+        "error"
+      );
 
       return;
-
     }
 
 
@@ -1074,22 +988,19 @@ pelanggaranForm.addEventListener(
       !waktu
     ) {
 
-      formMessage.textContent =
-        "Semua data pelanggaran harus diisi.";
-
-      formMessage.className =
-        "message error";
+      tampilkanPesanForm(
+        "Semua data pelanggaran harus diisi.",
+        "error"
+      );
 
       return;
-
     }
 
 
     const option =
-      rincianPelanggaran
-        .options[
-          rincianPelanggaran.selectedIndex
-        ];
+      rincianPelanggaran.options[
+        rincianPelanggaran.selectedIndex
+      ];
 
 
     const namaRincian =
@@ -1114,13 +1025,8 @@ pelanggaranForm.addEventListener(
     btnSimpan.disabled =
       true;
 
-
     btnSimpan.textContent =
       "MENYIMPAN...";
-
-
-    formMessage.textContent =
-      "";
 
 
     try {
@@ -1175,11 +1081,10 @@ pelanggaranForm.addEventListener(
       );
 
 
-      formMessage.textContent =
-        "Pelanggaran berhasil disimpan.";
-
-      formMessage.className =
-        "message success";
+      tampilkanPesanForm(
+        "Pelanggaran berhasil disimpan.",
+        "success"
+      );
 
 
       resetFormSetelahSimpan();
@@ -1189,17 +1094,16 @@ pelanggaranForm.addEventListener(
     catch (error) {
 
       console.error(
-        "Gagal menyimpan pelanggaran:",
+        "Gagal menyimpan:",
         error
       );
 
 
-      formMessage.textContent =
+      tampilkanPesanForm(
         "Gagal menyimpan data: "
-        + error.message;
-
-      formMessage.className =
-        "message error";
+        + error.message,
+        "error"
+      );
 
     }
 
@@ -1218,7 +1122,24 @@ pelanggaranForm.addEventListener(
 
 
 // =====================================================
-// RESET FORM SETELAH SIMPAN
+// PESAN FORM
+// =====================================================
+
+function tampilkanPesanForm(
+  pesan,
+  tipe
+) {
+
+  formMessage.textContent =
+    pesan;
+
+  formMessage.className =
+    "message " + tipe;
+}
+
+
+// =====================================================
+// RESET FORM
 // =====================================================
 
 function resetFormSetelahSimpan() {
@@ -1227,13 +1148,9 @@ function resetFormSetelahSimpan() {
     .getElementById(
       "tanggal"
     )
-    .value =
-      "";
+    .value = "";
 
-
-  jenisPelanggaran.value =
-    "";
-
+  jenisPelanggaran.value = "";
 
   rincianPelanggaran.innerHTML = `
     <option value="">
@@ -1241,54 +1158,30 @@ function resetFormSetelahSimpan() {
     </option>
   `;
 
-
   rincianPelanggaran.disabled =
     true;
 
-
   nilaiBobot.textContent =
     "-";
-
 
   document
     .getElementById(
       "waktu"
     )
-    .value =
-      "";
-
-
-  jenisTerpilih =
-    null;
-
+    .value = "";
 }
 
 
-// =====================================================
-// RESET SEMUA FORM
-// =====================================================
-
 function resetFormPelanggaran() {
 
-  siswaTerpilih =
-    null;
-
-
-  jenisTerpilih =
-    null;
-
+  siswaTerpilih = null;
 
   searchSiswa.disabled =
     false;
 
+  searchSiswa.value = "";
 
-  searchSiswa.value =
-    "";
-
-
-  hasilSiswa.innerHTML =
-    "";
-
+  hasilSiswa.innerHTML = "";
 
   document
     .getElementById(
@@ -1297,7 +1190,6 @@ function resetFormPelanggaran() {
     .classList
     .add("hidden");
 
-
   document
     .getElementById(
       "pelanggaranForm"
@@ -1305,18 +1197,13 @@ function resetFormPelanggaran() {
     .classList
     .add("hidden");
 
-
   document
     .getElementById(
       "tanggal"
     )
-    .value =
-      "";
+    .value = "";
 
-
-  jenisPelanggaran.value =
-    "";
-
+  jenisPelanggaran.value = "";
 
   rincianPelanggaran.innerHTML = `
     <option value="">
@@ -1324,25 +1211,1151 @@ function resetFormPelanggaran() {
     </option>
   `;
 
-
   rincianPelanggaran.disabled =
     true;
 
-
   nilaiBobot.textContent =
     "-";
-
 
   document
     .getElementById(
       "waktu"
     )
-    .value =
-      "";
+    .value = "";
+
+  formMessage.textContent = "";
+}
 
 
-  formMessage.textContent =
-    "";
+// =====================================================
+// =====================================================
+//                 DASHBOARD GURU
+// =====================================================
+// =====================================================
+
+
+// =====================================================
+// LOAD SEMUA PELANGGARAN
+// =====================================================
+
+async function loadDashboardGuru() {
+
+  const loading =
+    document.getElementById(
+      "loadingGuru"
+    );
+
+
+  loading.classList.remove(
+    "hidden"
+  );
+
+
+  try {
+
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "pelanggaran"
+        )
+      );
+
+
+    semuaPelanggaran = [];
+
+
+    snapshot.forEach(
+      function(docSnapshot) {
+
+        const data =
+          docSnapshot.data();
+
+
+        semuaPelanggaran.push({
+
+          id:
+            docSnapshot.id,
+
+          siswaId:
+            data.siswaId || "",
+
+          namaSiswa:
+            data.namaSiswa || "",
+
+          nisn:
+            data.nisn || "",
+
+          kelas:
+            data.kelas || "",
+
+          tanggal:
+            data.tanggal || "",
+
+          jenis:
+            String(
+              data.jenis || ""
+            ).toLowerCase(),
+
+          rincian:
+            data.rincian || "",
+
+          waktu:
+            data.waktu || "",
+
+          bobot:
+            Number(
+              data.bobot || 0
+            ),
+
+          petugasNama:
+            data.petugasNama || ""
+
+        });
+
+      }
+    );
+
+
+    buatFilterKelas();
+
+
+    tampilkanRanking();
+
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Gagal mengambil data pelanggaran:",
+      error
+    );
+
+
+    loading.textContent =
+      "Gagal mengambil data pelanggaran.";
+
+  }
+
+  finally {
+
+    loading.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+// =====================================================
+// BUAT FILTER KELAS
+// =====================================================
+
+function buatFilterKelas() {
+
+  const select =
+    document.getElementById(
+      "filterKelas"
+    );
+
+
+  const kelasSet =
+    new Set();
+
+
+  semuaPelanggaran.forEach(
+    function(item) {
+
+      if (item.kelas) {
+
+        kelasSet.add(
+          item.kelas
+        );
+
+      }
+
+    }
+  );
+
+
+  const kelasArray =
+    Array.from(
+      kelasSet
+    ).sort(
+      function(a, b) {
+
+        return a.localeCompare(
+          b,
+          "id"
+        );
+
+      }
+    );
+
+
+  select.innerHTML = `
+    <option value="">
+      Semua Kelas
+    </option>
+  `;
+
+
+  kelasArray.forEach(
+    function(kelas) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        kelas;
+
+      option.textContent =
+        kelas;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+// =====================================================
+// FILTER
+// =====================================================
+
+document
+  .getElementById(
+    "filterKelas"
+  )
+  .addEventListener(
+    "change",
+    function() {
+
+      tampilkanRanking();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "filterTanggal"
+  )
+  .addEventListener(
+    "change",
+    function() {
+
+      tampilkanRanking();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "btnResetFilter"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      document
+        .getElementById(
+          "filterKelas"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "filterTanggal"
+        )
+        .value = "";
+
+      tampilkanRanking();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "btnRefreshGuru"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      await loadDashboardGuru();
+
+    }
+  );
+
+
+// =====================================================
+// PROSES RANKING
+// =====================================================
+
+function prosesRanking() {
+
+  const kelas =
+    document
+      .getElementById(
+        "filterKelas"
+      )
+      .value;
+
+
+  const tanggal =
+    document
+      .getElementById(
+        "filterTanggal"
+      )
+      .value;
+
+
+  let data =
+    [...semuaPelanggaran];
+
+
+  if (kelas) {
+
+    data =
+      data.filter(
+        function(item) {
+
+          return item.kelas ===
+            kelas;
+
+        }
+      );
+
+  }
+
+
+  if (tanggal) {
+
+    data =
+      data.filter(
+        function(item) {
+
+          return item.tanggal ===
+            tanggal;
+
+        }
+      );
+
+  }
+
+
+  const kelompok =
+    {};
+
+
+  data.forEach(
+    function(item) {
+
+      const key =
+        item.siswaId ||
+        item.nisn ||
+        item.namaSiswa;
+
+
+      if (!kelompok[key]) {
+
+        kelompok[key] = {
+
+          siswaId:
+            item.siswaId,
+
+          namaSiswa:
+            item.namaSiswa,
+
+          nisn:
+            item.nisn,
+
+          kelas:
+            item.kelas,
+
+          ringan: 0,
+
+          sedang: 0,
+
+          berat: 0,
+
+          totalBobot: 0,
+
+          jumlahPelanggaran: 0
+
+        };
+
+      }
+
+
+      kelompok[key]
+        .jumlahPelanggaran++;
+
+
+      kelompok[key]
+        .totalBobot +=
+          item.bobot;
+
+
+      if (
+        item.jenis ===
+        "ringan"
+      ) {
+
+        kelompok[key].ringan++;
+
+      }
+
+      else if (
+        item.jenis ===
+        "sedang"
+      ) {
+
+        kelompok[key].sedang++;
+
+      }
+
+      else if (
+        item.jenis ===
+        "berat"
+      ) {
+
+        kelompok[key].berat++;
+
+      }
+
+    }
+  );
+
+
+  rankingSiswa =
+    Object.values(
+      kelompok
+    );
+
+
+  rankingSiswa.sort(
+    function(a, b) {
+
+      if (
+        b.totalBobot !==
+        a.totalBobot
+      ) {
+
+        return (
+          b.totalBobot -
+          a.totalBobot
+        );
+
+      }
+
+
+      return a.namaSiswa.localeCompare(
+        b.namaSiswa,
+        "id"
+      );
+
+    }
+  );
+
+
+  return rankingSiswa;
+
+}
+
+
+// =====================================================
+// TAMPILKAN RANKING
+// =====================================================
+
+function tampilkanRanking() {
+
+  const data =
+    prosesRanking();
+
+
+  const container =
+    document.getElementById(
+      "rankingContainer"
+    );
+
+
+  const totalSiswa =
+    document.getElementById(
+      "totalSiswa"
+    );
+
+
+  const totalPelanggaran =
+    document.getElementById(
+      "totalPelanggaran"
+    );
+
+
+  const totalBobot =
+    document.getElementById(
+      "totalBobot"
+    );
+
+
+  const totalPelanggaranFilter =
+    semuaPelanggaran.filter(
+      function(item) {
+
+        const kelas =
+          document
+            .getElementById(
+              "filterKelas"
+            )
+            .value;
+
+        const tanggal =
+          document
+            .getElementById(
+              "filterTanggal"
+            )
+            .value;
+
+
+        return (
+          (!kelas ||
+            item.kelas === kelas)
+          &&
+          (!tanggal ||
+            item.tanggal === tanggal)
+        );
+
+      }
+    );
+
+
+  totalSiswa.textContent =
+    data.length;
+
+
+  totalPelanggaran.textContent =
+    totalPelanggaranFilter.length;
+
+
+  totalBobot.textContent =
+    totalPelanggaranFilter.reduce(
+      function(total, item) {
+
+        return total + item.bobot;
+
+      },
+      0
+    );
+
+
+  if (data.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        Belum ada data pelanggaran.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  let html = `
+
+    <table class="ranking-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Rank
+          </th>
+
+          <th>
+            Siswa
+          </th>
+
+          <th>
+            Kelas
+          </th>
+
+          <th>
+            Ringan
+          </th>
+
+          <th>
+            Sedang
+          </th>
+
+          <th>
+            Berat
+          </th>
+
+          <th>
+            Total
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+  `;
+
+
+  data.forEach(
+    function(item, index) {
+
+      html += `
+
+        <tr
+          data-siswa-id="${escapeHtml(
+            item.siswaId
+          )}"
+        >
+
+          <td>
+
+            <span class="rank-number">
+              ${index + 1}
+            </span>
+
+          </td>
+
+
+          <td class="nama-cell">
+
+            ${escapeHtml(
+              item.namaSiswa
+            )}
+
+          </td>
+
+
+          <td>
+
+            ${escapeHtml(
+              item.kelas
+            )}
+
+          </td>
+
+
+          <td>
+            ${item.ringan}
+          </td>
+
+
+          <td>
+            ${item.sedang}
+          </td>
+
+
+          <td>
+            ${item.berat}
+          </td>
+
+
+          <td>
+
+            <span class="total-bobot">
+              ${item.totalBobot}
+            </span>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+      </tbody>
+
+    </table>
+
+  `;
+
+
+  container.innerHTML =
+    html;
+
+
+  const rows =
+    container.querySelectorAll(
+      "tbody tr"
+    );
+
+
+  rows.forEach(
+    function(row) {
+
+      row.addEventListener(
+        "click",
+        function() {
+
+          const siswaId =
+            row.dataset.siswaId;
+
+
+          bukaDetailSiswa(
+            siswaId
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+// =====================================================
+// DETAIL SISWA
+// =====================================================
+
+function bukaDetailSiswa(
+  siswaId
+) {
+
+  const data =
+    semuaPelanggaran.filter(
+      function(item) {
+
+        return item.siswaId ===
+          siswaId;
+
+      }
+    );
+
+
+  if (data.length === 0) {
+
+    return;
+  }
+
+
+  siswaDetailAktif =
+    siswaId;
+
+
+  const siswa =
+    data[0];
+
+
+  document
+    .getElementById(
+      "detailNamaSiswa"
+    )
+    .textContent =
+      siswa.namaSiswa;
+
+
+  document
+    .getElementById(
+      "detailInfoSiswa"
+    )
+    .textContent =
+      "NISN: "
+      + siswa.nisn
+      + " | Kelas: "
+      + siswa.kelas;
+
+
+  const container =
+    document.getElementById(
+      "detailPelanggaranContainer"
+    );
+
+
+  data.sort(
+    function(a, b) {
+
+      if (
+        a.tanggal !==
+        b.tanggal
+      ) {
+
+        return b.tanggal.localeCompare(
+          a.tanggal
+        );
+
+      }
+
+
+      return b.waktu.localeCompare(
+        a.waktu
+      );
+
+    }
+  );
+
+
+  let html = `
+
+    <div class="table-wrapper">
+
+      <table class="detail-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Tanggal
+            </th>
+
+            <th>
+              Waktu
+            </th>
+
+            <th>
+              Jenis
+            </th>
+
+            <th>
+              Rincian
+            </th>
+
+            <th>
+              Bobot
+            </th>
+
+            <th>
+              Petugas
+            </th>
+
+            <th>
+              Aksi
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+  `;
+
+
+  data.forEach(
+    function(item) {
+
+      html += `
+
+        <tr>
+
+          <td>
+            ${formatTanggal(
+              item.tanggal
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              item.waktu
+            )}
+          </td>
+
+          <td>
+            ${formatJenis(
+              item.jenis
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              item.rincian
+            )}
+          </td>
+
+          <td class="bobot">
+            ${item.bobot}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              item.petugasNama
+            )}
+          </td>
+
+          <td>
+
+            <button
+              class="delete-button"
+              data-id="${escapeHtml(
+                item.id
+              )}"
+            >
+              Hapus
+            </button>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+
+  container.innerHTML =
+    html;
+
+
+  document
+    .getElementById(
+      "detailSiswaCard"
+    )
+    .classList
+    .remove("hidden");
+
+
+  const deleteButtons =
+    container.querySelectorAll(
+      ".delete-button"
+    );
+
+
+  deleteButtons.forEach(
+    function(button) {
+
+      button.addEventListener(
+        "click",
+        async function(event) {
+
+          event.stopPropagation();
+
+
+          const id =
+            button.dataset.id;
+
+
+          await hapusPelanggaran(
+            id
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "detailSiswaCard"
+    )
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+}
+
+
+// =====================================================
+// HAPUS PELANGGARAN
+// =====================================================
+
+async function hapusPelanggaran(
+  id
+) {
+
+  if (
+    !userAktif ||
+    userAktif.role !== "guru"
+  ) {
+
+    alert(
+      "Hanya Guru yang dapat menghapus data."
+    );
+
+    return;
+  }
+
+
+  const yakin =
+    confirm(
+      "Apakah Anda yakin ingin menghapus data pelanggaran ini?"
+    );
+
+
+  if (!yakin) {
+
+    return;
+  }
+
+
+  try {
+
+    await deleteDoc(
+      doc(
+        db,
+        "pelanggaran",
+        id
+      )
+    );
+
+
+    alert(
+      "Data pelanggaran berhasil dihapus."
+    );
+
+
+    await loadDashboardGuru();
+
+
+    if (siswaDetailAktif) {
+
+      bukaDetailSiswa(
+        siswaDetailAktif
+      );
+
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Gagal menghapus:",
+      error
+    );
+
+
+    alert(
+      "Gagal menghapus data: "
+      + error.message
+    );
+
+  }
+
+}
+
+
+// =====================================================
+// TUTUP DETAIL
+// =====================================================
+
+document
+  .getElementById(
+    "btnTutupDetail"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      document
+        .getElementById(
+          "detailSiswaCard"
+        )
+        .classList
+        .add("hidden");
+
+      siswaDetailAktif =
+        null;
+
+    }
+  );
+
+
+// =====================================================
+// FORMAT JENIS
+// =====================================================
+
+function formatJenis(
+  jenis
+) {
+
+  if (jenis === "ringan") {
+
+    return "Ringan";
+
+  }
+
+
+  if (jenis === "sedang") {
+
+    return "Sedang";
+
+  }
+
+
+  if (jenis === "berat") {
+
+    return "Berat";
+
+  }
+
+
+  return jenis;
+
+}
+
+
+// =====================================================
+// FORMAT TANGGAL
+// =====================================================
+
+function formatTanggal(
+  tanggal
+) {
+
+  if (!tanggal) {
+
+    return "-";
+
+  }
+
+
+  const bagian =
+    tanggal.split("-");
+
+
+  if (bagian.length !== 3) {
+
+    return tanggal;
+
+  }
+
+
+  return (
+    bagian[2]
+    + "/"
+    + bagian[1]
+    + "/"
+    + bagian[0]
+  );
 
 }
 
@@ -1351,7 +2364,9 @@ function resetFormPelanggaran() {
 // ESCAPE HTML
 // =====================================================
 
-function escapeHtml(value) {
+function escapeHtml(
+  value
+) {
 
   return String(value)
 
