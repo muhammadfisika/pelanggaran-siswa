@@ -584,68 +584,85 @@
 
   function parseCSVLine(line) {
 
-    const result = [];
+  // Menentukan pemisah otomatis
+  // Bisa koma (,) atau titik koma (;)
 
-    let current = "";
+  let separator = ",";
 
-    let insideQuotes = false;
+  if (
+    line.includes(";") &&
+    !line.includes(",")
+  ) {
+    separator = ";";
+  }
+
+  const result = [];
+
+  let current = "";
+
+  let insideQuotes = false;
 
 
-    for (
-      let i = 0;
-      i < line.length;
-      i++
-    ) {
+  for (
+    let i = 0;
+    i < line.length;
+    i++
+  ) {
 
-      const char = line[i];
+    const char = line[i];
 
 
-      if (char === '"') {
+    // Jika tanda kutip
+    if (char === '"') {
 
-        if (
-          insideQuotes &&
-          line[i + 1] === '"'
-        ) {
-
-          current += '"';
-
-          i++;
-
-        } else {
-
-          insideQuotes =
-            !insideQuotes;
-
-        }
-
-      }
-
-      else if (
-        char === "," &&
-        !insideQuotes
+      if (
+        insideQuotes &&
+        line[i + 1] === '"'
       ) {
 
-        result.push(current);
+        current += '"';
 
-        current = "";
+        i++;
 
-      }
+      } else {
 
-      else {
-
-        current += char;
+        insideQuotes =
+          !insideQuotes;
 
       }
 
     }
 
+    // Jika separator
+    else if (
+      char === separator &&
+      !insideQuotes
+    ) {
 
-    result.push(current);
+      result.push(
+        current.trim()
+      );
 
-    return result;
+      current = "";
+
+    }
+
+    else {
+
+      current += char;
+
+    }
 
   }
 
+
+  result.push(
+    current.trim()
+  );
+
+
+  return result;
+}
 
   // ==========================================
   // TAMPILKAN RINGKASAN
