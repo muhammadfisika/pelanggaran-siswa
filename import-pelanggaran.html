@@ -1020,7 +1020,11 @@
       const valid =
         nisn !== "" &&
         nama !== "" &&
-        kelas !== "";
+        kelas !== "" &&
+        tanggal !== "" &&
+        jenis !== "" &&
+        rincian !== "" &&
+        waktu !== "";
 
 
       siswaData.push({
@@ -1028,6 +1032,10 @@
         nisn,
         nama,
         kelas,
+        tanggal,
+        jenis,
+        rincian,
+        waktu,
         valid
 
       });
