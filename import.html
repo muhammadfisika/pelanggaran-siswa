@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,277 +10,539 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <meta name="theme-color" content="#0d6efd">
+  <meta
+    name="theme-color"
+    content="#0d6efd"
+  >
 
-  <title>Import Data Siswa Baru</title>
+  <title>Import Data Siswa</title>
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
+
       padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      color: #212529;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        #f4f6f9;
+
+      color:
+        #212529;
+
     }
+
 
     .container {
-      max-width: 1100px;
-      margin: auto;
+
+      max-width:
+        1100px;
+
+      margin:
+        auto;
+
     }
+
 
     .header {
-      background: #0d6efd;
-      color: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
+      padding:
+        20px;
+
+      border-radius:
+        12px;
+
+      margin-bottom:
+        20px;
+
     }
+
 
     .header h1 {
-      margin: 0 0 8px;
-      font-size: 24px;
+
+      margin:
+        0 0 8px;
+
+      font-size:
+        24px;
+
     }
+
 
     .header p {
-      margin: 0;
-      opacity: 0.9;
+
+      margin:
+        0;
+
+      opacity:
+        .9;
+
     }
+
 
     .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+      background:
+        white;
+
+      padding:
+        20px;
+
+      border-radius:
+        12px;
+
+      margin-bottom:
+        20px;
+
+      box-shadow:
+        0 2px 8px
+        rgba(0,0,0,.08);
+
     }
+
 
     .card h2 {
-      margin-top: 0;
-      font-size: 20px;
+
+      margin-top:
+        0;
+
+      font-size:
+        20px;
+
     }
+
 
     .file-box {
-      border: 2px dashed #0d6efd;
-      padding: 30px 20px;
-      text-align: center;
-      border-radius: 10px;
-      background: #f8fbff;
+
+      border:
+        2px dashed #0d6efd;
+
+      padding:
+        30px 20px;
+
+      text-align:
+        center;
+
+      border-radius:
+        10px;
+
+      background:
+        #f8fbff;
+
     }
+
 
     .file-box input {
-      margin-top: 15px;
+
+      margin-top:
+        15px;
+
     }
+
 
     .info {
-      margin-top: 15px;
-      padding: 12px;
-      background: #eef5ff;
-      border-radius: 8px;
-      font-size: 14px;
+
+      margin-top:
+        15px;
+
+      padding:
+        12px;
+
+      background:
+        #eef5ff;
+
+      border-radius:
+        8px;
+
+      font-size:
+        14px;
+
     }
+
 
     .summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-top: 20px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        15px;
+
+      margin-top:
+        20px;
+
     }
+
 
     .summary-box {
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      background: #f8f9fa;
+
+      padding:
+        20px;
+
+      border-radius:
+        10px;
+
+      text-align:
+        center;
+
+      background:
+        #f8f9fa;
+
     }
+
 
     .summary-number {
-      display: block;
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 5px;
+
+      display:
+        block;
+
+      font-size:
+        28px;
+
+      font-weight:
+        bold;
+
+      margin-bottom:
+        5px;
+
     }
+
 
     .table-wrapper {
-      overflow-x: auto;
-      margin-top: 15px;
+
+      overflow-x:
+        auto;
+
+      margin-top:
+        15px;
+
     }
 
+
     table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 500px;
+
+      width:
+        100%;
+
+      border-collapse:
+        collapse;
+
+      min-width:
+        600px;
+
     }
+
 
     th,
     td {
-      border: 1px solid #dee2e6;
-      padding: 10px;
-      text-align: left;
+
+      border:
+        1px solid #dee2e6;
+
+      padding:
+        10px;
+
+      text-align:
+        left;
+
     }
+
 
     th {
-      background: #0d6efd;
-      color: white;
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
     }
+
 
     tr:nth-child(even) {
-      background: #f8f9fa;
+
+      background:
+        #f8f9fa;
+
     }
+
 
     .status {
-      margin-top: 15px;
-      padding: 15px;
-      border-radius: 8px;
-      display: none;
+
+      margin-top:
+        15px;
+
+      padding:
+        15px;
+
+      border-radius:
+        8px;
+
+      display:
+        none;
+
     }
+
 
     .status.success {
-      display: block;
-      background: #d1e7dd;
-      color: #0f5132;
+
+      display:
+        block;
+
+      background:
+        #d1e7dd;
+
+      color:
+        #0f5132;
+
     }
+
 
     .status.error {
-      display: block;
-      background: #f8d7da;
-      color: #842029;
+
+      display:
+        block;
+
+      background:
+        #f8d7da;
+
+      color:
+        #842029;
+
     }
+
 
     .status.warning {
-      display: block;
-      background: #fff3cd;
-      color: #664d03;
+
+      display:
+        block;
+
+      background:
+        #fff3cd;
+
+      color:
+        #664d03;
+
     }
+
 
     .btn {
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-      margin-top: 15px;
+
+      border:
+        none;
+
+      padding:
+        12px 20px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        15px;
+
+      font-weight:
+        bold;
+
+      margin-top:
+        15px;
+
     }
+
 
     .btn-primary {
-      background: #0d6efd;
-      color: white;
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
     }
+
 
     .btn-primary:hover {
-      background: #0b5ed7;
+
+      background:
+        #0b5ed7;
+
     }
 
-    .btn-secondary {
-      background: #6c757d;
-      color: white;
-    }
 
     .btn:disabled {
-      background: #adb5bd;
-      cursor: not-allowed;
+
+      background:
+        #adb5bd;
+
+      cursor:
+        not-allowed;
+
     }
+
 
     .hidden {
-      display: none;
+
+      display:
+        none;
+
     }
 
-    .error-row {
-      background: #fff0f0 !important;
-    }
 
     .valid {
-      color: #198754;
-      font-weight: bold;
+
+      color:
+        #198754;
+
+      font-weight:
+        bold;
+
     }
+
 
     .invalid {
-      color: #dc3545;
-      font-weight: bold;
+
+      color:
+        #dc3545;
+
+      font-weight:
+        bold;
+
     }
 
-    @media (max-width: 700px) {
+
+    .progress {
+
+      width:
+        100%;
+
+      height:
+        20px;
+
+      background:
+        #e9ecef;
+
+      border-radius:
+        10px;
+
+      overflow:
+        hidden;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .progress-bar {
+
+      height:
+        100%;
+
+      width:
+        0%;
+
+      background:
+        #0d6efd;
+
+      transition:
+        width .2s;
+
+    }
+
+
+    @media(max-width:700px) {
+
       body {
-        padding: 10px;
+
+        padding:
+          10px;
+
       }
+
 
       .summary {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
-      .header h1 {
-        font-size: 20px;
-      }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
+
   <!-- HEADER -->
+
   <div class="header">
-    <h1>Import Data Siswa</h1>
+
+    <h1>
+      Import Data Siswa
+    </h1>
+
     <p>
       Aplikasi Pencatat Pelanggaran Siswa
       - SMAN 2 Rangkasbitung
     </p>
-  </div>
-
-
-  <!-- PETUNJUK -->
-  <div class="card">
-
-    <h2>1. Petunjuk</h2>
-
-    <p>
-      Siapkan file data siswa dalam format
-      <strong>CSV UTF-8</strong>.
-    </p>
-
-    <p>
-      Format kolom harus:
-    </p>
-
-    <div class="info">
-      <strong>nisn,nama,kelas</strong>
-      <br><br>
-
-      Contoh:
-      <br>
-      0012345678,Ahmad Fauzan,X-1
-      <br>
-      0012345679,Budi Santoso,X-1
-      <br>
-      0012345680,Citra Lestari,X-2
-    </div>
 
   </div>
 
 
-  <!-- PILIH FILE -->
+
+  <!-- FILE -->
+
   <div class="card">
 
-    <h2>2. Pilih File CSV</h2>
+    <h2>
+      1. Pilih File CSV
+    </h2>
+
 
     <div class="file-box">
 
       <strong>
-        Pilih file data siswa
+        Pilih data siswa
       </strong>
 
       <br>
+
 
       <input
         type="file"
         id="csvFile"
         accept=".csv,text/csv"
       >
+
 
       <div
         id="fileInfo"
@@ -290,60 +554,83 @@
   </div>
 
 
-  <!-- RINGKASAN -->
+
+  <!-- SUMMARY -->
+
   <div
     id="summaryCard"
     class="card hidden">
 
-    <h2>3. Ringkasan Data</h2>
+    <h2>
+      2. Ringkasan Data
+    </h2>
+
 
     <div class="summary">
 
+
       <div class="summary-box">
+
         <span
           id="totalData"
           class="summary-number">
+
           0
+
         </span>
 
         Total Data
+
       </div>
 
+
       <div class="summary-box">
+
         <span
           id="validData"
           class="summary-number valid">
+
           0
+
         </span>
 
         Data Valid
+
       </div>
 
+
       <div class="summary-box">
+
         <span
           id="invalidData"
           class="summary-number invalid">
+
           0
+
         </span>
 
         Data Bermasalah
+
       </div>
+
 
     </div>
 
   </div>
 
 
+
   <!-- PREVIEW -->
+
   <div
     id="previewCard"
     class="card hidden">
 
-    <h2>4. Preview Data</h2>
 
-    <p>
-      Berikut contoh data yang berhasil dibaca.
-    </p>
+    <h2>
+      3. Preview
+    </h2>
+
 
     <div class="table-wrapper">
 
@@ -352,21 +639,30 @@
         <thead>
 
           <tr>
+
             <th>No</th>
+
             <th>NISN</th>
+
             <th>Nama</th>
+
             <th>Kelas</th>
+
             <th>Status</th>
+
           </tr>
 
         </thead>
 
-        <tbody id="previewBody">
+
+        <tbody
+          id="previewBody">
         </tbody>
 
       </table>
 
     </div>
+
 
     <button
       id="importButton"
@@ -377,98 +673,222 @@
 
     </button>
 
+
+    <div
+      id="progressContainer"
+      class="hidden">
+
+      <div class="progress">
+
+        <div
+          id="progressBar"
+          class="progress-bar">
+        </div>
+
+      </div>
+
+      <p id="progressText">
+        Menyiapkan import...
+      </p>
+
+    </div>
+
+
   </div>
 
 
+
   <!-- STATUS -->
+
   <div
     id="statusBox"
     class="status">
   </div>
 
+
 </div>
 
 
-<script>
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+  import {
+
+    initializeApp
+
+  }
+
+  from
+  "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+
+  import {
+
+    getFirestore,
+
+    doc,
+
+    writeBatch
+
+  }
+
+  from
+  "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+
+  // =====================================================
+  // FIREBASE CONFIG
+  // GANTI DENGAN CONFIG FIREBASE ANDA
+  // =====================================================
+
+ const firebaseConfig = {
+  apiKey: "AIzaSyAwsBj_5jJS1J4nQTXlp_88dnJaAh1FI58",
+  authDomain: "pelanggaran-siswa-sman2.firebaseapp.com",
+  projectId: "pelanggaran-siswa-sman2",
+  storageBucket: "pelanggaran-siswa-sman2.firebasestorage.app",
+  messagingSenderId: "62940952618",
+  appId: "1:62940952618:web:10a06124346f778ed82b53"
+};
+
+  // =====================================================
+  // INITIALIZE FIREBASE
+  // =====================================================
+
+  const app =
+    initializeApp(
+      firebaseConfig
+    );
+
+
+  const db =
+    getFirestore(app);
+
+
+
+  // =====================================================
+  // DATA
+  // =====================================================
 
   let siswaData = [];
 
 
-  // ==========================================
-  // PILIH FILE CSV
-  // ==========================================
+
+  // =====================================================
+  // PILIH FILE
+  // =====================================================
 
   document
     .getElementById("csvFile")
-    .addEventListener("change", function(event) {
+    .addEventListener(
+      "change",
+      function(event) {
 
-      const file = event.target.files[0];
+        const file =
+          event.target.files[0];
 
-      if (!file) {
-        return;
-      }
 
-      const fileInfo =
-        document.getElementById("fileInfo");
+        if (!file) {
 
-      fileInfo.classList.remove("hidden");
+          return;
 
-      fileInfo.innerHTML =
-        `
-        <strong>File:</strong> ${file.name}
-        <br>
-        <strong>Ukuran:</strong>
-        ${(file.size / 1024).toFixed(2)} KB
+        }
+
+
+        const fileInfo =
+          document.getElementById(
+            "fileInfo"
+          );
+
+
+        fileInfo.classList
+          .remove("hidden");
+
+
+        fileInfo.innerHTML = `
+
+          <strong>File:</strong>
+          ${escapeHTML(file.name)}
+
+          <br>
+
+          <strong>Ukuran:</strong>
+          ${(file.size / 1024).toFixed(2)}
+          KB
+
         `;
 
-      readCSV(file);
 
-    });
+        readCSV(file);
+
+      }
+    );
 
 
-  // ==========================================
-  // BACA CSV
-  // ==========================================
+
+  // =====================================================
+  // READ CSV
+  // =====================================================
 
   function readCSV(file) {
 
-    const reader = new FileReader();
+    const reader =
+      new FileReader();
 
-    reader.onload = function(event) {
 
-      const text = event.target.result;
+    reader.onload =
+      function(event) {
 
-      processCSV(text);
+        processCSV(
+          event.target.result
+        );
 
-    };
+      };
 
-    reader.onerror = function() {
 
-      showStatus(
-        "Gagal membaca file CSV.",
-        "error"
-      );
+    reader.onerror =
+      function() {
 
-    };
+        showStatus(
+          "Gagal membaca file CSV.",
+          "error"
+        );
 
-    reader.readAsText(file, "UTF-8");
+      };
+
+
+    reader.readAsText(
+      file,
+      "UTF-8"
+    );
 
   }
 
 
-  // ==========================================
-  // PROSES CSV
-  // ==========================================
+
+  // =====================================================
+  // PROCESS CSV
+  // =====================================================
 
   function processCSV(text) {
 
     siswaData = [];
 
+
     const lines =
       text
         .replace(/\r/g, "")
         .split("\n")
-        .filter(line => line.trim() !== "");
+        .filter(
+          line =>
+            line.trim() !== ""
+        );
+
 
     if (lines.length < 2) {
 
@@ -482,32 +902,37 @@
     }
 
 
-    // Header
     const header =
-  parseCSVLine(lines[0])
-    .map(value =>
-      value
-        .replace(/^\uFEFF/, "")
-        .trim()
-        .toLowerCase()
-    );
-
-
-    // Validasi header
-
-    const requiredColumns = [
-      "nisn",
-      "nama",
-      "kelas"
-    ];
-
-    const missingColumns =
-      requiredColumns.filter(
-        column => !header.includes(column)
+      parseCSVLine(
+        lines[0]
+      ).map(
+        value =>
+          value
+            .replace(/^\uFEFF/, "")
+            .trim()
+            .toLowerCase()
       );
 
 
-    if (missingColumns.length > 0) {
+    const requiredColumns = [
+
+      "nisn",
+      "nama",
+      "kelas"
+
+    ];
+
+
+    const missingColumns =
+      requiredColumns.filter(
+        column =>
+          !header.includes(column)
+      );
+
+
+    if (
+      missingColumns.length > 0
+    ) {
 
       showStatus(
         "Kolom berikut tidak ditemukan: "
@@ -523,16 +948,15 @@
     const nisnIndex =
       header.indexOf("nisn");
 
+
     const namaIndex =
       header.indexOf("nama");
+
 
     const kelasIndex =
       header.indexOf("kelas");
 
 
-    // ========================================
-    // BACA SETIAP BARIS
-    // ========================================
 
     for (
       let i = 1;
@@ -540,17 +964,32 @@
       i++
     ) {
 
+
       const row =
-        parseCSVLine(lines[i]);
+        parseCSVLine(
+          lines[i]
+        );
+
 
       const nisn =
-        (row[nisnIndex] || "").trim();
+        (
+          row[nisnIndex]
+          || ""
+        ).trim();
+
 
       const nama =
-        (row[namaIndex] || "").trim();
+        (
+          row[namaIndex]
+          || ""
+        ).trim();
+
 
       const kelas =
-        (row[kelasIndex] || "").trim();
+        (
+          row[kelasIndex]
+          || ""
+        ).trim();
 
 
       const valid =
@@ -561,13 +1000,10 @@
 
       siswaData.push({
 
-        nisn: nisn,
-
-        nama: nama,
-
-        kelas: kelas,
-
-        valid: valid
+        nisn,
+        nama,
+        kelas,
+        valid
 
       });
 
@@ -581,164 +1017,199 @@
   }
 
 
-  // ==========================================
+
+  // =====================================================
   // PARSE CSV
-  // ==========================================
+  // Mendukung , dan ;
+  // =====================================================
 
   function parseCSVLine(line) {
 
-  // Menentukan pemisah otomatis
-  // Bisa koma (,) atau titik koma (;)
 
-  let separator = ",";
-
-  if (
-    line.includes(";") &&
-    !line.includes(",")
-  ) {
-    separator = ";";
-  }
-
-  const result = [];
-
-  let current = "";
-
-  let insideQuotes = false;
+    let separator = ",";
 
 
-  for (
-    let i = 0;
-    i < line.length;
-    i++
-  ) {
+    if (
+      line.includes(";")
+      &&
+      !line.includes(",")
+    ) {
 
-    const char = line[i];
+      separator = ";";
+
+    }
 
 
-    // Jika tanda kutip
-    if (char === '"') {
+    const result = [];
+
+    let current = "";
+
+    let insideQuotes = false;
+
+
+    for (
+      let i = 0;
+      i < line.length;
+      i++
+    ) {
+
+
+      const char =
+        line[i];
+
 
       if (
-        insideQuotes &&
-        line[i + 1] === '"'
+        char === '"'
       ) {
 
-        current += '"';
 
-        i++;
+        if (
+          insideQuotes
+          &&
+          line[i + 1] === '"'
+        ) {
 
-      } else {
+          current += '"';
 
-        insideQuotes =
-          !insideQuotes;
+          i++;
+
+        }
+
+        else {
+
+          insideQuotes =
+            !insideQuotes;
+
+        }
+
+      }
+
+
+      else if (
+        char === separator
+        &&
+        !insideQuotes
+      ) {
+
+
+        result.push(
+          current.trim()
+        );
+
+
+        current = "";
+
+      }
+
+
+      else {
+
+        current += char;
 
       }
 
     }
 
-    // Jika separator
-    else if (
-      char === separator &&
-      !insideQuotes
-    ) {
 
-      result.push(
-        current.trim()
-      );
+    result.push(
+      current.trim()
+    );
 
-      current = "";
 
-    }
-
-    else {
-
-      current += char;
-
-    }
+    return result;
 
   }
 
 
-  result.push(
-    current.trim()
-  );
 
-
-  return result;
-}
-
-  // ==========================================
-  // TAMPILKAN RINGKASAN
-  // ==========================================
+  // =====================================================
+  // SUMMARY
+  // =====================================================
 
   function displaySummary() {
+
 
     const total =
       siswaData.length;
 
+
     const valid =
       siswaData.filter(
-        siswa => siswa.valid
+        siswa =>
+          siswa.valid
       ).length;
+
 
     const invalid =
       total - valid;
 
 
     document
-      .getElementById("summaryCard")
-      .classList.remove("hidden");
+      .getElementById(
+        "summaryCard"
+      )
+      .classList
+      .remove("hidden");
 
 
     document
-      .getElementById("totalData")
-      .textContent = total;
+      .getElementById(
+        "totalData"
+      )
+      .textContent =
+        total;
 
 
     document
-      .getElementById("validData")
-      .textContent = valid;
+      .getElementById(
+        "validData"
+      )
+      .textContent =
+        valid;
 
 
     document
-      .getElementById("invalidData")
-      .textContent = invalid;
+      .getElementById(
+        "invalidData"
+      )
+      .textContent =
+        invalid;
 
   }
 
 
-  // ==========================================
-  // PREVIEW DATA
-  // ==========================================
+
+  // =====================================================
+  // PREVIEW
+  // =====================================================
 
   function displayPreview() {
+
 
     const body =
       document.getElementById(
         "previewBody"
       );
 
+
     body.innerHTML = "";
 
 
     const previewData =
-      siswaData.slice(0, 20);
+      siswaData.slice(
+        0,
+        20
+      );
 
 
     previewData.forEach(
       (siswa, index) => {
 
+
         const row =
-          document.createElement("tr");
-
-
-        if (!siswa.valid) {
-
-          row.classList.add(
-            "error-row"
+          document.createElement(
+            "tr"
           );
-
-        }
 
 
         row.innerHTML = `
@@ -760,70 +1231,331 @@
           </td>
 
           <td>
+
             ${
               siswa.valid
-              ? '<span class="valid">✓ Valid</span>'
-              : '<span class="invalid">✕ Bermasalah</span>'
+
+              ?
+
+              '<span class="valid">✓ Valid</span>'
+
+              :
+
+              '<span class="invalid">✕ Bermasalah</span>'
+
             }
+
           </td>
 
         `;
 
 
-        body.appendChild(row);
+        body.appendChild(
+          row
+        );
 
       }
     );
 
 
     document
-      .getElementById("previewCard")
-      .classList.remove("hidden");
+      .getElementById(
+        "previewCard"
+      )
+      .classList
+      .remove("hidden");
 
 
     const validCount =
       siswaData.filter(
-        siswa => siswa.valid
+        siswa =>
+          siswa.valid
       ).length;
 
 
     document
-      .getElementById("importButton")
+      .getElementById(
+        "importButton"
+      )
       .disabled =
         validCount === 0;
 
   }
 
 
-  // ==========================================
+
+  // =====================================================
+  // IMPORT FIREBASE
+  // =====================================================
+
+  document
+    .getElementById(
+      "importButton"
+    )
+    .addEventListener(
+      "click",
+      importToFirebase
+    );
+
+
+
+  async function importToFirebase() {
+
+
+    const validData =
+      siswaData.filter(
+        siswa =>
+          siswa.valid
+      );
+
+
+    if (
+      validData.length === 0
+    ) {
+
+      showStatus(
+        "Tidak ada data valid untuk diimport.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "importButton"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Sedang mengimport...";
+
+
+    document
+      .getElementById(
+        "progressContainer"
+      )
+      .classList
+      .remove("hidden");
+
+
+    try {
+
+
+      /*
+       * Firestore batch maksimal
+       * 500 operasi.
+       *
+       * Kita gunakan 450 agar
+       * lebih aman.
+       */
+
+      const batchSize =
+        450;
+
+
+      let imported =
+        0;
+
+
+      for (
+        let i = 0;
+        i < validData.length;
+        i += batchSize
+      ) {
+
+
+        const batch =
+          writeBatch(db);
+
+
+        const chunk =
+          validData.slice(
+            i,
+            i + batchSize
+          );
+
+
+        chunk.forEach(
+          siswa => {
+
+
+            /*
+             * NISN menjadi
+             * document ID
+             */
+
+            const docRef =
+              doc(
+                db,
+                "siswa",
+                siswa.nisn
+              );
+
+
+            batch.set(
+              docRef,
+              {
+
+                nisn:
+                  siswa.nisn,
+
+                nama:
+                  siswa.nama,
+
+                kelas:
+                  siswa.kelas,
+
+                updatedAt:
+                  new Date()
+
+              },
+              {
+                merge: true
+              }
+            );
+
+          }
+        );
+
+
+        await batch.commit();
+
+
+        imported +=
+          chunk.length;
+
+
+        const percent =
+          Math.round(
+            (
+              imported /
+              validData.length
+            ) * 100
+          );
+
+
+        document
+          .getElementById(
+            "progressBar"
+          )
+          .style.width =
+            percent + "%";
+
+
+        document
+          .getElementById(
+            "progressText"
+          )
+          .textContent =
+            `Mengimport ${imported} dari ${validData.length} siswa (${percent}%)`;
+
+      }
+
+
+      showStatus(
+        `
+        <strong>Import berhasil!</strong>
+        <br><br>
+        ${imported} data siswa berhasil
+        dimasukkan/diperbarui di Firebase.
+        `,
+        "success"
+      );
+
+
+      button.textContent =
+        "Import Selesai";
+
+
+    }
+
+    catch(error) {
+
+
+      console.error(
+        "Firebase Import Error:",
+        error
+      );
+
+
+      showStatus(
+        `
+        <strong>Import gagal.</strong>
+        <br><br>
+        ${escapeHTML(
+          error.message
+        )}
+        `,
+        "error"
+      );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Coba Import Lagi";
+
+    }
+
+  }
+
+
+
+  // =====================================================
   // ESCAPE HTML
-  // ==========================================
+  // =====================================================
 
   function escapeHTML(value) {
 
     return String(value)
 
-      .replace(/&/g, "&amp;")
+      .replace(
+        /&/g,
+        "&amp;"
+      )
 
-      .replace(/</g, "&lt;")
+      .replace(
+        /</g,
+        "&lt;"
+      )
 
-      .replace(/>/g, "&gt;")
+      .replace(
+        />/g,
+        "&gt;"
+      )
 
-      .replace(/"/g, "&quot;")
+      .replace(
+        /"/g,
+        "&quot;"
+      )
 
-      .replace(/'/g, "&#039;");
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
   }
 
 
-  // ==========================================
+
+  // =====================================================
   // STATUS
-  // ==========================================
+  // =====================================================
 
   function showStatus(
     message,
     type
   ) {
+
 
     const box =
       document.getElementById(
@@ -841,25 +1573,9 @@
   }
 
 
-  // ==========================================
-  // BUTTON IMPORT
-  // ==========================================
-
-  document
-    .getElementById("importButton")
-    .addEventListener(
-      "click",
-      function() {
-
-        showStatus(
-          "Tahap membaca dan validasi data berhasil. Tombol Firebase akan diaktifkan pada tahap berikutnya.",
-          "warning"
-        );
-
-      }
-    );
-
 </script>
 
+
 </body>
+
 </html>
