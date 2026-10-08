@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#0d6efd">
+
+  <title>Import Data Siswa</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #212529;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .header {
+      background: #0d6efd;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .file-box {
+      border: 2px dashed #0d6efd;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 10px;
+      background: #f8fbff;
+    }
+
+    .file-box input {
+      margin-top: 15px;
+    }
+
+    .info {
+      margin-top: 15px;
+      padding: 12px;
+      background: #eef5ff;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .summary-box {
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      background: #f8f9fa;
+    }
+
+    .summary-number {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dee2e6;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #0d6efd;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .status.success {
+      display: block;
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+
+    .status.error {
+      display: block;
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .status.warning {
+      display: block;
+      background: #fff3cd;
+      color: #664d03;
+    }
+
+    .btn {
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0b5ed7;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error-row {
+      background: #fff0f0 !important;
+    }
+
+    .valid {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .invalid {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 10px;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Import Data Siswa</h1>
+    <p>
+      Aplikasi Pencatat Pelanggaran Siswa
+      - SMAN 2 Rangkasbitung
+    </p>
+  </div>
+
+
+  <!-- PETUNJUK -->
+  <div class="card">
+
+    <h2>1. Petunjuk</h2>
+
+    <p>
+      Siapkan file data siswa dalam format
+      <strong>CSV UTF-8</strong>.
+    </p>
+
+    <p>
+      Format kolom harus:
+    </p>
+
+    <div class="info">
+      <strong>nisn,nama,kelas</strong>
+      <br><br>
+
+      Contoh:
+      <br>
+      0012345678,Ahmad Fauzan,X-1
+      <br>
+      0012345679,Budi Santoso,X-1
+      <br>
+      0012345680,Citra Lestari,X-2
+    </div>
+
+  </div>
+
+
+  <!-- PILIH FILE -->
+  <div class="card">
+
+    <h2>2. Pilih File CSV</h2>
+
+    <div class="file-box">
+
+      <strong>
+        Pilih file data siswa
+      </strong>
+
+      <br>
+
+      <input
+        type="file"
+        id="csvFile"
+        accept=".csv,text/csv"
+      >
+
+      <div
+        id="fileInfo"
+        class="info hidden">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RINGKASAN -->
+  <div
+    id="summaryCard"
+    class="card hidden">
+
+    <h2>3. Ringkasan Data</h2>
+
+    <div class="summary">
+
+      <div class="summary-box">
+        <span
+          id="totalData"
+          class="summary-number">
+          0
+        </span>
+
+        Total Data
+      </div>
+
+      <div class="summary-box">
+        <span
+          id="validData"
+          class="summary-number valid">
+          0
+        </span>
+
+        Data Valid
+      </div>
+
+      <div class="summary-box">
+        <span
+          id="invalidData"
+          class="summary-number invalid">
+          0
+        </span>
+
+        Data Bermasalah
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PREVIEW -->
+  <div
+    id="previewCard"
+    class="card hidden">
+
+    <h2>4. Preview Data</h2>
+
+    <p>
+      Berikut contoh data yang berhasil dibaca.
+    </p>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No</th>
+            <th>NISN</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="previewBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <button
+      id="importButton"
+      class="btn btn-primary"
+      disabled>
+
+      Import ke Firebase
+
+    </button>
+
+  </div>
+
+
+  <!-- STATUS -->
+  <div
+    id="statusBox"
+    class="status">
+  </div>
+
+</div>
+
+
+<script>
+
+  let siswaData = [];
+
+
+  // ==========================================
+  // PILIH FILE CSV
+  // ==========================================
+
+  document
+    .getElementById("csvFile")
+    .addEventListener("change", function(event) {
+
+      const file = event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      const fileInfo =
+        document.getElementById("fileInfo");
+
+      fileInfo.classList.remove("hidden");
+
+      fileInfo.innerHTML =
+        `
+        <strong>File:</strong> ${file.name}
+        <br>
+        <strong>Ukuran:</strong>
+        ${(file.size / 1024).toFixed(2)} KB
+        `;
+
+      readCSV(file);
+
+    });
+
+
+  // ==========================================
+  // BACA CSV
+  // ==========================================
+
+  function readCSV(file) {
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+
+      const text = event.target.result;
+
+      processCSV(text);
+
+    };
+
+    reader.onerror = function() {
+
+      showStatus(
+        "Gagal membaca file CSV.",
+        "error"
+      );
+
+    };
+
+    reader.readAsText(file, "UTF-8");
+
+  }
+
+
+  // ==========================================
+  // PROSES CSV
+  // ==========================================
+
+  function processCSV(text) {
+
+    siswaData = [];
+
+    const lines =
+      text
+        .replace(/\r/g, "")
+        .split("\n")
+        .filter(line => line.trim() !== "");
+
+    if (lines.length < 2) {
+
+      showStatus(
+        "File CSV tidak memiliki data.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    // Header
+    const header =
+      parseCSVLine(lines[0])
+        .map(value =>
+          value.trim().toLowerCase()
+        );
+
+
+    // Validasi header
+
+    const requiredColumns = [
+      "nisn",
+      "nama",
+      "kelas"
+    ];
+
+    const missingColumns =
+      requiredColumns.filter(
+        column => !header.includes(column)
+      );
+
+
+    if (missingColumns.length > 0) {
+
+      showStatus(
+        "Kolom berikut tidak ditemukan: "
+        + missingColumns.join(", "),
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const nisnIndex =
+      header.indexOf("nisn");
+
+    const namaIndex =
+      header.indexOf("nama");
+
+    const kelasIndex =
+      header.indexOf("kelas");
+
+
+    // ========================================
+    // BACA SETIAP BARIS
+    // ========================================
+
+    for (
+      let i = 1;
+      i < lines.length;
+      i++
+    ) {
+
+      const row =
+        parseCSVLine(lines[i]);
+
+      const nisn =
+        (row[nisnIndex] || "").trim();
+
+      const nama =
+        (row[namaIndex] || "").trim();
+
+      const kelas =
+        (row[kelasIndex] || "").trim();
+
+
+      const valid =
+        nisn !== "" &&
+        nama !== "" &&
+        kelas !== "";
+
+
+      siswaData.push({
+
+        nisn: nisn,
+
+        nama: nama,
+
+        kelas: kelas,
+
+        valid: valid
+
+      });
+
+    }
+
+
+    displaySummary();
+
+    displayPreview();
+
+  }
+
+
+  // ==========================================
+  // PARSE CSV
+  // ==========================================
+
+  function parseCSVLine(line) {
+
+    const result = [];
+
+    let current = "";
+
+    let insideQuotes = false;
+
+
+    for (
+      let i = 0;
+      i < line.length;
+      i++
+    ) {
+
+      const char = line[i];
+
+
+      if (char === '"') {
+
+        if (
+          insideQuotes &&
+          line[i + 1] === '"'
+        ) {
+
+          current += '"';
+
+          i++;
+
+        } else {
+
+          insideQuotes =
+            !insideQuotes;
+
+        }
+
+      }
+
+      else if (
+        char === "," &&
+        !insideQuotes
+      ) {
+
+        result.push(current);
+
+        current = "";
+
+      }
+
+      else {
+
+        current += char;
+
+      }
+
+    }
+
+
+    result.push(current);
+
+    return result;
+
+  }
+
+
+  // ==========================================
+  // TAMPILKAN RINGKASAN
+  // ==========================================
+
+  function displaySummary() {
+
+    const total =
+      siswaData.length;
+
+    const valid =
+      siswaData.filter(
+        siswa => siswa.valid
+      ).length;
+
+    const invalid =
+      total - valid;
+
+
+    document
+      .getElementById("summaryCard")
+      .classList.remove("hidden");
+
+
+    document
+      .getElementById("totalData")
+      .textContent = total;
+
+
+    document
+      .getElementById("validData")
+      .textContent = valid;
+
+
+    document
+      .getElementById("invalidData")
+      .textContent = invalid;
+
+  }
+
+
+  // ==========================================
+  // PREVIEW DATA
+  // ==========================================
+
+  function displayPreview() {
+
+    const body =
+      document.getElementById(
+        "previewBody"
+      );
+
+    body.innerHTML = "";
+
+
+    const previewData =
+      siswaData.slice(0, 20);
+
+
+    previewData.forEach(
+      (siswa, index) => {
+
+        const row =
+          document.createElement("tr");
+
+
+        if (!siswa.valid) {
+
+          row.classList.add(
+            "error-row"
+          );
+
+        }
+
+
+        row.innerHTML = `
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.nisn)}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.nama)}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.kelas)}
+          </td>
+
+          <td>
+            ${
+              siswa.valid
+              ? '<span class="valid">✓ Valid</span>'
+              : '<span class="invalid">✕ Bermasalah</span>'
+            }
+          </td>
+
+        `;
+
+
+        body.appendChild(row);
+
+      }
+    );
+
+
+    document
+      .getElementById("previewCard")
+      .classList.remove("hidden");
+
+
+    const validCount =
+      siswaData.filter(
+        siswa => siswa.valid
+      ).length;
+
+
+    document
+      .getElementById("importButton")
+      .disabled =
+        validCount === 0;
+
+  }
+
+
+  // ==========================================
+  // ESCAPE HTML
+  // ==========================================
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replace(/&/g, "&amp;")
+
+      .replace(/</g, "&lt;")
+
+      .replace(/>/g, "&gt;")
+
+      .replace(/"/g, "&quot;")
+
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  // ==========================================
+  // STATUS
+  // ==========================================
+
+  function showStatus(
+    message,
+    type
+  ) {
+
+    const box =
+      document.getElementById(
+        "statusBox"
+      );
+
+
+    box.className =
+      "status " + type;
+
+
+    box.innerHTML =
+      message;
+
+  }
+
+
+  // ==========================================
+  // BUTTON IMPORT
+  // ==========================================
+
+  document
+    .getElementById("importButton")
+    .addEventListener(
+      "click",
+      function() {
+
+        showStatus(
+          "Tahap membaca dan validasi data berhasil. Tombol Firebase akan diaktifkan pada tahap berikutnya.",
+          "warning"
+        );
+
+      }
+    );
+
+</script>
+
+</body>
+</html>
