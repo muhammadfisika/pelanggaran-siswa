@@ -484,10 +484,13 @@
 
     // Header
     const header =
-      parseCSVLine(lines[0])
-        .map(value =>
-          value.trim().toLowerCase()
-        );
+  parseCSVLine(lines[0])
+    .map(value =>
+      value
+        .replace(/^\uFEFF/, "")
+        .trim()
+        .toLowerCase()
+    );
 
 
     // Validasi header
