@@ -15,7 +15,9 @@
     content="#0d6efd"
   >
 
-  <title>Import Data Pelanggaran Siswa</title>
+  <title>
+    Import Pelanggaran Siswa
+  </title>
 
 
   <style>
@@ -129,6 +131,59 @@
     }
 
 
+    .login-card {
+
+      max-width:
+        500px;
+
+      margin:
+        50px auto;
+
+    }
+
+
+    .form-group {
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .form-group label {
+
+      display:
+        block;
+
+      font-weight:
+        bold;
+
+      margin-bottom:
+        6px;
+
+    }
+
+
+    .form-control {
+
+      width:
+        100%;
+
+      padding:
+        12px;
+
+      border:
+        1px solid #ced4da;
+
+      border-radius:
+        8px;
+
+      font-size:
+        15px;
+
+    }
+
+
     .file-box {
 
       border:
@@ -183,10 +238,10 @@
         grid;
 
       grid-template-columns:
-        repeat(3,1fr);
+        repeat(5,1fr);
 
       gap:
-        15px;
+        12px;
 
       margin-top:
         20px;
@@ -197,7 +252,7 @@
     .summary-box {
 
       padding:
-        20px;
+        18px 10px;
 
       border-radius:
         10px;
@@ -207,7 +262,7 @@
 
       background:
         #f8f9fa;
- 
+
     }
 
 
@@ -224,6 +279,30 @@
 
       margin-bottom:
         5px;
+
+    }
+
+
+    .light {
+
+      color:
+        #198754;
+
+    }
+
+
+    .medium {
+
+      color:
+        #fd7e14;
+
+    }
+
+
+    .heavy {
+
+      color:
+        #dc3545;
 
     }
 
@@ -248,7 +327,7 @@
         collapse;
 
       min-width:
-        600px;
+        900px;
 
     }
 
@@ -260,10 +339,13 @@
         1px solid #dee2e6;
 
       padding:
-        10px;
+        9px;
 
       text-align:
         left;
+
+      font-size:
+        14px;
 
     }
 
@@ -283,6 +365,59 @@
 
       background:
         #f8f9fa;
+
+    }
+
+
+    .badge {
+
+      display:
+        inline-block;
+
+      padding:
+        4px 8px;
+
+      border-radius:
+        5px;
+
+      font-size:
+        12px;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .badge-light {
+
+      background:
+        #d1e7dd;
+
+      color:
+        #0f5132;
+
+    }
+
+
+    .badge-medium {
+
+      background:
+        #ffe5d0;
+
+      color:
+        #9a3412;
+
+    }
+
+
+    .badge-heavy {
+
+      background:
+        #f8d7da;
+
+      color:
+        #842029;
 
     }
 
@@ -346,6 +481,20 @@
     }
 
 
+    .status.info {
+
+      display:
+        block;
+
+      background:
+        #cff4fc;
+
+      color:
+        #055160;
+
+    }
+
+
     .btn {
 
       border:
@@ -367,7 +516,7 @@
         bold;
 
       margin-top:
-        15px;
+        10px;
 
     }
 
@@ -391,6 +540,28 @@
     }
 
 
+    .btn-danger {
+
+      background:
+        #dc3545;
+
+      color:
+        white;
+
+    }
+
+
+    .btn-secondary {
+
+      background:
+        #6c757d;
+
+      color:
+        white;
+
+    }
+
+
     .btn:disabled {
 
       background:
@@ -405,7 +576,7 @@
     .hidden {
 
       display:
-        none;
+        none !important;
 
     }
 
@@ -438,7 +609,7 @@
         100%;
 
       height:
-        20px;
+        22px;
 
       background:
         #e9ecef;
@@ -469,10 +640,96 @@
       transition:
         width .2s;
 
+      text-align:
+        center;
+
+      color:
+        white;
+
+      font-size:
+        12px;
+
+      line-height:
+        22px;
+
     }
 
 
-    @media(max-width:700px) {
+    .user-info {
+
+      background:
+        #e9f2ff;
+
+      padding:
+        10px 14px;
+
+      border-radius:
+        8px;
+
+      margin-bottom:
+        15px;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .logout-area {
+
+      text-align:
+        right;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .example {
+
+      background:
+        #f8f9fa;
+
+      border:
+        1px solid #dee2e6;
+
+      border-radius:
+        8px;
+
+      padding:
+        12px;
+
+      margin-top:
+        15px;
+
+      overflow-x:
+        auto;
+
+    }
+
+
+    .example code {
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    @media(max-width:900px) {
+
+      .summary {
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+    }
+
+
+    @media(max-width:600px) {
 
       body {
 
@@ -485,7 +742,15 @@
       .summary {
 
         grid-template-columns:
-          1fr;
+          1fr 1fr;
+
+      }
+
+
+      .header h1 {
+
+        font-size:
+          20px;
 
       }
 
@@ -499,7 +764,100 @@
 <body>
 
 
-<div class="container">
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div
+  id="loginPage"
+  class="container"
+>
+
+  <div class="card login-card">
+
+    <div class="header">
+
+      <h1>
+        Login Import Data
+      </h1>
+
+      <p>
+        Aplikasi Pelanggaran Siswa
+        - SMAN 2 Rangkasbitung
+      </p>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="email">
+
+        Email Firebase
+
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        placeholder="Masukkan email"
+        autocomplete="username"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="password">
+
+        Password
+
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        placeholder="Masukkan password"
+        autocomplete="current-password"
+      >
+
+    </div>
+
+
+    <button
+      id="loginButton"
+      class="btn btn-primary"
+      style="width:100%;"
+    >
+
+      Login
+
+    </button>
+
+
+    <div
+      id="loginStatus"
+      class="status"
+    >
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     APLIKASI IMPORT
+===================================================== -->
+
+<div
+  id="appPage"
+  class="container hidden"
+>
 
 
   <!-- HEADER -->
@@ -518,6 +876,128 @@
   </div>
 
 
+  <!-- USER -->
+
+  <div class="user-info">
+
+    Login sebagai:
+
+    <strong id="currentUser">
+      -
+    </strong>
+
+  </div>
+
+
+  <div class="logout-area">
+
+    <button
+      id="logoutButton"
+      class="btn btn-secondary"
+    >
+
+      Logout
+
+    </button>
+
+  </div>
+
+
+
+  <!-- PETUNJUK -->
+
+  <div class="card">
+
+    <h2>
+      Format CSV
+    </h2>
+
+    <p>
+      File CSV harus memiliki kolom berikut:
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>nisn</strong>
+      </li>
+
+      <li>
+        <strong>nama</strong>
+      </li>
+
+      <li>
+        <strong>kelas</strong>
+      </li>
+
+      <li>
+        <strong>tanggal</strong>
+      </li>
+
+      <li>
+        <strong>jenis</strong>
+      </li>
+
+      <li>
+        <strong>rincian</strong>
+      </li>
+
+      <li>
+        <strong>waktu</strong>
+      </li>
+
+    </ul>
+
+
+    <div class="example">
+
+      <strong>Contoh CSV:</strong>
+
+      <br><br>
+
+      <code>
+        nisn,nama,kelas,tanggal,jenis,rincian,waktu
+      </code>
+
+      <br>
+
+      <code>
+        0123456789,Budi Santoso,XII IPA 1,2026-10-07,Ringan,Datang terlambat,06:55
+      </code>
+
+      <br>
+
+      <code>
+        0123456790,Siti Aminah,XI IPA 2,2026-10-07,Sedang,HP saat pembelajaran,09:30
+      </code>
+
+      <br>
+
+      <code>
+        0123456791,Andi Wijaya,X IPA 3,2026-10-07,Berat,Perkelahian,11:15
+      </code>
+
+    </div>
+
+
+    <div class="info">
+
+      <strong>Bobot otomatis:</strong>
+
+      Ringan = 1,
+      Sedang = 5,
+      Berat = 10.
+
+      <br>
+
+      Kolom <strong>bobot</strong>
+      tidak perlu dibuat di CSV.
+
+    </div>
+
+  </div>
+
+
 
   <!-- FILE -->
 
@@ -531,7 +1011,7 @@
     <div class="file-box">
 
       <strong>
-        Pilih data siswa
+        Pilih data pelanggaran
       </strong>
 
       <br>
@@ -546,7 +1026,8 @@
 
       <div
         id="fileInfo"
-        class="info hidden">
+        class="info hidden"
+      >
       </div>
 
     </div>
@@ -559,7 +1040,8 @@
 
   <div
     id="summaryCard"
-    class="card hidden">
+    class="card hidden"
+  >
 
     <h2>
       2. Ringkasan Data
@@ -573,13 +1055,12 @@
 
         <span
           id="totalData"
-          class="summary-number">
-
+          class="summary-number"
+        >
           0
-
         </span>
 
-        Total Data
+        Total
 
       </div>
 
@@ -588,13 +1069,12 @@
 
         <span
           id="validData"
-          class="summary-number valid">
-
+          class="summary-number valid"
+        >
           0
-
         </span>
 
-        Data Valid
+        Valid
 
       </div>
 
@@ -603,13 +1083,54 @@
 
         <span
           id="invalidData"
-          class="summary-number invalid">
-
+          class="summary-number invalid"
+        >
           0
-
         </span>
 
-        Data Bermasalah
+        Bermasalah
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span
+          id="ringanData"
+          class="summary-number light"
+        >
+          0
+        </span>
+
+        Ringan
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span
+          id="sedangData"
+          class="summary-number medium"
+        >
+          0
+        </span>
+
+        Sedang
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span
+          id="beratData"
+          class="summary-number heavy"
+        >
+          0
+        </span>
+
+        Berat
 
       </div>
 
@@ -624,12 +1145,17 @@
 
   <div
     id="previewCard"
-    class="card hidden">
+    class="card hidden"
+  >
 
 
     <h2>
-      3. Preview
+      3. Preview Data
     </h2>
+
+    <p>
+      Maksimal 30 data pertama ditampilkan sebagai preview.
+    </p>
 
 
     <div class="table-wrapper">
@@ -640,23 +1166,45 @@
 
           <tr>
 
-            <th>No</th>
+            <th>
+              No
+            </th>
 
-            <th>NISN</th>
+            <th>
+              NISN
+            </th>
 
-            <th>Nama</th>
+            <th>
+              Nama
+            </th>
 
-            <th>Kelas</th>
+            <th>
+              Kelas
+            </th>
 
-            <th>Tanggal</th>
+            <th>
+              Tanggal
+            </th>
 
-            <th>Jenis</th>
+            <th>
+              Jenis
+            </th>
 
-            <th>Rincian</th>
+            <th>
+              Bobot
+            </th>
 
-            <th>Waktu</th>
+            <th>
+              Rincian
+            </th>
 
-            <th>Status</th>
+            <th>
+              Waktu
+            </th>
+
+            <th>
+              Status
+            </th>
 
           </tr>
 
@@ -664,7 +1212,8 @@
 
 
         <tbody
-          id="previewBody">
+          id="previewBody"
+        >
         </tbody>
 
       </table>
@@ -675,7 +1224,8 @@
     <button
       id="importButton"
       class="btn btn-primary"
-      disabled>
+      disabled
+    >
 
       Import ke Firebase
 
@@ -684,13 +1234,16 @@
 
     <div
       id="progressContainer"
-      class="hidden">
+      class="hidden"
+    >
 
       <div class="progress">
 
         <div
           id="progressBar"
-          class="progress-bar">
+          class="progress-bar"
+        >
+          0%
         </div>
 
       </div>
@@ -710,7 +1263,8 @@
 
   <div
     id="statusBox"
-    class="status">
+    class="status"
+  >
   </div>
 
 
@@ -725,6 +1279,10 @@
 <script type="module">
 
 
+  /* =====================================================
+     FIREBASE APP
+  ===================================================== */
+
   import {
 
     initializeApp
@@ -735,13 +1293,39 @@
   "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 
+  /* =====================================================
+     FIREBASE AUTH
+  ===================================================== */
+
+  import {
+
+    getAuth,
+
+    signInWithEmailAndPassword,
+
+    onAuthStateChanged,
+
+    signOut
+
+  }
+
+  from
+  "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+  /* =====================================================
+     FIRESTORE
+  ===================================================== */
+
   import {
 
     getFirestore,
 
     doc,
 
-    writeBatch
+    writeBatch,
+
+    serverTimestamp
 
   }
 
@@ -750,23 +1334,37 @@
 
 
 
-  // =====================================================
-  // FIREBASE CONFIG
-  // GANTI DENGAN CONFIG FIREBASE ANDA
-  // =====================================================
+  /* =====================================================
+     FIREBASE CONFIG
+  ===================================================== */
 
- const firebaseConfig = {
-  apiKey: "AIzaSyAwsBj_5jJS1J4nQTXlp_88dnJaAh1FI58",
-  authDomain: "pelanggaran-siswa-sman2.firebaseapp.com",
-  projectId: "pelanggaran-siswa-sman2",
-  storageBucket: "pelanggaran-siswa-sman2.firebasestorage.app",
-  messagingSenderId: "62940952618",
-  appId: "1:62940952618:web:10a06124346f778ed82b53"
-};
+  const firebaseConfig = {
 
-  // =====================================================
-  // INITIALIZE FIREBASE
-  // =====================================================
+    apiKey:
+      "AIzaSyAwsBj_5jJS1J4nQTXlp_88dnJaAh1FI58",
+
+    authDomain:
+      "pelanggaran-siswa-sman2.firebaseapp.com",
+
+    projectId:
+      "pelanggaran-siswa-sman2",
+
+    storageBucket:
+      "pelanggaran-siswa-sman2.firebasestorage.app",
+
+    messagingSenderId:
+      "62940952618",
+
+    appId:
+      "1:62940952618:web:10a06124346f778ed82b53"
+
+  };
+
+
+
+  /* =====================================================
+     INITIALIZE
+  ===================================================== */
 
   const app =
     initializeApp(
@@ -774,31 +1372,305 @@
     );
 
 
+  const auth =
+    getAuth(app);
+
+
   const db =
     getFirestore(app);
 
 
 
-  // =====================================================
-  // DATA
-  // =====================================================
+  /* =====================================================
+     DATA GLOBAL
+  ===================================================== */
 
-  let siswaData = [];
+  let pelanggaranData = [];
+
+  let currentUser = null;
 
 
 
-  // =====================================================
-  // PILIH FILE
-  // =====================================================
+  /* =====================================================
+     AUTH STATE
+  ===================================================== */
+
+  onAuthStateChanged(
+    auth,
+    function(user) {
+
+      if (user) {
+
+        currentUser =
+          user;
+
+        document
+          .getElementById(
+            "loginPage"
+          )
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById(
+            "appPage"
+          )
+          .classList
+          .remove("hidden");
+
+        document
+          .getElementById(
+            "currentUser"
+          )
+          .textContent =
+            user.email;
+
+      }
+
+      else {
+
+        currentUser =
+          null;
+
+        document
+          .getElementById(
+            "loginPage"
+          )
+          .classList
+          .remove("hidden");
+
+        document
+          .getElementById(
+            "appPage"
+          )
+          .classList
+          .add("hidden");
+
+      }
+
+    }
+  );
+
+
+
+  /* =====================================================
+     LOGIN
+  ===================================================== */
 
   document
-    .getElementById("csvFile")
+    .getElementById(
+      "loginButton"
+    )
+    .addEventListener(
+      "click",
+      login
+    );
+
+
+  async function login() {
+
+    const email =
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
+
+
+    if (!email) {
+
+      showLoginStatus(
+        "Email harus diisi.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!password) {
+
+      showLoginStatus(
+        "Password harus diisi.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document
+        .getElementById(
+          "loginButton"
+        );
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Login...";
+
+
+    try {
+
+      await
+        signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      showLoginStatus(
+        "Login berhasil.",
+        "success"
+      );
+
+    }
+
+    catch(error) {
+
+      console.error(
+        error
+      );
+
+
+      let message =
+        "Login gagal.";
+
+
+      if (
+        error.code ===
+        "auth/invalid-credential"
+      ) {
+
+        message =
+          "Email atau password salah.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/user-not-found"
+      ) {
+
+        message =
+          "Akun tidak ditemukan.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/wrong-password"
+      ) {
+
+        message =
+          "Password salah.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/invalid-email"
+      ) {
+
+        message =
+          "Format email tidak valid.";
+
+      }
+
+      else {
+
+        message =
+          error.message;
+
+      }
+
+
+      showLoginStatus(
+        escapeHTML(message),
+        "error"
+      );
+
+    }
+
+    finally {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Login";
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
+  document
+    .getElementById(
+      "logoutButton"
+    )
+    .addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await
+            signOut(auth);
+
+          location.reload();
+
+        }
+
+        catch(error) {
+
+          console.error(
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+
+  /* =====================================================
+     PILIH FILE
+  ===================================================== */
+
+  document
+    .getElementById(
+      "csvFile"
+    )
     .addEventListener(
       "change",
       function(event) {
 
         const file =
-          event.target.files[0];
+          event
+            .target
+            .files[0];
 
 
         if (!file) {
@@ -809,12 +1681,14 @@
 
 
         const fileInfo =
-          document.getElementById(
-            "fileInfo"
-          );
+          document
+            .getElementById(
+              "fileInfo"
+            );
 
 
-        fileInfo.classList
+        fileInfo
+          .classList
           .remove("hidden");
 
 
@@ -839,9 +1713,9 @@
 
 
 
-  // =====================================================
-  // READ CSV
-  // =====================================================
+  /* =====================================================
+     READ CSV
+  ===================================================== */
 
   function readCSV(file) {
 
@@ -879,13 +1753,25 @@
 
 
 
-  // =====================================================
-  // PROCESS CSV
-  // =====================================================
+  /* =====================================================
+     PROCESS CSV
+  ===================================================== */
 
   function processCSV(text) {
 
-    siswaData = [];
+    pelanggaranData =
+      [];
+
+
+    /*
+     * Menghapus BOM
+     */
+
+    text =
+      text.replace(
+        /^\uFEFF/,
+        ""
+      );
 
 
     const lines =
@@ -898,7 +1784,9 @@
         );
 
 
-    if (lines.length < 2) {
+    if (
+      lines.length < 2
+    ) {
 
       showStatus(
         "File CSV tidak memiliki data.",
@@ -916,22 +1804,34 @@
       ).map(
         value =>
           value
-            .replace(/^\uFEFF/, "")
+            .replace(
+              /^\uFEFF/,
+              ""
+            )
             .trim()
             .toLowerCase()
       );
 
 
+    /*
+     * KOLOM WAJIB
+     */
+
     const requiredColumns = [
 
       "nisn",
+
       "nama",
+
       "kelas",
+
       "tanggal",
+
       "jenis",
+
       "rincian",
+
       "waktu"
-      
 
     ];
 
@@ -939,7 +1839,9 @@
     const missingColumns =
       requiredColumns.filter(
         column =>
-          !header.includes(column)
+          !header.includes(
+            column
+          )
       );
 
 
@@ -949,7 +1851,10 @@
 
       showStatus(
         "Kolom berikut tidak ditemukan: "
-        + missingColumns.join(", "),
+        +
+        missingColumns.join(
+          ", "
+        ),
         "error"
       );
 
@@ -958,37 +1863,62 @@
     }
 
 
+    /*
+     * INDEX KOLOM
+     */
+
     const nisnIndex =
-      header.indexOf("nisn");
+      header.indexOf(
+        "nisn"
+      );
 
 
     const namaIndex =
-      header.indexOf("nama");
+      header.indexOf(
+        "nama"
+      );
 
 
     const kelasIndex =
-      header.indexOf("kelas");
+      header.indexOf(
+        "kelas"
+      );
+
 
     const tanggalIndex =
-      header.indexOf("tanggal");
+      header.indexOf(
+        "tanggal"
+      );
+
 
     const jenisIndex =
-      header.indexOf("jenis");
+      header.indexOf(
+        "jenis"
+      );
+
 
     const rincianIndex =
-      header.indexOf("rincian");
+      header.indexOf(
+        "rincian"
+      );
+
 
     const waktuIndex =
-      header.indexOf("waktu");
+      header.indexOf(
+        "waktu"
+      );
 
 
+
+    /*
+     * BACA SETIAP BARIS
+     */
 
     for (
       let i = 1;
       i < lines.length;
       i++
     ) {
-
 
       const row =
         parseCSVLine(
@@ -999,69 +1929,175 @@
       const nisn =
         (
           row[nisnIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
 
 
       const nama =
         (
           row[namaIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
 
 
       const kelas =
         (
           row[kelasIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
+
 
       const tanggal =
         (
           row[tanggalIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
+
 
       const jenis =
         (
           row[jenisIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
+
 
       const rincian =
         (
           row[rincianIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
+
 
       const waktu =
         (
           row[waktuIndex]
-          || ""
-        ).trim();
+          ||
+          ""
+        )
+        .trim();
 
 
+      /*
+       * NORMALISASI JENIS
+       */
 
-      const valid =
-        nisn !== "" &&
-        nama !== "" &&
-        kelas !== "" &&
-        tanggal !== "" &&
-        jenis !== "" &&
-        rincian !== "" &&
-        waktu !== "";
+      const jenisNormal =
+        normalizeJenis(
+          jenis
+        );
 
 
-      siswaData.push({
+      /*
+       * BOBOT
+       */
+
+      const bobot =
+        getBobot(
+          jenisNormal
+        );
+
+
+      /*
+       * VALIDASI
+       */
+
+      let errorMessage =
+        "";
+
+
+      if (!nisn) {
+
+        errorMessage =
+          "NISN kosong";
+
+      }
+
+      else if (!nama) {
+
+        errorMessage =
+          "Nama kosong";
+
+      }
+
+      else if (!kelas) {
+
+        errorMessage =
+          "Kelas kosong";
+
+      }
+
+      else if (!tanggal) {
+
+        errorMessage =
+          "Tanggal kosong";
+
+      }
+
+      else if (!jenis) {
+
+        errorMessage =
+          "Jenis pelanggaran kosong";
+
+      }
+
+      else if (!jenisNormal) {
+
+        errorMessage =
+          "Jenis harus Ringan, Sedang, atau Berat";
+
+      }
+
+      else if (!rincian) {
+
+        errorMessage =
+          "Rincian kosong";
+
+      }
+
+      else if (!waktu) {
+
+        errorMessage =
+          "Waktu kosong";
+
+      }
+
+
+      pelanggaranData.push({
 
         nisn,
+
         nama,
+
         kelas,
+
         tanggal,
-        jenis,
+
+        jenis:
+          jenisNormal,
+
         rincian,
+
         waktu,
-        valid
+
+        bobot,
+
+        valid:
+          errorMessage === "",
+
+        error:
+          errorMessage
 
       });
 
@@ -1076,16 +2112,110 @@
 
 
 
-  // =====================================================
-  // PARSE CSV
-  // Mendukung , dan ;
-  // =====================================================
+  /* =====================================================
+     NORMALIZE JENIS
+  ===================================================== */
 
-  function parseCSVLine(line) {
+  function normalizeJenis(
+    value
+  ) {
+
+    const text =
+      String(value)
+        .trim()
+        .toLowerCase();
 
 
-    let separator = ",";
+    if (
+      text === "ringan"
+    ) {
 
+      return "Ringan";
+
+    }
+
+
+    if (
+      text === "sedang"
+    ) {
+
+      return "Sedang";
+
+    }
+
+
+    if (
+      text === "berat"
+    ) {
+
+      return "Berat";
+
+    }
+
+
+    return "";
+
+  }
+
+
+
+  /* =====================================================
+     BOBOT
+  ===================================================== */
+
+  function getBobot(
+    jenis
+  ) {
+
+    if (
+      jenis === "Ringan"
+    ) {
+
+      return 1;
+
+    }
+
+
+    if (
+      jenis === "Sedang"
+    ) {
+
+      return 5;
+
+    }
+
+
+    if (
+      jenis === "Berat"
+    ) {
+
+      return 10;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+
+  /* =====================================================
+     PARSE CSV
+  ===================================================== */
+
+  function parseCSVLine(
+    line
+  ) {
+
+    let separator =
+      ",";
+
+
+    /*
+     * Jika CSV menggunakan
+     * titik koma
+     */
 
     if (
       line.includes(";")
@@ -1093,16 +2223,20 @@
       !line.includes(",")
     ) {
 
-      separator = ";";
+      separator =
+        ";";
 
     }
 
 
-    const result = [];
+    const result =
+      [];
 
-    let current = "";
+    let current =
+      "";
 
-    let insideQuotes = false;
+    let insideQuotes =
+      false;
 
 
     for (
@@ -1111,15 +2245,21 @@
       i++
     ) {
 
-
       const char =
         line[i];
 
+
+      /*
+       * Tanda kutip
+       */
 
       if (
         char === '"'
       ) {
 
+        /*
+         * Double quote
+         */
 
         if (
           insideQuotes
@@ -1127,7 +2267,8 @@
           line[i + 1] === '"'
         ) {
 
-          current += '"';
+          current +=
+            '"';
 
           i++;
 
@@ -1143,26 +2284,30 @@
       }
 
 
+      /*
+       * Separator
+       */
+
       else if (
         char === separator
         &&
         !insideQuotes
       ) {
 
-
         result.push(
           current.trim()
         );
 
-
-        current = "";
+        current =
+          "";
 
       }
 
 
       else {
 
-        current += char;
+        current +=
+          char;
 
       }
 
@@ -1180,26 +2325,55 @@
 
 
 
-  // =====================================================
-  // SUMMARY
-  // =====================================================
+  /* =====================================================
+     SUMMARY
+  ===================================================== */
 
   function displaySummary() {
 
-
     const total =
-      siswaData.length;
+      pelanggaranData.length;
 
 
     const valid =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      pelanggaranData.filter(
+        item =>
+          item.valid
       ).length;
 
 
     const invalid =
       total - valid;
+
+
+    const ringan =
+      pelanggaranData.filter(
+        item =>
+          item.valid
+          &&
+          item.jenis ===
+            "Ringan"
+      ).length;
+
+
+    const sedang =
+      pelanggaranData.filter(
+        item =>
+          item.valid
+          &&
+          item.jenis ===
+            "Sedang"
+      ).length;
+
+
+    const berat =
+      pelanggaranData.filter(
+        item =>
+          item.valid
+          &&
+          item.jenis ===
+            "Berat"
+      ).length;
 
 
     document
@@ -1233,41 +2407,146 @@
       .textContent =
         invalid;
 
+
+    document
+      .getElementById(
+        "ringanData"
+      )
+      .textContent =
+        ringan;
+
+
+    document
+      .getElementById(
+        "sedangData"
+      )
+      .textContent =
+        sedang;
+
+
+    document
+      .getElementById(
+        "beratData"
+      )
+      .textContent =
+        berat;
+
   }
 
 
 
-  // =====================================================
-  // PREVIEW
-  // =====================================================
+  /* =====================================================
+     PREVIEW
+  ===================================================== */
 
   function displayPreview() {
 
-
     const body =
-      document.getElementById(
-        "previewBody"
-      );
+      document
+        .getElementById(
+          "previewBody"
+        );
 
 
-    body.innerHTML = "";
+    body.innerHTML =
+      "";
 
 
     const previewData =
-      siswaData.slice(
+      pelanggaranData.slice(
         0,
-        20
+        30
       );
 
 
     previewData.forEach(
-      (siswa, index) => {
-
+      function(item, index) {
 
         const row =
-          document.createElement(
-            "tr"
+          document
+            .createElement(
+              "tr"
+            );
+
+
+        let jenisHTML =
+          escapeHTML(
+            item.jenis
           );
+
+
+        if (
+          item.jenis ===
+          "Ringan"
+        ) {
+
+          jenisHTML =
+            `
+            <span class="badge badge-light">
+              Ringan
+            </span>
+            `;
+
+        }
+
+        else if (
+          item.jenis ===
+          "Sedang"
+        ) {
+
+          jenisHTML =
+            `
+            <span class="badge badge-medium">
+              Sedang
+            </span>
+            `;
+
+        }
+
+        else if (
+          item.jenis ===
+          "Berat"
+        ) {
+
+          jenisHTML =
+            `
+            <span class="badge badge-heavy">
+              Berat
+            </span>
+            `;
+
+        }
+
+
+        let statusHTML;
+
+
+        if (
+          item.valid
+        ) {
+
+          statusHTML =
+            `
+            <span class="valid">
+              ✓ Valid
+            </span>
+            `;
+
+        }
+
+        else {
+
+          statusHTML =
+            `
+            <span class="invalid">
+              ✕
+              ${escapeHTML(
+                item.error
+              )}
+            </span>
+            `;
+
+        }
 
 
         row.innerHTML = `
@@ -1277,51 +2556,51 @@
           </td>
 
           <td>
-            ${escapeHTML(siswa.nisn)}
+            ${escapeHTML(
+              item.nisn
+            )}
           </td>
 
           <td>
-            ${escapeHTML(siswa.nama)}
+            ${escapeHTML(
+              item.nama
+            )}
           </td>
 
           <td>
-            ${escapeHTML(siswa.kelas)}
+            ${escapeHTML(
+              item.kelas
+            )}
           </td>
 
           <td>
-            ${escapeHTML(siswa.tanggal)}
-          </td>
-
-<td>
-            ${escapeHTML(siswa.jenis)}
-          </td>
-
-          <td>
-            ${escapeHTML(siswa.rincian)}
+            ${escapeHTML(
+              item.tanggal
+            )}
           </td>
 
           <td>
-            ${escapeHTML(siswa.waktu)}
+            ${jenisHTML}
           </td>
 
-
-
+          <td>
+            ${item.bobot}
+          </td>
 
           <td>
+            ${escapeHTML(
+              item.rincian
+            )}
+          </td>
 
-            ${
-              siswa.valid
+          <td>
+            ${escapeHTML(
+              item.waktu
+            )}
+          </td>
 
-              ?
-
-              '<span class="valid">✓ Valid</span>'
-
-              :
-
-              '<span class="invalid">✕ Bermasalah</span>'
-
-            }
-
+          <td>
+            ${statusHTML}
           </td>
 
         `;
@@ -1344,9 +2623,9 @@
 
 
     const validCount =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      pelanggaranData.filter(
+        item =>
+          item.valid
       ).length;
 
 
@@ -1361,9 +2640,9 @@
 
 
 
-  // =====================================================
-  // IMPORT FIREBASE
-  // =====================================================
+  /* =====================================================
+     IMPORT BUTTON
+  ===================================================== */
 
   document
     .getElementById(
@@ -1376,13 +2655,38 @@
 
 
 
+  /* =====================================================
+     IMPORT FIREBASE
+  ===================================================== */
+
   async function importToFirebase() {
 
+    /*
+     * Pastikan sudah login
+     */
+
+    if (
+      !currentUser
+    ) {
+
+      showStatus(
+        "Silakan login terlebih dahulu.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * Ambil data valid
+     */
 
     const validData =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      pelanggaranData.filter(
+        item =>
+          item.valid
       );
 
 
@@ -1400,10 +2704,36 @@
     }
 
 
-    const button =
-      document.getElementById(
-        "importButton"
+    /*
+     * Konfirmasi
+     */
+
+    const confirmed =
+      confirm(
+        "Anda akan mengimport "
+        +
+        validData.length
+        +
+        " data pelanggaran ke koleksi 'pelanggaran'.\n\n"
+        +
+        "Lanjutkan?"
       );
+
+
+    if (
+      !confirmed
+    ) {
+
+      return;
+
+    }
+
+
+    const button =
+      document
+        .getElementById(
+          "importButton"
+        );
 
 
     button.disabled =
@@ -1424,13 +2754,11 @@
 
     try {
 
-
       /*
-       * Firestore batch maksimal
-       * 500 operasi.
+       * Firestore batch
        *
-       * Kita gunakan 450 agar
-       * lebih aman.
+       * Maksimal 500 operasi.
+       * Kita gunakan 450 agar aman.
        */
 
       const batchSize =
@@ -1441,6 +2769,10 @@
         0;
 
 
+      /*
+       * LOOP BATCH
+       */
+
       for (
         let i = 0;
         i < validData.length;
@@ -1449,7 +2781,9 @@
 
 
         const batch =
-          writeBatch(db);
+          writeBatch(
+            db
+          );
 
 
         const chunk =
@@ -1459,20 +2793,26 @@
           );
 
 
+        /*
+         * SETIAP DATA PELANGGARAN
+         */
+
         chunk.forEach(
-          siswa => {
+          function(item) {
 
 
             /*
-             * NISN menjadi
-             * document ID
+             * PENTING:
+             *
+             * ID DOKUMEN OTOMATIS
+             *
+             * NISN BUKAN ID.
              */
 
             const docRef =
               doc(
                 db,
-                "pelanggaran",
-                siswa.nisn
+                "pelanggaran"
               );
 
 
@@ -1480,53 +2820,91 @@
               docRef,
               {
 
+                /*
+                 * IDENTITAS SISWA
+                 */
+
                 nisn:
-                  siswa.nisn,
+                  item.nisn,
 
                 nama:
-                  siswa.nama,
+                  item.nama,
 
                 kelas:
-                  siswa.kelas,
+                  item.kelas,
 
-                kelas:
-                  siswa.tanggal,
 
-                kelas:
-                  siswa.jenis,
+                /*
+                 * DATA PELANGGARAN
+                 */
 
-                kelas:
-                  siswa.rincian,
+                tanggal:
+                  item.tanggal,
 
-                kelas:
-                  siswa.waktu,
+                jenis:
+                  item.jenis,
 
-                updatedAt:
-                  new Date()
+                rincian:
+                  item.rincian,
 
-              },
-              {
-                merge: true
+                waktu:
+                  item.waktu,
+
+
+                /*
+                 * BOBOT
+                 */
+
+                bobot:
+                  item.bobot,
+
+
+                /*
+                 * USER YANG IMPORT
+                 */
+
+                createdBy:
+                  currentUser.email,
+
+
+                /*
+                 * WAKTU SERVER FIREBASE
+                 */
+
+                createdAt:
+                  serverTimestamp()
+
               }
+
             );
 
           }
         );
 
 
-        await batch.commit();
+        /*
+         * COMMIT BATCH
+         */
+
+        await
+          batch.commit();
 
 
         imported +=
           chunk.length;
 
 
+        /*
+         * PROGRESS
+         */
+
         const percent =
           Math.round(
             (
               imported /
               validData.length
-            ) * 100
+            ) *
+            100
           );
 
 
@@ -1540,20 +2918,57 @@
 
         document
           .getElementById(
+            "progressBar"
+          )
+          .textContent =
+            percent + "%";
+
+
+        document
+          .getElementById(
             "progressText"
           )
           .textContent =
-            `Mengimport ${imported} dari ${validData.length} siswa (${percent}%)`;
+            "Mengimport "
+            +
+            imported
+            +
+            " dari "
+            +
+            validData.length
+            +
+            " data ("
+            +
+            percent
+            +
+            "%)";
 
       }
 
 
+
+      /*
+       * SELESAI
+       */
+
       showStatus(
         `
-        <strong>Import berhasil!</strong>
+        <strong>
+          Import berhasil!
+        </strong>
+
         <br><br>
-        ${imported} data siswa berhasil
-        dimasukkan/diperbarui di Firebase.
+
+        ${imported}
+        data pelanggaran berhasil
+        dimasukkan ke koleksi
+        <strong>pelanggaran</strong>.
+
+        <br><br>
+
+        Data siswa di koleksi
+        <strong>siswa</strong>
+        tidak diubah.
         `,
         "success"
       );
@@ -1563,10 +2978,21 @@
         "Import Selesai";
 
 
+      /*
+       * Reset file
+       */
+
+      document
+        .getElementById(
+          "csvFile"
+        )
+        .value =
+          "";
+
     }
 
-    catch(error) {
 
+    catch(error) {
 
       console.error(
         "Firebase Import Error:",
@@ -1574,12 +3000,51 @@
       );
 
 
+      let message =
+        error.message;
+
+
+      /*
+       * PERMISSION ERROR
+       */
+
+      if (
+        error.code ===
+        "permission-denied"
+      ) {
+
+        message =
+          "Firebase menolak akses. "
+          +
+          "Pastikan akun sudah login dan "
+          +
+          "Security Rules Firestore mengizinkan "
+          +
+          "user yang sudah login menulis ke koleksi pelanggaran.";
+
+      }
+
+
       showStatus(
         `
-        <strong>Import gagal.</strong>
+        <strong>
+          Import gagal.
+        </strong>
+
         <br><br>
+
         ${escapeHTML(
-          error.message
+          message
+        )}
+
+        <br><br>
+
+        <strong>
+          Kode error:
+        </strong>
+
+        ${escapeHTML(
+          error.code || "-"
         )}
         `,
         "error"
@@ -1599,13 +3064,17 @@
 
 
 
-  // =====================================================
-  // ESCAPE HTML
-  // =====================================================
+  /* =====================================================
+     ESCAPE HTML
+  ===================================================== */
 
-  function escapeHTML(value) {
+  function escapeHTML(
+    value
+  ) {
 
-    return String(value)
+    return String(
+      value
+    )
 
       .replace(
         /&/g,
@@ -1636,28 +3105,67 @@
 
 
 
-  // =====================================================
-  // STATUS
-  // =====================================================
+  /* =====================================================
+     LOGIN STATUS
+  ===================================================== */
+
+  function showLoginStatus(
+    message,
+    type
+  ) {
+
+    const box =
+      document
+        .getElementById(
+          "loginStatus"
+        );
+
+
+    box.className =
+      "status "
+      +
+      type;
+
+
+    box.innerHTML =
+      message;
+
+  }
+
+
+
+  /* =====================================================
+     GENERAL STATUS
+  ===================================================== */
 
   function showStatus(
     message,
     type
   ) {
 
-
     const box =
-      document.getElementById(
-        "statusBox"
-      );
+      document
+        .getElementById(
+          "statusBox"
+        );
 
 
     box.className =
-      "status " + type;
+      "status "
+      +
+      type;
 
 
     box.innerHTML =
       message;
+
+
+    box.scrollIntoView({
+      behavior:
+        "smooth",
+      block:
+        "center"
+    });
 
   }
 
