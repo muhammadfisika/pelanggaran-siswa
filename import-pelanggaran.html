@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Import Data Pelanggaran</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+
+    h2 {
+      color: #334155;
+    }
+
+    .login-box {
+      max-width: 450px;
+      margin: 70px auto;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .logout {
+      background: #dc2626;
+      width: auto;
+      padding: 8px 15px;
+      float: right;
+    }
+
+    .logout:hover {
+      background: #b91c1c;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .info {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .success {
+      background: #f0fdf4;
+      border-left: 5px solid #16a34a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .error {
+      background: #fef2f2;
+      border-left: 5px solid #dc2626;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th,
+    td {
+      border: 1px solid #e2e8f0;
+      padding: 9px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #1e40af;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .valid {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    .invalid {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .progress {
+      width: 100%;
+      height: 25px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      line-height: 25px;
+      transition: width .3s;
+    }
+
+    .user-info {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .count {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- LOGIN -->
+<!-- ========================= -->
+
+<section id="loginSection" class="login-box card">
+
+  <h1>🔐 Login Import</h1>
+
+  <p>
+    Silakan login menggunakan akun Firebase yang memiliki
+    izin untuk menambahkan data pelanggaran.
+  </p>
+
+  <label>Email</label>
+  <input
+    type="email"
+    id="email"
+    placeholder="email@contoh.com"
+  >
+
+  <label>Password</label>
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+  >
+
+  <button id="loginButton">
+    Login
+  </button>
+
+  <div id="loginMessage"></div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- APLIKASI IMPORT -->
+<!-- ========================= -->
+
+<section id="appSection" class="container hidden">
+
+  <div class="card">
+
+    <button
+      id="logoutButton"
+      class="logout">
+      Logout
+    </button>
+
+    <h1>📥 Import Data Pelanggaran</h1>
+
+    <div class="user-info">
+      Login sebagai:
+      <strong id="userEmail"></strong>
+    </div>
+
+    <div class="info">
+
+      <strong>Format CSV:</strong>
+
+      <br><br>
+
+      Kolom yang diperlukan:
+
+      <br>
+
+      <code>
+        nisn,nama,kelas,tanggal,jenis,rincian,waktu
+      </code>
+
+      <br><br>
+
+      Bobot otomatis:
+
+      <br>
+
+      <strong>Ringan = 1</strong><br>
+      <strong>Sedang = 5</strong><br>
+      <strong>Berat = 10</strong>
+
+    </div>
+
+
+    <h2>1. Pilih File CSV</h2>
+
+    <input
+      type="file"
+      id="csvFile"
+      accept=".csv,text/csv"
+    >
+
+
+    <button
+      id="previewButton"
+      disabled>
+      Tampilkan Preview
+    </button>
+
+
+    <div id="message"></div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- PREVIEW -->
+  <!-- ========================= -->
+
+  <div
+    id="previewSection"
+    class="card hidden">
+
+    <h2>2. Preview Data</h2>
+
+    <div
+      id="summary"
+      class="count">
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No</th>
+            <th>NISN</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Tanggal</th>
+            <th>Jenis</th>
+            <th>Rincian</th>
+            <th>Waktu</th>
+            <th>Bobot</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="previewBody"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <br>
+
+    <button
+      id="importButton">
+      🚀 Import ke Firebase
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- PROGRESS -->
+  <!-- ========================= -->
+
+  <div
+    id="progressSection"
+    class="card hidden">
+
+    <h2>3. Proses Import</h2>
+
+    <div
+      id="progressText">
+      Memulai...
+    </div>
+
+    <div class="progress">
+
+      <div
+        id="progressBar"
+        class="progress-bar">
+        0%
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- FIREBASE -->
+<!-- ========================= -->
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  writeBatch,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+/* =====================================
+   FIREBASE CONFIG
+===================================== */
+
+const firebaseConfig = {
+
+  apiKey: "GANTI_API_KEY",
+
+  authDomain: "GANTI_AUTH_DOMAIN",
+
+  projectId: "GANTI_PROJECT_ID",
+
+  storageBucket: "GANTI_STORAGE_BUCKET",
+
+  messagingSenderId:
+    "GANTI_MESSAGING_SENDER_ID",
+
+  appId: "GANTI_APP_ID"
+
+};
+
+
+/* =====================================
+   INITIALIZE
+===================================== */
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================
+   VARIABLE
+===================================== */
+
+let pelanggaranData = [];
+
+
+/* =====================================
+   ELEMENT
+===================================== */
+
+const loginSection =
+  document.getElementById("loginSection");
+
+const appSection =
+  document.getElementById("appSection");
+
+const loginButton =
+  document.getElementById("loginButton");
+
+const logoutButton =
+  document.getElementById("logoutButton");
+
+const csvFile =
+  document.getElementById("csvFile");
+
+const previewButton =
+  document.getElementById("previewButton");
+
+const importButton =
+  document.getElementById("importButton");
+
+const previewSection =
+  document.getElementById("previewSection");
+
+const previewBody =
+  document.getElementById("previewBody");
+
+const summary =
+  document.getElementById("summary");
+
+const message =
+  document.getElementById("message");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+
+/* =====================================
+   AUTH STATE
+===================================== */
+
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    loginSection.classList.add("hidden");
+
+    appSection.classList.remove("hidden");
+
+    document.getElementById("userEmail")
+      .textContent = user.email;
+
+  } else {
+
+    loginSection.classList.remove("hidden");
+
+    appSection.classList.add("hidden");
+
+  }
+
+});
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+loginButton.addEventListener(
+  "click",
+  async () => {
+
+    const email =
+      document.getElementById("email")
+        .value.trim();
+
+    const password =
+      document.getElementById("password")
+        .value;
+
+    if (!email || !password) {
+
+      loginMessage.innerHTML = `
+        <div class="error">
+          Email dan password wajib diisi.
+        </div>
+      `;
+
+      return;
+    }
+
+    loginButton.disabled = true;
+
+    loginButton.textContent =
+      "Sedang login...";
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      loginMessage.innerHTML = "";
+
+    } catch (error) {
+
+      console.error(error);
+
+      loginMessage.innerHTML = `
+        <div class="error">
+          Login gagal:
+          ${error.message}
+        </div>
+      `;
+
+    } finally {
+
+      loginButton.disabled = false;
+
+      loginButton.textContent =
+        "Login";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+logoutButton.addEventListener(
+  "click",
+  async () => {
+
+    await signOut(auth);
+
+  }
+);
+
+
+/* =====================================
+   FILE SELECT
+===================================== */
+
+csvFile.addEventListener(
+  "change",
+  () => {
+
+    previewButton.disabled =
+      !csvFile.files.length;
+
+  }
+);
+
+
+/* =====================================
+   CSV PARSER
+===================================== */
+
+function parseCSVLine(line) {
+
+  const separator =
+    line.includes(";")
+      ? ";"
+      : ",";
+
+  const result = [];
+
+  let current = "";
+
+  let insideQuotes = false;
+
+  for (
+    let i = 0;
+    i < line.length;
+    i++
+  ) {
+
+    const char = line[i];
+
+    if (char === '"') {
+
+      insideQuotes =
+        !insideQuotes;
+
+    } else if (
+      char === separator &&
+      !insideQuotes
+    ) {
+
+      result.push(
+        current.trim()
+      );
+
+      current = "";
+
+    } else {
+
+      current += char;
+
+    }
+
+  }
+
+  result.push(
+    current.trim()
+  );
+
+  return result.map(
+    value =>
+      value
+        .replace(/^"|"$/g, "")
+        .trim()
+  );
+
+}
+
+
+/* =====================================
+   NORMALIZE HEADER
+===================================== */
+
+function normalizeHeader(value) {
+
+  return value
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =====================================
+   BOBOT
+===================================== */
+
+function getBobot(jenis) {
+
+  const value =
+    jenis
+      .toLowerCase()
+      .trim();
+
+  if (value === "ringan") {
+    return 1;
+  }
+
+  if (value === "sedang") {
+    return 5;
+  }
+
+  if (value === "berat") {
+    return 10;
+  }
+
+  return null;
+
+}
+
+
+/* =====================================
+   VALIDASI TANGGAL
+===================================== */
+
+function validDate(value) {
+
+  if (!value) return false;
+
+  const regex =
+    /^\d{4}-\d{2}-\d{2}$/;
+
+  return regex.test(value);
+
+}
+
+
+/* =====================================
+   PREVIEW
+===================================== */
+
+previewButton.addEventListener(
+  "click",
+  async () => {
+
+    const file =
+      csvFile.files[0];
+
+    if (!file) return;
+
+
+    message.innerHTML = "";
+
+    previewSection
+      .classList.add("hidden");
+
+
+    try {
+
+      const text =
+        await file.text();
+
+      const lines =
+        text
+          .split(/\r?\n/)
+          .filter(line =>
+            line.trim() !== ""
+          );
+
+
+      if (lines.length < 2) {
+
+        throw new Error(
+          "File CSV tidak memiliki data."
+        );
+
+      }
+
+
+      /* HEADER */
+
+      const headers =
+        parseCSVLine(lines[0])
+          .map(normalizeHeader);
+
+
+      const requiredHeaders = [
+        "nisn",
+        "nama",
+        "kelas",
+        "tanggal",
+        "jenis",
+        "rincian",
+        "waktu"
+      ];
+
+
+      const missing =
+        requiredHeaders.filter(
+          header =>
+            !headers.includes(header)
+        );
+
+
+      if (missing.length > 0) {
+
+        throw new Error(
+          "Kolom berikut tidak ditemukan: "
+          + missing.join(", ")
+        );
+
+      }
+
+
+      /* INDEX */
+
+      const index = {};
+
+      headers.forEach(
+        (header, i) => {
+          index[header] = i;
+        }
+      );
+
+
+      pelanggaranData = [];
+
+
+      /* DATA */
+
+      for (
+        let i = 1;
+        i < lines.length;
+        i++
+      ) {
+
+        const columns =
+          parseCSVLine(lines[i]);
+
+
+        const nisn =
+          columns[index.nisn] || "";
+
+        const nama =
+          columns[index.nama] || "";
+
+        const kelas =
+          columns[index.kelas] || "";
+
+        const tanggal =
+          columns[index.tanggal] || "";
+
+        const jenis =
+          columns[index.jenis] || "";
+
+        const rincian =
+          columns[index.rincian] || "";
+
+        const waktu =
+          columns[index.waktu] || "";
+
+
+        const bobot =
+          getBobot(jenis);
+
+
+        let valid = true;
+
+        let alasan = "";
+
+
+        if (!nisn) {
+
+          valid = false;
+
+          alasan =
+            "NISN kosong";
+
+        }
+
+        else if (!nama) {
+
+          valid = false;
+
+          alasan =
+            "Nama kosong";
+
+        }
+
+        else if (!kelas) {
+
+          valid = false;
+
+          alasan =
+            "Kelas kosong";
+
+        }
+
+        else if (!validDate(tanggal)) {
+
+          valid = false;
+
+          alasan =
+            "Format tanggal salah";
+
+        }
+
+        else if (bobot === null) {
+
+          valid = false;
+
+          alasan =
+            "Jenis harus Ringan/Sedang/Berat";
+
+        }
+
+        else if (!rincian) {
+
+          valid = false;
+
+          alasan =
+            "Rincian kosong";
+
+        }
+
+
+        pelanggaranData.push({
+
+          nisn,
+
+          nama,
+
+          kelas,
+
+          tanggal,
+
+          jenis,
+
+          rincian,
+
+          waktu,
+
+          bobot,
+
+          valid,
+
+          alasan
+
+        });
+
+      }
+
+
+      tampilkanPreview();
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.innerHTML = `
+        <div class="error">
+          ${error.message}
+        </div>
+      `;
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   TAMPILKAN PREVIEW
+===================================== */
+
+function tampilkanPreview() {
+
+  previewBody.innerHTML = "";
+
+
+  let validCount = 0;
+
+  let invalidCount = 0;
+
+
+  pelanggaranData
+    .slice(0, 100)
+    .forEach(
+      (data, index) => {
+
+        if (data.valid) {
+
+          validCount++;
+
+        } else {
+
+          invalidCount++;
+
+        }
+
+
+        const row =
+          document.createElement("tr");
+
+
+        row.innerHTML = `
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            ${escapeHTML(data.nisn)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.nama)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.kelas)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.tanggal)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.jenis)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.rincian)}
+          </td>
+
+          <td>
+            ${escapeHTML(data.waktu)}
+          </td>
+
+          <td>
+            ${data.bobot ?? "-"}
+          </td>
+
+          <td class="${
+            data.valid
+              ? "valid"
+              : "invalid"
+          }">
+
+            ${
+              data.valid
+                ? "✓ Valid"
+                : "✗ " + data.alasan
+            }
+
+          </td>
+
+        `;
+
+
+        previewBody.appendChild(row);
+
+      }
+    );
+
+
+  const total =
+    pelanggaranData.length;
+
+
+  const validTotal =
+    pelanggaranData.filter(
+      data => data.valid
+    ).length;
+
+
+  const invalidTotal =
+    total - validTotal;
+
+
+  summary.innerHTML = `
+    Total data:
+    <strong>${total}</strong>
+    &nbsp; | &nbsp;
+
+    Valid:
+    <strong class="valid">
+      ${validTotal}
+    </strong>
+
+    &nbsp; | &nbsp;
+
+    Tidak valid:
+    <strong class="invalid">
+      ${invalidTotal}
+    </strong>
+
+    <br><br>
+
+    ${
+      total > 100
+        ? "Preview hanya menampilkan 100 data pertama."
+        : ""
+    }
+  `;
+
+
+  previewSection
+    .classList.remove("hidden");
+
+
+  importButton.disabled =
+    validTotal === 0;
+
+}
+
+
+/* =====================================
+   IMPORT FIRESTORE
+===================================== */
+
+importButton.addEventListener(
+  "click",
+  importToFirebase
+);
+
+
+async function importToFirebase() {
+
+  const validData =
+    pelanggaranData.filter(
+      data => data.valid
+    );
+
+
+  if (validData.length === 0) {
+
+    alert(
+      "Tidak ada data valid untuk diimport."
+    );
+
+    return;
+
+  }
+
+
+  const konfirmasi =
+    confirm(
+      `Import ${validData.length} data pelanggaran ke Firebase?`
+    );
+
+
+  if (!konfirmasi) return;
+
+
+  importButton.disabled = true;
+
+  importButton.textContent =
+    "⏳ Sedang mengimport...";
+
+
+  document
+    .getElementById("progressSection")
+    .classList.remove("hidden");
+
+
+  try {
+
+    const batchSize = 450;
+
+    let imported = 0;
+
+
+    for (
+      let i = 0;
+      i < validData.length;
+      i += batchSize
+    ) {
+
+      const batch =
+        writeBatch(db);
+
+
+      const chunk =
+        validData.slice(
+          i,
+          i + batchSize
+        );
+
+
+      for (
+        const data of chunk
+      ) {
+
+
+        /*
+         * ID DOKUMEN OTOMATIS
+         */
+
+        const docRef =
+          doc(
+            db,
+            "pelanggaran"
+          );
+
+
+        batch.set(
+          docRef,
+          {
+
+            nisn:
+              data.nisn,
+
+            nama:
+              data.nama,
+
+            kelas:
+              data.kelas,
+
+            tanggal:
+              data.tanggal,
+
+            jenis:
+              data.jenis,
+
+            rincian:
+              data.rincian,
+
+            waktu:
+              data.waktu,
+
+            bobot:
+              data.bobot,
+
+            createdAt:
+              new Date(),
+
+            createdBy:
+              auth.currentUser
+                ? auth.currentUser.uid
+                : ""
+
+          }
+        );
+
+      }
+
+
+      await batch.commit();
+
+
+      imported +=
+        chunk.length;
+
+
+      const percent =
+        Math.round(
+          imported /
+          validData.length *
+          100
+        );
+
+
+      document
+        .getElementById(
+          "progressBar"
+        )
+        .style.width =
+          percent + "%";
+
+
+      document
+        .getElementById(
+          "progressBar"
+        )
+        .textContent =
+          percent + "%";
+
+
+      document
+        .getElementById(
+          "progressText"
+        )
+        .textContent =
+          `Berhasil mengimport ${imported} dari ${validData.length} data`;
+
+    }
+
+
+    message.innerHTML = `
+
+      <div class="success">
+
+        <strong>Import berhasil!</strong>
+
+        <br><br>
+
+        ${imported} data pelanggaran
+        berhasil dimasukkan ke Firebase.
+
+      </div>
+
+    `;
+
+
+    importButton.textContent =
+      "✓ Import Selesai";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    message.innerHTML = `
+
+      <div class="error">
+
+        <strong>Import gagal.</strong>
+
+        <br><br>
+
+        ${error.message}
+
+        <br><br>
+
+        Periksa kembali
+        Firestore Security Rules
+        dan akun Firebase.
+
+      </div>
+
+    `;
+
+
+    importButton.disabled = false;
+
+    importButton.textContent =
+      "🚀 Import ke Firebase";
+
+  }
+
+}
+
+
+/* =====================================
+   ESCAPE HTML
+===================================== */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
