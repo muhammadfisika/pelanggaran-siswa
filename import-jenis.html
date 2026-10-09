@@ -1,1 +1,1582 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0d6efd"
+  >
+
+  <title>Import Data Jenis Pelanggaran</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      padding: 20px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        #f4f6f9;
+
+      color:
+        #212529;
+
+    }
+
+
+    .container {
+
+      max-width:
+        1100px;
+
+      margin:
+        auto;
+
+    }
+
+
+    .header {
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
+      padding:
+        20px;
+
+      border-radius:
+        12px;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .header h1 {
+
+      margin:
+        0 0 8px;
+
+      font-size:
+        24px;
+
+    }
+
+
+    .header p {
+
+      margin:
+        0;
+
+      opacity:
+        .9;
+
+    }
+
+
+    .card {
+
+      background:
+        white;
+
+      padding:
+        20px;
+
+      border-radius:
+        12px;
+
+      margin-bottom:
+        20px;
+
+      box-shadow:
+        0 2px 8px
+        rgba(0,0,0,.08);
+
+    }
+
+
+    .card h2 {
+
+      margin-top:
+        0;
+
+      font-size:
+        20px;
+
+    }
+
+
+    .file-box {
+
+      border:
+        2px dashed #0d6efd;
+
+      padding:
+        30px 20px;
+
+      text-align:
+        center;
+
+      border-radius:
+        10px;
+
+      background:
+        #f8fbff;
+
+    }
+
+
+    .file-box input {
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .info {
+
+      margin-top:
+        15px;
+
+      padding:
+        12px;
+
+      background:
+        #eef5ff;
+
+      border-radius:
+        8px;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .summary {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        15px;
+
+      margin-top:
+        20px;
+
+    }
+
+
+    .summary-box {
+
+      padding:
+        20px;
+
+      border-radius:
+        10px;
+
+      text-align:
+        center;
+
+      background:
+        #f8f9fa;
+
+    }
+
+
+    .summary-number {
+
+      display:
+        block;
+
+      font-size:
+        28px;
+
+      font-weight:
+        bold;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    .table-wrapper {
+
+      overflow-x:
+        auto;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    table {
+
+      width:
+        100%;
+
+      border-collapse:
+        collapse;
+
+      min-width:
+        600px;
+
+    }
+
+
+    th,
+    td {
+
+      border:
+        1px solid #dee2e6;
+
+      padding:
+        10px;
+
+      text-align:
+        left;
+
+    }
+
+
+    th {
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
+    }
+
+
+    tr:nth-child(even) {
+
+      background:
+        #f8f9fa;
+
+    }
+
+
+    .status {
+
+      margin-top:
+        15px;
+
+      padding:
+        15px;
+
+      border-radius:
+        8px;
+
+      display:
+        none;
+
+    }
+
+
+    .status.success {
+
+      display:
+        block;
+
+      background:
+        #d1e7dd;
+
+      color:
+        #0f5132;
+
+    }
+
+
+    .status.error {
+
+      display:
+        block;
+
+      background:
+        #f8d7da;
+
+      color:
+        #842029;
+
+    }
+
+
+    .status.warning {
+
+      display:
+        block;
+
+      background:
+        #fff3cd;
+
+      color:
+        #664d03;
+
+    }
+
+
+    .btn {
+
+      border:
+        none;
+
+      padding:
+        12px 20px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        15px;
+
+      font-weight:
+        bold;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .btn-primary {
+
+      background:
+        #0d6efd;
+
+      color:
+        white;
+
+    }
+
+
+    .btn-primary:hover {
+
+      background:
+        #0b5ed7;
+
+    }
+
+
+    .btn:disabled {
+
+      background:
+        #adb5bd;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    .hidden {
+
+      display:
+        none;
+
+    }
+
+
+    .valid {
+
+      color:
+        #198754;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .invalid {
+
+      color:
+        #dc3545;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .progress {
+
+      width:
+        100%;
+
+      height:
+        20px;
+
+      background:
+        #e9ecef;
+
+      border-radius:
+        10px;
+
+      overflow:
+        hidden;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .progress-bar {
+
+      height:
+        100%;
+
+      width:
+        0%;
+
+      background:
+        #0d6efd;
+
+      transition:
+        width .2s;
+
+    }
+
+
+    @media(max-width:700px) {
+
+      body {
+
+        padding:
+          10px;
+
+      }
+
+
+      .summary {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <h1>
+      Import Data Jenis Pelanggaran
+    </h1>
+
+    <p>
+      Aplikasi Pencatat Pelanggaran Siswa
+      - SMAN 2 Rangkasbitung
+    </p>
+
+  </div>
+
+
+
+  <!-- FILE -->
+
+  <div class="card">
+
+    <h2>
+      1. Pilih File CSV
+    </h2>
+
+
+    <div class="file-box">
+
+      <strong>
+        Pilih data Jenis Pelanggaran
+      </strong>
+
+      <br>
+
+
+      <input
+        type="file"
+        id="csvFile"
+        accept=".csv,text/csv"
+      >
+
+
+      <div
+        id="fileInfo"
+        class="info hidden">
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- SUMMARY -->
+
+  <div
+    id="summaryCard"
+    class="card hidden">
+
+    <h2>
+      2. Ringkasan Data
+    </h2>
+
+
+    <div class="summary">
+
+
+      <div class="summary-box">
+
+        <span
+          id="totalData"
+          class="summary-number">
+
+          0
+
+        </span>
+
+        Total Data
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span
+          id="validData"
+          class="summary-number valid">
+
+          0
+
+        </span>
+
+        Data Valid
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span
+          id="invalidData"
+          class="summary-number invalid">
+
+          0
+
+        </span>
+
+        Data Bermasalah
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PREVIEW -->
+
+  <div
+    id="previewCard"
+    class="card hidden">
+
+
+    <h2>
+      3. Preview
+    </h2>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>No</th>
+
+            <th>Nama</th>
+
+            <th>Jenis</th>
+
+            <th>Bobot</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody
+          id="previewBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <button
+      id="importButton"
+      class="btn btn-primary"
+      disabled>
+
+      Import ke Firebase
+
+    </button>
+
+
+    <div
+      id="progressContainer"
+      class="hidden">
+
+      <div class="progress">
+
+        <div
+          id="progressBar"
+          class="progress-bar">
+        </div>
+
+      </div>
+
+      <p id="progressText">
+        Menyiapkan import...
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- STATUS -->
+
+  <div
+    id="statusBox"
+    class="status">
+  </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+  import {
+
+    initializeApp
+
+  }
+
+  from
+  "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+
+  import {
+
+    getFirestore,
+
+    doc,
+
+    writeBatch
+
+  }
+
+  from
+  "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+
+  // =====================================================
+  // FIREBASE CONFIG
+  // GANTI DENGAN CONFIG FIREBASE ANDA
+  // =====================================================
+
+ const firebaseConfig = {
+  apiKey: "AIzaSyAwsBj_5jJS1J4nQTXlp_88dnJaAh1FI58",
+  authDomain: "pelanggaran-siswa-sman2.firebaseapp.com",
+  projectId: "pelanggaran-siswa-sman2",
+  storageBucket: "pelanggaran-siswa-sman2.firebasestorage.app",
+  messagingSenderId: "62940952618",
+  appId: "1:62940952618:web:10a06124346f778ed82b53"
+};
+
+  // =====================================================
+  // INITIALIZE FIREBASE
+  // =====================================================
+
+  const app =
+    initializeApp(
+      firebaseConfig
+    );
+
+
+  const db =
+    getFirestore(app);
+
+
+
+  // =====================================================
+  // DATA
+  // =====================================================
+
+  let siswaData = [];
+
+
+
+  // =====================================================
+  // PILIH FILE
+  // =====================================================
+
+  document
+    .getElementById("csvFile")
+    .addEventListener(
+      "change",
+      function(event) {
+
+        const file =
+          event.target.files[0];
+
+
+        if (!file) {
+
+          return;
+
+        }
+
+
+        const fileInfo =
+          document.getElementById(
+            "fileInfo"
+          );
+
+
+        fileInfo.classList
+          .remove("hidden");
+
+
+        fileInfo.innerHTML = `
+
+          <strong>File:</strong>
+          ${escapeHTML(file.name)}
+
+          <br>
+
+          <strong>Ukuran:</strong>
+          ${(file.size / 1024).toFixed(2)}
+          KB
+
+        `;
+
+
+        readCSV(file);
+
+      }
+    );
+
+
+
+  // =====================================================
+  // READ CSV
+  // =====================================================
+
+  function readCSV(file) {
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function(event) {
+
+        processCSV(
+          event.target.result
+        );
+
+      };
+
+
+    reader.onerror =
+      function() {
+
+        showStatus(
+          "Gagal membaca file CSV.",
+          "error"
+        );
+
+      };
+
+
+    reader.readAsText(
+      file,
+      "UTF-8"
+    );
+
+  }
+
+
+
+  // =====================================================
+  // PROCESS CSV
+  // =====================================================
+
+  function processCSV(text) {
+
+    siswaData = [];
+
+
+    const lines =
+      text
+        .replace(/\r/g, "")
+        .split("\n")
+        .filter(
+          line =>
+            line.trim() !== ""
+        );
+
+
+    if (lines.length < 2) {
+
+      showStatus(
+        "File CSV tidak memiliki data.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const header =
+      parseCSVLine(
+        lines[0]
+      ).map(
+        value =>
+          value
+            .replace(/^\uFEFF/, "")
+            .trim()
+            .toLowerCase()
+      );
+
+
+    const requiredColumns = [
+
+      "nama",
+      "jenis",
+      "bobot"
+
+    ];
+
+
+    const missingColumns =
+      requiredColumns.filter(
+        column =>
+          !header.includes(column)
+      );
+
+
+    if (
+      missingColumns.length > 0
+    ) {
+
+      showStatus(
+        "Kolom berikut tidak ditemukan: "
+        + missingColumns.join(", "),
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const namaIndex =
+      header.indexOf("nama");
+
+
+    const jenisIndex =
+      header.indexOf("jenis");
+
+
+    const bobotIndex =
+      header.indexOf("bobot");
+
+
+
+    for (
+      let i = 1;
+      i < lines.length;
+      i++
+    ) {
+
+
+      const row =
+        parseCSVLine(
+          lines[i]
+        );
+
+
+      const nama =
+        (
+          row[namaIndex]
+          || ""
+        ).trim();
+
+
+      const jenis =
+        (
+          row[jenisIndex]
+          || ""
+        ).trim();
+
+
+      const bobot =
+        (
+          row[bobotIndex]
+          || ""
+        ).trim();
+
+
+      const valid =
+        nama !== "" &&
+        jenis !== "" &&
+        bobot !== "";
+
+
+      siswaData.push({
+
+        nama,
+        jenis,
+        bobot,
+        valid
+
+      });
+
+    }
+
+
+    displaySummary();
+
+    displayPreview();
+
+  }
+
+
+
+  // =====================================================
+  // PARSE CSV
+  // Mendukung , dan ;
+  // =====================================================
+
+  function parseCSVLine(line) {
+
+
+    let separator = ",";
+
+
+    if (
+      line.includes(";")
+      &&
+      !line.includes(",")
+    ) {
+
+      separator = ";";
+
+    }
+
+
+    const result = [];
+
+    let current = "";
+
+    let insideQuotes = false;
+
+
+    for (
+      let i = 0;
+      i < line.length;
+      i++
+    ) {
+
+
+      const char =
+        line[i];
+
+
+      if (
+        char === '"'
+      ) {
+
+
+        if (
+          insideQuotes
+          &&
+          line[i + 1] === '"'
+        ) {
+
+          current += '"';
+
+          i++;
+
+        }
+
+        else {
+
+          insideQuotes =
+            !insideQuotes;
+
+        }
+
+      }
+
+
+      else if (
+        char === separator
+        &&
+        !insideQuotes
+      ) {
+
+
+        result.push(
+          current.trim()
+        );
+
+
+        current = "";
+
+      }
+
+
+      else {
+
+        current += char;
+
+      }
+
+    }
+
+
+    result.push(
+      current.trim()
+    );
+
+
+    return result;
+
+  }
+
+
+
+  // =====================================================
+  // SUMMARY
+  // =====================================================
+
+  function displaySummary() {
+
+
+    const total =
+      siswaData.length;
+
+
+    const valid =
+      siswaData.filter(
+        siswa =>
+          siswa.valid
+      ).length;
+
+
+    const invalid =
+      total - valid;
+
+
+    document
+      .getElementById(
+        "summaryCard"
+      )
+      .classList
+      .remove("hidden");
+
+
+    document
+      .getElementById(
+        "totalData"
+      )
+      .textContent =
+        total;
+
+
+    document
+      .getElementById(
+        "validData"
+      )
+      .textContent =
+        valid;
+
+
+    document
+      .getElementById(
+        "invalidData"
+      )
+      .textContent =
+        invalid;
+
+  }
+
+
+
+  // =====================================================
+  // PREVIEW
+  // =====================================================
+
+  function displayPreview() {
+
+
+    const body =
+      document.getElementById(
+        "previewBody"
+      );
+
+
+    body.innerHTML = "";
+
+
+    const previewData =
+      siswaData.slice(
+        0,
+        20
+      );
+
+
+    previewData.forEach(
+      (siswa, index) => {
+
+
+        const row =
+          document.createElement(
+            "tr"
+          );
+
+
+        row.innerHTML = `
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.nama)}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.jenis)}
+          </td>
+
+          <td>
+            ${escapeHTML(siswa.bobot)}
+          </td>
+
+          <td>
+
+            ${
+              siswa.valid
+
+              ?
+
+              '<span class="valid">✓ Valid</span>'
+
+              :
+
+              '<span class="invalid">✕ Bermasalah</span>'
+
+            }
+
+          </td>
+
+        `;
+
+
+        body.appendChild(
+          row
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "previewCard"
+      )
+      .classList
+      .remove("hidden");
+
+
+    const validCount =
+      siswaData.filter(
+        siswa =>
+          siswa.valid
+      ).length;
+
+
+    document
+      .getElementById(
+        "importButton"
+      )
+      .disabled =
+        validCount === 0;
+
+  }
+
+
+
+  // =====================================================
+  // IMPORT FIREBASE
+  // =====================================================
+
+  document
+    .getElementById(
+      "importButton"
+    )
+    .addEventListener(
+      "click",
+      importToFirebase
+    );
+
+
+
+  async function importToFirebase() {
+
+
+    const validData =
+      siswaData.filter(
+        siswa =>
+          siswa.valid
+      );
+
+
+    if (
+      validData.length === 0
+    ) {
+
+      showStatus(
+        "Tidak ada data valid untuk diimport.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "importButton"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Sedang mengimport...";
+
+
+    document
+      .getElementById(
+        "progressContainer"
+      )
+      .classList
+      .remove("hidden");
+
+
+    try {
+
+
+      /*
+       * Firestore batch maksimal
+       * 500 operasi.
+       *
+       * Kita gunakan 450 agar
+       * lebih aman.
+       */
+
+      const batchSize =
+        450;
+
+
+      let imported =
+        0;
+
+
+      for (
+        let i = 0;
+        i < validData.length;
+        i += batchSize
+      ) {
+
+
+        const batch =
+          writeBatch(db);
+
+
+        const chunk =
+          validData.slice(
+            i,
+            i + batchSize
+          );
+
+
+        chunk.forEach(
+          siswa => {
+
+
+            /*
+             * NISN menjadi
+             * document ID
+             */
+
+            const docRef =
+              doc(
+                db,
+                "jenis_pelanggaran",
+                siswa.id
+              );
+
+
+            batch.set(
+              docRef,
+              {
+
+                nama:
+                  siswa.nama,
+
+                jenis:
+                  siswa.jenis,
+
+                bobot:
+                  siswa.bobot,
+
+                updatedAt:
+                  new Date()
+
+              },
+              {
+                merge: true
+              }
+            );
+
+          }
+        );
+
+
+        await batch.commit();
+
+
+        imported +=
+          chunk.length;
+
+
+        const percent =
+          Math.round(
+            (
+              imported /
+              validData.length
+            ) * 100
+          );
+
+
+        document
+          .getElementById(
+            "progressBar"
+          )
+          .style.width =
+            percent + "%";
+
+
+        document
+          .getElementById(
+            "progressText"
+          )
+          .textContent =
+            `Mengimport ${imported} dari ${validData.length} siswa (${percent}%)`;
+
+      }
+
+
+      showStatus(
+        `
+        <strong>Import berhasil!</strong>
+        <br><br>
+        ${imported} data siswa berhasil
+        dimasukkan/diperbarui di Firebase.
+        `,
+        "success"
+      );
+
+
+      button.textContent =
+        "Import Selesai";
+
+
+    }
+
+    catch(error) {
+
+
+      console.error(
+        "Firebase Import Error:",
+        error
+      );
+
+
+      showStatus(
+        `
+        <strong>Import gagal.</strong>
+        <br><br>
+        ${escapeHTML(
+          error.message
+        )}
+        `,
+        "error"
+      );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "Coba Import Lagi";
+
+    }
+
+  }
+
+
+
+  // =====================================================
+  // ESCAPE HTML
+  // =====================================================
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+
+  // =====================================================
+  // STATUS
+  // =====================================================
+
+  function showStatus(
+    message,
+    type
+  ) {
+
+
+    const box =
+      document.getElementById(
+        "statusBox"
+      );
+
+
+    box.className =
+      "status " + type;
+
+
+    box.innerHTML =
+      message;
+
+  }
+
+
+</script>
+
+
+</body>
+
+</html>
 
