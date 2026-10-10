@@ -1578,12 +1578,9 @@
              * document ID
              */
 
-            const docRef =
-              doc(
-                db,
-                "pelanggaran"
-              );
-
+            const docRef = doc(
+  collection(db, "pelanggaran")
+);
 
             batch.set(
               docRef,
