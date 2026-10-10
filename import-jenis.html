@@ -777,7 +777,7 @@
   // DATA
   // =====================================================
 
-  let siswaData = [];
+  let jenis_pelanggaranData = [];
 
 
 
@@ -879,7 +879,7 @@
 
   function processCSV(text) {
 
-    siswaData = [];
+    jenis_pelanggaranData = [];
 
 
     const lines =
@@ -1011,7 +1011,7 @@
         bobot !== "";
 
 
-      siswaData.push({
+      jenis_pelanggaranData.push({
 
         id,
         nama,
@@ -1144,13 +1144,13 @@
 
 
     const total =
-      siswaData.length;
+      jenis_pelanggaranData.length;
 
 
     const valid =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      jenis_pelanggaranData.filter(
+        jenis_pelanggaran =>
+          jenis_pelanggaran.valid
       ).length;
 
 
@@ -1210,14 +1210,14 @@
 
 
     const previewData =
-      siswaData.slice(
+      jenis_pelanggaranData.slice(
         0,
         20
       );
 
 
     previewData.forEach(
-      (siswa, index) => {
+      (jenis_pelanggaran, index) => {
 
 
         const row =
@@ -1233,25 +1233,25 @@
           </td>
 
           <td>
-            ${escapeHTML(siswa.id)}
+            ${escapeHTML(jenis_pelanggaran.id)}
           </td>
           
           <td>
-            ${escapeHTML(siswa.nama)}
+            ${escapeHTML(jenis_pelanggaran.nama)}
           </td>
 
           <td>
-            ${escapeHTML(siswa.jenis)}
+            ${escapeHTML(jenis_pelanggaran.jenis)}
           </td>
 
           <td>
-            ${escapeHTML(siswa.bobot)}
+            ${escapeHTML(jenis_pelanggaran.bobot)}
           </td>
 
           <td>
 
             ${
-              siswa.valid
+              jenis_pelanggaran.valid
 
               ?
 
@@ -1285,9 +1285,9 @@
 
 
     const validCount =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      jenis_pelanggaranData.filter(
+        jenis_pelanggaran =>
+          jenis_pelanggaran.valid
       ).length;
 
 
@@ -1321,9 +1321,9 @@
 
 
     const validData =
-      siswaData.filter(
-        siswa =>
-          siswa.valid
+      jenis_pelanggaranData.filter(
+        jenis_pelanggaran =>
+          jenis_pelanggaran.valid
       );
 
 
@@ -1401,7 +1401,7 @@
 
 
         chunk.forEach(
-          siswa => {
+          jenis_pelanggaran => {
 
 
             /*
@@ -1475,7 +1475,7 @@
             "progressText"
           )
           .textContent =
-            `Mengimport ${imported} dari ${validData.length} siswa (${percent}%)`;
+            `Mengimport ${imported} dari ${validData.length} jenis_pelanggaran (${percent}%)`;
 
       }
 
@@ -1484,7 +1484,7 @@
         `
         <strong>Import berhasil!</strong>
         <br><br>
-        ${imported} data siswa berhasil
+        ${imported} data jenis_pelanggaran berhasil
         dimasukkan/diperbarui di Firebase.
         `,
         "success"
