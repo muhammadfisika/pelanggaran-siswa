@@ -1137,9 +1137,19 @@
 
       pelanggaranData.push({
 
-        nisn,
-        nama,
+        namaId,
+        namaSiswa,
         kelas,
+        nisn,
+        jenis,
+        rincianId,
+        rincian,
+        bobot,
+        petugasId,
+        petugasNama,
+        tanggal,
+        waktu,
+        createdAt,
         valid
 
       });
@@ -1356,15 +1366,55 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.nisn)}
+            ${escapeHTML(pelanggaran.siswaId)}
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.nama)}
+            ${escapeHTML(pelanggaran.namaSiswa)}
           </td>
 
           <td>
             ${escapeHTML(pelanggaran.kelas)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.nisn)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.jenis)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.rincianId)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.rincian)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.bobot)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.petugasId)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.petugasNama)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.tanggal)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.waktu)}
+          </td>
+
+          <td>
+            ${escapeHTML(pelanggaran.createdAt)}
           </td>
 
           <td>
