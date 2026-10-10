@@ -701,7 +701,7 @@ function pilihSiswa(siswa) {
 
   document
     .getElementById(
-      "namasiswaTerpilih"
+      "namaSiswaTerpilih"
     )
     .textContent =
       siswa.nama;
@@ -969,7 +969,7 @@ pelanggaranForm.addEventListener(
       jenisPelanggaran.value;
 
 
-    const rincianid =
+    const rincianId =
       rincianPelanggaran.value;
 
 
@@ -984,7 +984,7 @@ pelanggaranForm.addEventListener(
     if (
       !tanggal ||
       !jenis ||
-      !rincianid ||
+      !rincianId ||
       !waktu
     ) {
 
@@ -1038,10 +1038,10 @@ pelanggaranForm.addEventListener(
         ),
         {
 
-          siswaid:
+          siswaId:
             siswaTerpilih.id,
 
-          namasiswa:
+          namaSiswa:
             siswaTerpilih.nama,
 
           nisn:
@@ -1059,8 +1059,8 @@ pelanggaranForm.addEventListener(
           rincian:
             namaRincian,
 
-          rincianid:
-            rincianid,
+          rincianId:
+            rincianId,
 
           waktu:
             waktu,
@@ -1068,13 +1068,13 @@ pelanggaranForm.addEventListener(
           bobot:
             bobot,
 
-          petugasid:
+          petugasId:
             userAktif.uid,
 
-          petugasnama:
+          petugasNama:
             userAktif.nama,
 
-          createdat:
+          createdAt:
             serverTimestamp()
 
         }
@@ -1277,11 +1277,11 @@ async function loadDashboardGuru() {
           id:
             docSnapshot.id,
 
-          siswaid:
-            data.siswaid || "",
+          siswaId:
+            data.siswaId || "",
 
-          namasiswa:
-            data.namasiswa || "",
+          namaSiswa:
+            data.namaSiswa || "",
 
           nisn:
             data.nisn || "",
@@ -1308,8 +1308,8 @@ async function loadDashboardGuru() {
               data.bobot || 0
             ),
 
-          petugasnama:
-            data.petugasnama || ""
+          petugasNama:
+            data.petugasNama || ""
 
         });
 
@@ -1562,20 +1562,20 @@ function prosesRanking() {
     function(item) {
 
       const key =
-        item.siswaid ||
+        item.siswaId ||
         item.nisn ||
-        item.namasiswa;
+        item.namaSiswa;
 
 
       if (!kelompok[key]) {
 
         kelompok[key] = {
 
-          siswaid:
-            item.siswaid,
+          siswaId:
+            item.siswaId,
 
-          namasiswa:
-            item.namasiswa,
+          namaSiswa:
+            item.namaSiswa,
 
           nisn:
             item.nisn,
@@ -1660,8 +1660,8 @@ function prosesRanking() {
       }
 
 
-      return a.namasiswa.localeCompare(
-        b.namasiswa,
+      return a.namaSiswa.localeCompare(
+        b.namaSiswa,
         "id"
       );
 
@@ -1822,7 +1822,7 @@ function tampilkanRanking() {
 
         <tr
           data-siswa-id="${escapeHtml(
-            item.siswaid
+            item.siswaId
           )}"
         >
 
@@ -1838,7 +1838,7 @@ function tampilkanRanking() {
           <td class="nama-cell">
 
             ${escapeHtml(
-              item.namasiswa
+              item.namaSiswa
             )}
 
           </td>
@@ -1910,12 +1910,12 @@ function tampilkanRanking() {
         "click",
         function() {
 
-          const siswaid =
-            row.dataset.siswaid;
+          const siswaId =
+            row.dataset.siswaId;
 
 
           bukaDetailSiswa(
-            siswaid
+            siswaId
           );
 
         }
@@ -1932,15 +1932,15 @@ function tampilkanRanking() {
 // =====================================================
 
 function bukaDetailSiswa(
-  siswaid
+  siswaId
 ) {
 
   const data =
     semuaPelanggaran.filter(
       function(item) {
 
-        return item.siswaid ===
-          siswaid;
+        return item.siswaId ===
+          siswaId;
 
       }
     );
@@ -1953,7 +1953,7 @@ function bukaDetailSiswa(
 
 
   siswaDetailAktif =
-    siswaid;
+    siswaId;
 
 
   const siswa =
@@ -1962,10 +1962,10 @@ function bukaDetailSiswa(
 
   document
     .getElementById(
-      "detailnamasiswa"
+      "detailnamaSiswa"
     )
     .textContent =
-      siswa.namasiswa;
+      siswa.namaSiswa;
 
 
   document
@@ -2092,7 +2092,7 @@ function bukaDetailSiswa(
 
           <td>
             ${escapeHtml(
-              item.petugasnama
+              item.petugasNama
             )}
           </td>
 
