@@ -938,7 +938,7 @@
 
     const requiredColumns = [
 
-      "siswaId",
+      "siswaid",
       "nama_siswa",
       "kelas",
       "nisn",
@@ -977,8 +977,8 @@
     }
 
 
-    const siswaIdIndex =
-      header.indexOf("siswaId");
+    const siswaidIndex =
+      header.indexOf("siswaid");
 
 
     const nama_siswaIndex =
@@ -1039,9 +1039,9 @@
         );
 
 
-      const siswaId =
+      const siswaid =
         (
-          row[siswaIdIndex]
+          row[siswaidIndex]
           || ""
         ).trim();
 
@@ -1120,7 +1120,7 @@
         ).trim();
 
       const valid =
-        siswaId !== "" &&
+        siswaid !== "" &&
         nama_siswa !== "" &&
         kelas !== "" &&
         nisn !== "" &&
@@ -1137,7 +1137,7 @@
 
       pelanggaranData.push({
 
-        siswaId,
+        siswaid,
         nama_siswa,
         kelas,
         nisn,
@@ -1366,7 +1366,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.siswaId)}
+            ${escapeHTML(pelanggaran.siswaid)}
           </td>
 
           <td>
@@ -1590,8 +1590,8 @@
               docRef,
               {
 
-                siswaId:
-                  pelanggaran.siswaId,
+                siswaid:
+                  pelanggaran.siswaid,
 
                 nama_siswa:
                   pelanggaran.nama_siswa,
