@@ -938,9 +938,19 @@
 
     const requiredColumns = [
 
+      "siswaId",
+      "namaSiswa",
+      "kelas",
       "nisn",
-      "nama",
-      "kelas"
+      "jenis",
+      "rincianId",
+      "rincian",
+      "bobot",
+      "petugasId",
+      "petugasNama",
+      "tanggal",
+      "waktu",
+      "createdAt"
 
     ];
 
@@ -967,16 +977,52 @@
     }
 
 
-    const nisnIndex =
-      header.indexOf("nisn");
+    const siswaIdIndex =
+      header.indexOf("siswaId");
 
 
-    const namaIndex =
-      header.indexOf("nama");
+    const namaSiswaIndex =
+      header.indexOf("namaSiswa");
 
 
     const kelasIndex =
       header.indexOf("kelas");
+
+    const nisnIndex =
+      header.indexOf("nisn");
+
+
+    const jenisIndex =
+      header.indexOf("jenis");
+
+
+    const rincianIdIndex =
+      header.indexOf("rincianId");
+
+    const rincianIndex =
+      header.indexOf("rincian");
+
+
+    const bobotIndex =
+      header.indexOf("bobot");
+
+
+    const petugasIdIndex =
+      header.indexOf("petugasId");
+
+    const petugasNamaIndex =
+      header.indexOf("petugasNama");
+
+
+    const tanggalIndex =
+      header.indexOf("tanggal");
+
+
+    const waktuIndex =
+      header.indexOf("waktu");
+
+    const createdAtIndex =
+      header.indexOf("createdAt");
 
 
 
