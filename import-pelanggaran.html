@@ -666,7 +666,7 @@
 
             <th>Waktu</th>
 
-            <th>createdat</th>
+            <th>createdAt</th>
 
 
 
@@ -945,14 +945,14 @@
       "kelas",
       "nisn",
       "jenis",
-      "rincianid",
+      "rincianId",
       "rincian",
       "bobot",
-      "petugasid",
-      "petugasnama",
+      "petugasId",
+      "petugasNama",
       "tanggal",
       "waktu",
-      "createdat"
+      "createdAt"
 
     ];
 
@@ -998,8 +998,8 @@
       header.indexOf("jenis");
 
 
-    const rincianidIndex =
-      header.indexOf("rincianid");
+    const rincianIdIndex =
+      header.indexOf("rincianId");
 
     const rincianIndex =
       header.indexOf("rincian");
@@ -1009,11 +1009,11 @@
       header.indexOf("bobot");
 
 
-    const petugasidIndex =
-      header.indexOf("petugasid");
+    const petugasIdIndex =
+      header.indexOf("petugasId");
 
-    const petugasnamaIndex =
-      header.indexOf("petugasnama");
+    const petugasNamaIndex =
+      header.indexOf("petugasNama");
 
 
     const tanggalIndex =
@@ -1023,8 +1023,8 @@
     const waktuIndex =
       header.indexOf("waktu");
 
-    const createdatIndex =
-      header.indexOf("createdat");
+    const createdAtIndex =
+      header.indexOf("createdAt");
 
 
 
@@ -1073,9 +1073,9 @@
           || ""
         ).trim();
 
-      const rincianid =
+      const rincianId =
         (
-          row[rincianidIndex]
+          row[rincianIdIndex]
           || ""
         ).trim();
 
@@ -1091,15 +1091,15 @@
           || ""
         ).trim();
 
-      const petugasid =
+      const petugasId =
         (
-          row[petugasidIndex]
+          row[petugasIdIndex]
           || ""
         ).trim();
 
-      const petugasnama =
+      const petugasNama =
         (
-          row[petugasnamaIndex]
+          row[petugasNamaIndex]
           || ""
         ).trim();
 
@@ -1115,9 +1115,9 @@
           || ""
         ).trim();
 
-      const createdat =
+      const createdAt =
         (
-          row[createdatIndex]
+          row[createdAtIndex]
           || ""
         ).trim();
 
@@ -1127,14 +1127,14 @@
         kelas !== "" &&
         nisn !== "" &&
         jenis !== "" &&
-        rincianid !== "" &&
+        rincianId !== "" &&
         rincian !== "" &&
         bobot !== "" &&
-        petugasid !== "" &&
-        petugasnama !== "" &&
+        petugasId !== "" &&
+        petugasNama !== "" &&
         tanggal !== "" &&
         waktu !== "" &&
-        createdat !== "";
+        createdAt !== "";
 
 
       pelanggaranData.push({
@@ -1144,14 +1144,14 @@
         kelas,
         nisn,
         jenis,
-        rincianid,
+        rincianId,
         rincian,
         bobot,
-        petugasid,
-        petugasnama,
+        petugasId,
+        petugasNama,
         tanggal,
         waktu,
-        createdat,
+        createdAt,
         valid
 
       });
@@ -1388,7 +1388,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.rincianid)}
+            ${escapeHTML(pelanggaran.rincianId)}
           </td>
 
           <td>
@@ -1400,11 +1400,11 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.petugasid)}
+            ${escapeHTML(pelanggaran.petugasId)}
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.petugasnama)}
+            ${escapeHTML(pelanggaran.petugasNama)}
           </td>
 
           <td>
@@ -1416,7 +1416,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.createdat)}
+            ${escapeHTML(pelanggaran.createdAt)}
           </td>
 
           <td>
@@ -1603,8 +1603,8 @@
                 jenis:
                   pelanggaran.jenis,
 
-                rincianid:
-                  pelanggaran.rincianid,
+                rincianId:
+                  pelanggaran.rincianId,
 
                 rincian:
                   pelanggaran.rincian,
@@ -1612,11 +1612,11 @@
                 bobot:
                   pelanggaran.bobot,
 
-                petugasid:
-                  pelanggaran.petugasid,
+                petugasId:
+                  pelanggaran.petugasId,
 
-                petugasnama:
-                  pelanggaran.petugasnama,
+                petugasNama:
+                  pelanggaran.petugasNama,
 
                 tanggal:
                   pelanggaran.tanggal,
@@ -1624,8 +1624,8 @@
                 waktu:
                   pelanggaran.waktu,
 
-                createdat:
-                  pelanggaran.createdat,
+                createdAt:
+                  pelanggaran.createdAt,
                 
 
                 updatedAt:
