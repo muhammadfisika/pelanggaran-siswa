@@ -666,7 +666,7 @@
 
             <th>Waktu</th>
 
-            <th>created_at</th>
+            <th>createdat</th>
 
 
 
@@ -939,18 +939,18 @@
     const requiredColumns = [
 
       "siswaid",
-      "nama_siswa",
+      "namasiswa",
       "kelas",
       "nisn",
       "jenis",
-      "rincian_id",
+      "rincianid",
       "rincian",
       "bobot",
-      "petugas_id",
-      "petugas_nama",
+      "petugasid",
+      "petugasnama",
       "tanggal",
       "waktu",
-      "created_at"
+      "createdat"
 
     ];
 
@@ -981,8 +981,8 @@
       header.indexOf("siswaid");
 
 
-    const nama_siswaIndex =
-      header.indexOf("nama_siswa");
+    const namasiswaIndex =
+      header.indexOf("namasiswa");
 
 
     const kelasIndex =
@@ -996,8 +996,8 @@
       header.indexOf("jenis");
 
 
-    const rincian_idIndex =
-      header.indexOf("rincian_id");
+    const rincianidIndex =
+      header.indexOf("rincianid");
 
     const rincianIndex =
       header.indexOf("rincian");
@@ -1007,11 +1007,11 @@
       header.indexOf("bobot");
 
 
-    const petugas_idIndex =
-      header.indexOf("petugas_id");
+    const petugasidIndex =
+      header.indexOf("petugasid");
 
-    const petugas_namaIndex =
-      header.indexOf("petugas_nama");
+    const petugasnamaIndex =
+      header.indexOf("petugasnama");
 
 
     const tanggalIndex =
@@ -1021,8 +1021,8 @@
     const waktuIndex =
       header.indexOf("waktu");
 
-    const created_atIndex =
-      header.indexOf("created_at");
+    const createdatIndex =
+      header.indexOf("createdat");
 
 
 
@@ -1046,9 +1046,9 @@
         ).trim();
 
 
-      const nama_siswa =
+      const namasiswa =
         (
-          row[nama_siswaIndex]
+          row[namasiswaIndex]
           || ""
         ).trim();
 
@@ -1071,9 +1071,9 @@
           || ""
         ).trim();
 
-      const rincian_id =
+      const rincianid =
         (
-          row[rincian_idIndex]
+          row[rincianidIndex]
           || ""
         ).trim();
 
@@ -1089,15 +1089,15 @@
           || ""
         ).trim();
 
-      const petugas_id =
+      const petugasid =
         (
-          row[petugas_idIndex]
+          row[petugasidIndex]
           || ""
         ).trim();
 
-      const petugas_nama =
+      const petugasnama =
         (
-          row[petugas_namaIndex]
+          row[petugasnamaIndex]
           || ""
         ).trim();
 
@@ -1113,43 +1113,43 @@
           || ""
         ).trim();
 
-      const created_at =
+      const createdat =
         (
-          row[created_atIndex]
+          row[createdatIndex]
           || ""
         ).trim();
 
       const valid =
         siswaid !== "" &&
-        nama_siswa !== "" &&
+        namasiswa !== "" &&
         kelas !== "" &&
         nisn !== "" &&
         jenis !== "" &&
-        rincian_id !== "" &&
+        rincianid !== "" &&
         rincian !== "" &&
         bobot !== "" &&
-        petugas_id !== "" &&
-        petugas_nama !== "" &&
+        petugasid !== "" &&
+        petugasnama !== "" &&
         tanggal !== "" &&
         waktu !== "" &&
-        created_at !== "";
+        createdat !== "";
 
 
       pelanggaranData.push({
 
         siswaid,
-        nama_siswa,
+        namasiswa,
         kelas,
         nisn,
         jenis,
-        rincian_id,
+        rincianid,
         rincian,
         bobot,
-        petugas_id,
-        petugas_nama,
+        petugasid,
+        petugasnama,
         tanggal,
         waktu,
-        created_at,
+        createdat,
         valid
 
       });
@@ -1370,7 +1370,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.nama_siswa)}
+            ${escapeHTML(pelanggaran.namasiswa)}
           </td>
 
           <td>
@@ -1386,7 +1386,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.rincian_id)}
+            ${escapeHTML(pelanggaran.rincianid)}
           </td>
 
           <td>
@@ -1398,11 +1398,11 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.petugas_id)}
+            ${escapeHTML(pelanggaran.petugasid)}
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.petugas_nama)}
+            ${escapeHTML(pelanggaran.petugasnama)}
           </td>
 
           <td>
@@ -1414,7 +1414,7 @@
           </td>
 
           <td>
-            ${escapeHTML(pelanggaran.created_at)}
+            ${escapeHTML(pelanggaran.createdat)}
           </td>
 
           <td>
@@ -1593,8 +1593,8 @@
                 siswaid:
                   pelanggaran.siswaid,
 
-                nama_siswa:
-                  pelanggaran.nama_siswa,
+                namasiswa:
+                  pelanggaran.namasiswa,
 
                 kelas:
                   pelanggaran.kelas,
@@ -1605,8 +1605,8 @@
                 jenis:
                   pelanggaran.jenis,
 
-                rincian_id:
-                  pelanggaran.rincian_id,
+                rincianid:
+                  pelanggaran.rincianid,
 
                 rincian:
                   pelanggaran.rincian,
@@ -1614,11 +1614,11 @@
                 bobot:
                   pelanggaran.bobot,
 
-                petugas_id:
-                  pelanggaran.petugas_id,
+                petugasid:
+                  pelanggaran.petugasid,
 
-                petugas_nama:
-                  pelanggaran.petugas_nama,
+                petugasnama:
+                  pelanggaran.petugasnama,
 
                 tanggal:
                   pelanggaran.tanggal,
@@ -1626,8 +1626,8 @@
                 waktu:
                   pelanggaran.waktu,
 
-                created_at:
-                  pelanggaran.created_at,
+                createdat:
+                  pelanggaran.createdat,
                 
 
                 updatedAt:
