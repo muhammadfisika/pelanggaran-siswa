@@ -1038,7 +1038,7 @@ pelanggaranForm.addEventListener(
         ),
         {
 
-          siswaId:
+          siswaid:
             siswaTerpilih.id,
 
           namaSiswa:
@@ -1277,8 +1277,8 @@ async function loadDashboardGuru() {
           id:
             docSnapshot.id,
 
-          siswaId:
-            data.siswaId || "",
+          siswaid:
+            data.siswaid || "",
 
           namaSiswa:
             data.namaSiswa || "",
@@ -1562,7 +1562,7 @@ function prosesRanking() {
     function(item) {
 
       const key =
-        item.siswaId ||
+        item.siswaid ||
         item.nisn ||
         item.namaSiswa;
 
@@ -1571,8 +1571,8 @@ function prosesRanking() {
 
         kelompok[key] = {
 
-          siswaId:
-            item.siswaId,
+          siswaid:
+            item.siswaid,
 
           namaSiswa:
             item.namaSiswa,
@@ -1822,7 +1822,7 @@ function tampilkanRanking() {
 
         <tr
           data-siswa-id="${escapeHtml(
-            item.siswaId
+            item.siswaid
           )}"
         >
 
@@ -1910,12 +1910,12 @@ function tampilkanRanking() {
         "click",
         function() {
 
-          const siswaId =
-            row.dataset.siswaId;
+          const siswaid =
+            row.dataset.siswaid;
 
 
           bukaDetailSiswa(
-            siswaId
+            siswaid
           );
 
         }
@@ -1932,15 +1932,15 @@ function tampilkanRanking() {
 // =====================================================
 
 function bukaDetailSiswa(
-  siswaId
+  siswaid
 ) {
 
   const data =
     semuaPelanggaran.filter(
       function(item) {
 
-        return item.siswaId ===
-          siswaId;
+        return item.siswaid ===
+          siswaid;
 
       }
     );
@@ -1953,7 +1953,7 @@ function bukaDetailSiswa(
 
 
   siswaDetailAktif =
-    siswaId;
+    siswaid;
 
 
   const siswa =
