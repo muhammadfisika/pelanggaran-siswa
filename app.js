@@ -701,7 +701,7 @@ function pilihSiswa(siswa) {
 
   document
     .getElementById(
-      "namaSiswaTerpilih"
+      "namasiswaTerpilih"
     )
     .textContent =
       siswa.nama;
@@ -969,7 +969,7 @@ pelanggaranForm.addEventListener(
       jenisPelanggaran.value;
 
 
-    const rincianId =
+    const rincianid =
       rincianPelanggaran.value;
 
 
@@ -984,7 +984,7 @@ pelanggaranForm.addEventListener(
     if (
       !tanggal ||
       !jenis ||
-      !rincianId ||
+      !rincianid ||
       !waktu
     ) {
 
@@ -1041,7 +1041,7 @@ pelanggaranForm.addEventListener(
           siswaid:
             siswaTerpilih.id,
 
-          namaSiswa:
+          namasiswa:
             siswaTerpilih.nama,
 
           nisn:
@@ -1059,8 +1059,8 @@ pelanggaranForm.addEventListener(
           rincian:
             namaRincian,
 
-          rincianId:
-            rincianId,
+          rincianid:
+            rincianid,
 
           waktu:
             waktu,
@@ -1068,13 +1068,13 @@ pelanggaranForm.addEventListener(
           bobot:
             bobot,
 
-          petugasId:
+          petugasid:
             userAktif.uid,
 
-          petugasNama:
+          petugasnama:
             userAktif.nama,
 
-          createdAt:
+          createdat:
             serverTimestamp()
 
         }
@@ -1280,8 +1280,8 @@ async function loadDashboardGuru() {
           siswaid:
             data.siswaid || "",
 
-          namaSiswa:
-            data.namaSiswa || "",
+          namasiswa:
+            data.namasiswa || "",
 
           nisn:
             data.nisn || "",
@@ -1308,8 +1308,8 @@ async function loadDashboardGuru() {
               data.bobot || 0
             ),
 
-          petugasNama:
-            data.petugasNama || ""
+          petugasnama:
+            data.petugasnama || ""
 
         });
 
@@ -1564,7 +1564,7 @@ function prosesRanking() {
       const key =
         item.siswaid ||
         item.nisn ||
-        item.namaSiswa;
+        item.namasiswa;
 
 
       if (!kelompok[key]) {
@@ -1574,8 +1574,8 @@ function prosesRanking() {
           siswaid:
             item.siswaid,
 
-          namaSiswa:
-            item.namaSiswa,
+          namasiswa:
+            item.namasiswa,
 
           nisn:
             item.nisn,
@@ -1660,8 +1660,8 @@ function prosesRanking() {
       }
 
 
-      return a.namaSiswa.localeCompare(
-        b.namaSiswa,
+      return a.namasiswa.localeCompare(
+        b.namasiswa,
         "id"
       );
 
@@ -1838,7 +1838,7 @@ function tampilkanRanking() {
           <td class="nama-cell">
 
             ${escapeHtml(
-              item.namaSiswa
+              item.namasiswa
             )}
 
           </td>
@@ -1962,10 +1962,10 @@ function bukaDetailSiswa(
 
   document
     .getElementById(
-      "detailNamaSiswa"
+      "detailnamasiswa"
     )
     .textContent =
-      siswa.namaSiswa;
+      siswa.namasiswa;
 
 
   document
@@ -2092,7 +2092,7 @@ function bukaDetailSiswa(
 
           <td>
             ${escapeHtml(
-              item.petugasNama
+              item.petugasnama
             )}
           </td>
 
