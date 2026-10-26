@@ -1596,6 +1596,42 @@
 
 </script>
 
+<!-- MODAL DETAIL PELANGGARAN SISWA -->
+<div
+  id="detailSiswaModal"
+  class="detail-modal hidden"
+  aria-hidden="true"
+>
+  <div class="detail-modal-content" role="dialog" aria-modal="true" aria-labelledby="detailnamaSiswa">
+
+    <div class="detail-modal-header">
+      <div>
+        <h2 id="detailnamaSiswa">Nama Siswa</h2>
+        <p id="detailInfoSiswa">NISN: - | Kelas: -</p>
+      </div>
+
+      <button
+        type="button"
+        id="btnTutupDetail"
+        class="modal-close"
+        aria-label="Tutup detail"
+      >&times;</button>
+    </div>
+
+    <div class="detail-modal-body">
+      <h3>Riwayat Pelanggaran</h3>
+      <div id="detailPelanggaranContainer"></div>
+    </div>
+
+    <div class="detail-modal-footer">
+      <button type="button" id="btnTutupDetailBawah">
+        Tutup
+      </button>
+    </div>
+
+  </div>
+</div>
+
 
 </body>
 
