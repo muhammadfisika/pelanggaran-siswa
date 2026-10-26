@@ -1,0 +1,274 @@
+
+/* =========================================
+   FLOATING FORM RINCIAN PELANGGARAN
+========================================= */
+
+#detailModal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(15, 23, 42, 0.68);
+    backdrop-filter: blur(4px);
+
+    overflow-y: auto;
+}
+
+#detailModal.hidden {
+    display: none !important;
+}
+
+#detailModal .modal-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+    color: #1f2937;
+
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+    animation: modalMasuk 0.2s ease-out;
+}
+
+#detailModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 18px 22px;
+
+    background: #1d4ed8;
+    color: #ffffff;
+
+    flex-shrink: 0;
+}
+
+#detailModal .modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+#detailModal .close-btn {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+#detailModal .close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#detailModal .detail-student {
+    padding: 16px 22px 8px;
+    flex-shrink: 0;
+}
+
+#detailModal .detail-student-card {
+    display: grid;
+    gap: 7px;
+
+    padding: 15px;
+
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+
+    background: #eff6ff;
+}
+
+#detailModal .detail-student-card strong {
+    font-size: 18px;
+    color: #1d4ed8;
+}
+
+#detailModal #detailList {
+    padding: 12px 22px 22px;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+#detailModal .detail-item {
+    margin-bottom: 12px;
+    padding: 15px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    background: #ffffff;
+}
+
+#detailModal .detail-item:last-child {
+    margin-bottom: 0;
+}
+
+#detailModal .detail-item-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+#detailModal .detail-time {
+    color: #64748b;
+    font-size: 13px;
+}
+
+#detailModal .detail-badges {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+#detailModal .badge {
+    display: inline-block;
+
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+#detailModal .badge-ringan {
+    background: #dcfce7;
+    color: #166534;
+}
+
+#detailModal .badge-sedang {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+#detailModal .badge-berat {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+#detailModal .detail-points {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+#detailModal .detail-description {
+    margin: 0 0 10px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#detailModal .detail-item small {
+    color: #64748b;
+}
+
+#detailModal .detail-loading,
+#detailModal .detail-empty,
+#detailModal .detail-error {
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+#detailModal .detail-loading {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+#detailModal .detail-empty {
+    background: #f8fafc;
+    color: #475569;
+    text-align: center;
+}
+
+#detailModal .detail-error {
+    background: #fef2f2;
+    color: #991b1b;
+    overflow-wrap: anywhere;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+@keyframes modalMasuk {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Tampilan ponsel */
+@media (max-width: 600px) {
+    #detailModal {
+        padding: 10px;
+        align-items: center;
+    }
+
+    #detailModal .modal-content {
+        max-height: 92vh;
+        border-radius: 14px;
+    }
+
+    #detailModal .modal-header {
+        padding: 14px;
+    }
+
+    #detailModal .modal-header h2 {
+        font-size: 17px;
+    }
+
+    #detailModal .detail-student {
+        padding: 12px 14px 6px;
+    }
+
+    #detailModal #detailList {
+        padding: 10px 14px 16px;
+    }
+
+    #detailModal .detail-item {
+        padding: 12px;
+    }
+}
