@@ -26,8 +26,8 @@
     Pelanggaran Siswa - SMAN 2 Rangkasbitung
   </title>
 
-  <link rel="stylesheet"
-        href="./style.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="modal-detail.css">
 
 </head>
 
@@ -317,7 +317,22 @@
 
   </section>
 
+<!-- =================================================
+       Floadting Form
+  ================================================== -->
+<div id="detailModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="detailTitle">Rincian Pelanggaran</h2>
+            <button type="button" onclick="closeDetail()" class="close-btn">×</button>
+        </div>
 
+        <div id="detailStudent" class="detail-student"></div>
+        <div id="detailList">Memuat...</div>
+    </div>
+</div>
+
+  
 
   <!-- =================================================
        GURU
