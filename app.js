@@ -1931,255 +1931,117 @@ function tampilkanRanking() {
 // DETAIL SISWA
 // =====================================================
 
-function bukaDetailSiswa(
-  siswaId
-) {
 
-  const data =
-    semuaPelanggaran.filter(
-      function(item) {
-
-        return item.siswaId ===
-          siswaId;
-
-      }
-    );
-
+function bukaDetailSiswa(siswaId) {
+  const data = semuaPelanggaran.filter(
+    function(item) {
+      return item.siswaId === siswaId;
+    }
+  );
 
   if (data.length === 0) {
-
+    alert("Belum ada data pelanggaran untuk siswa ini.");
     return;
   }
 
-
-  siswaDetailAktif =
-    siswaId;
-
-
-  const siswa =
-    data[0];
-
-
-  document
-    .getElementById(
-      "detailnamaSiswa"
-    )
-    .textContent =
-      siswa.namaSiswa;
-
-
-  document
-    .getElementById(
-      "detailInfoSiswa"
-    )
-    .textContent =
-      "NISN: "
-      + siswa.nisn
-      + " | Kelas: "
-      + siswa.kelas;
-
-
-  const container =
-    document.getElementById(
-      "detailPelanggaranContainer"
-    );
-
-
-  data.sort(
-    function(a, b) {
-
-      if (
-        a.tanggal !==
-        b.tanggal
-      ) {
-
-        return b.tanggal.localeCompare(
-          a.tanggal
-        );
-
-      }
-
-
-      return b.waktu.localeCompare(
-        a.waktu
-      );
-
-    }
-  );
-
-
-  let html = `
-
-    <div class="table-wrapper">
-
-      <table class="detail-table">
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Tanggal
-            </th>
-
-            <th>
-              Waktu
-            </th>
-
-            <th>
-              Jenis
-            </th>
-
-            <th>
-              Rincian
-            </th>
-
-            <th>
-              Bobot
-            </th>
-
-            <th>
-              Petugas
-            </th>
-
-            <th>
-              Aksi
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-  `;
-
-
-  data.forEach(
-    function(item) {
-
-      html += `
-
-        <tr>
-
-          <td>
-            ${formatTanggal(
-              item.tanggal
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              item.waktu
-            )}
-          </td>
-
-          <td>
-            ${formatJenis(
-              item.jenis
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              item.rincian
-            )}
-          </td>
-
-          <td class="bobot">
-            ${item.bobot}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              item.petugasNama
-            )}
-          </td>
-
-          <td>
-
-            <button
-              class="delete-button"
-              data-id="${escapeHtml(
-                item.id
-              )}"
-            >
-              Hapus
-            </button>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  container.innerHTML =
-    html;
-
-
-  document
-    .getElementById(
-      "detailSiswaCard"
-    )
-    .classList
-    .remove("hidden");
-
-
-  const deleteButtons =
-    container.querySelectorAll(
-      ".delete-button"
-    );
-
-
-  deleteButtons.forEach(
-    function(button) {
-
-      button.addEventListener(
-        "click",
-        async function(event) {
-
-          event.stopPropagation();
-
-
-          const id =
-            button.dataset.id;
-
-
-          await hapusPelanggaran(
-            id
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      "detailSiswaCard"
-    )
-    .scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+  // Pastikan semua elemen modal tersedia.
+  const modal = document.getElementById("detailSiswaModal");
+  const namaEl = document.getElementById("detailnamaSiswa");
+  const infoEl = document.getElementById("detailInfoSiswa");
+  const container = document.getElementById("detailPelanggaranContainer");
+
+  if (!modal || !namaEl || !infoEl || !container) {
+    console.error("Elemen modal detail siswa tidak ditemukan:", {
+      detailSiswaModal: !!modal,
+      detailnamaSiswa: !!namaEl,
+      detailInfoSiswa: !!infoEl,
+      detailPelanggaranContainer: !!container
     });
 
+    alert(
+      "Modal detail siswa belum lengkap. " +
+      "Periksa HTML pada bagian modal detail siswa."
+    );
+    return;
+  }
+
+  siswaDetailAktif = siswaId;
+
+  const siswa = data[0];
+
+  namaEl.textContent = siswa.namaSiswa;
+  infoEl.textContent =
+    "NISN: " + siswa.nisn + " | Kelas: " + siswa.kelas;
+
+  // Urutkan pelanggaran terbaru terlebih dahulu.
+  data.sort(function(a, b) {
+    if (a.tanggal !== b.tanggal) {
+      return b.tanggal.localeCompare(a.tanggal);
+    }
+
+    return (b.waktu || "").localeCompare(a.waktu || "");
+  });
+
+  let html = `
+    <div class="table-wrapper">
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Waktu</th>
+            <th>Jenis</th>
+            <th>Rincian</th>
+            <th>Bobot</th>
+            <th>Petugas</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  data.forEach(function(item) {
+    html += `
+      <tr>
+        <td>${formatTanggal(item.tanggal)}</td>
+        <td>${escapeHtml(item.waktu || "-")}</td>
+        <td>${formatJenis(item.jenis)}</td>
+        <td>${escapeHtml(item.rincian || "-")}</td>
+        <td class="bobot">${item.bobot}</td>
+        <td>${escapeHtml(item.petugasNama || "-")}</td>
+        <td>
+          <button
+            type="button"
+            class="delete-button"
+            data-id="${escapeHtml(item.id)}"
+          >Hapus</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  container.innerHTML = html;
+
+  // Tampilkan floating form.
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  // Tombol hapus pada setiap baris.
+  container.querySelectorAll(".delete-button").forEach(
+    function(button) {
+      button.addEventListener("click", async function(event) {
+        event.stopPropagation();
+
+        await hapusPelanggaran(button.dataset.id);
+      });
+    }
+  );
 }
 
 
