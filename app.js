@@ -2129,26 +2129,44 @@ async function hapusPelanggaran(
 // TUTUP DETAIL
 // =====================================================
 
-document
-  .getElementById(
-    "btnTutupDetail"
-  )
-  .addEventListener(
-    "click",
-    function() {
+function tutupModalDetailSiswa() {
+  const modal = document.getElementById("detailSiswaModal");
 
-      document
-        .getElementById(
-          "detailSiswaCard"
-        )
-        .classList
-        .add("hidden");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+  }
 
-      siswaDetailAktif =
-        null;
+  document.body.classList.remove("modal-open");
+  siswaDetailAktif = null;
+}
 
+document.getElementById("btnTutupDetail")?.addEventListener(
+  "click",
+  tutupModalDetailSiswa
+);
+
+document.getElementById("btnTutupDetailBawah")?.addEventListener(
+  "click",
+  tutupModalDetailSiswa
+);
+
+// Klik area gelap di luar modal untuk menutup.
+document.getElementById("detailSiswaModal")?.addEventListener(
+  "click",
+  function(event) {
+    if (event.target.id === "detailSiswaModal") {
+      tutupModalDetailSiswa();
     }
-  );
+  }
+);
+
+// Tombol Escape untuk menutup modal.
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    tutupModalDetailSiswa();
+  }
+});
 
 
 // =====================================================
